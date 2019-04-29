@@ -23,16 +23,26 @@
                     <th scope="col">Имя</th>
                     <th scope="col">Отчество</th>
                     <th scope="col">Рейтинг</th>
+                    <th scope="col">Отметка</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for player in players %}
                 <div>
+                    {% if player.activ = 1 %}
+                    <tr class="alert-success">
+                    {% else %}
                     <tr>
+                    {% endif %}
                         <th scope="col">{{ player.last }}</th>
                         <th scope="col">{{ player.first }}</th>
                         <th scope="col">{{ player.patro }}</th>
                         <th scope="col">{{ player.rating_rus }}</th>
+                        {% if player.activ = 1 %}
+                        <th scope="col"><a href="list_players/{{ player.id }}/mark/0">Отменить</a></th>
+                        {% else %}
+                        <th scope="col"><a href="list_players/{{ player.id }}/mark/1">Пришел</a></th>
+                        {% endif %}
                     </tr>
                 </div>
                 {% endfor %}

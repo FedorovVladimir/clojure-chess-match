@@ -100,7 +100,8 @@
                           HUMAN.LAST as last,
                           HUMAN.FIRST as first,
                           HUMAN.PATRO as patro,
-                          PLAYER.RATING_RUS as rating_rus
+                          PLAYER.RATING_RUS as rating_rus,
+                          LIST_PLAYER.ACTIVE as activ
                           from LIST_PLAYER,
                           PLAYER,
                           HUMAN
