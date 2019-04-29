@@ -55,7 +55,7 @@
            :citys (if (not-empty citys)
                     citys false)}))
 
-(defn tournaments-info [tournament regions sex]
+(defn tournaments-info [tournament regions sex titles titles-rus]
   "Страница турнира"
   (render "tournament_info.html"
           {:tournament (if (not-empty tournament)
@@ -63,4 +63,8 @@
            :regions (if (not-empty regions)
                       regions false)
            :sex (if (not-empty sex)
-                  sex false)}))
+                  sex false)
+           :titles (if (not-empty titles)
+                     titles false)
+           :titles-rus (if (not-empty titles-rus)
+                         titles-rus false)}))

@@ -36,15 +36,17 @@
              (-> c/tournament-add))
 
            ; обработчик регистрации на турнир
-           (POST "/tournaments/:id/register" [request]
+           (POST "/tournaments/register" [request]
              (-> c/tournament-register))
 
            ; страница турнира
            (GET "/tournaments/info/:id" [id]
              (let [tournament (db/get-tournament id)
                    regions (db/get-regions)
-                   sex (db/get-sex)]
-             (v/tournaments-info tournament regions sex)))
+                   sex (db/get-sex)
+                   titles (db/get-titles)
+                   titles-rus (db/get-titles-rus)]
+             (v/tournaments-info tournament regions sex titles titles-rus)))
 
            ; ошибка 404
            (route/not-found "Ничего не найдено"))

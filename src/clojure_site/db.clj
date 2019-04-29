@@ -55,10 +55,39 @@
                                 REGION.NAME as region,
                                 INDICATOR.NAME as indicator
                                 from TOURNAMENT, CITY, REGION, INDICATOR
-                                where ID_CITY = CITY.ID and ID_INDICATOR = INDICATOR.ID and TOURNAMENT.ID_REGION = REGION.ID and TOURNAMENT.ID = " id)])) )
+                                where ID_CITY = CITY.ID and
+                                ID_INDICATOR = INDICATOR.ID and
+                                TOURNAMENT.ID_REGION = REGION.ID and
+                                TOURNAMENT.ID = " id)])) )
 
 (defn get-sex []
   (jdbc/query mysql-db ["select * from SEX"]))
 
-(defn tournament-register [user]
-  (println user))
+(defn tournament-register [user id-t]
+  (let [id-human (jdbc/insert! mysql-db :HUMAN {:LAST (:last_name user)
+                                               :FIRST (:first_name user)
+                                               :PATRO (:patro user)
+                                               :DATE_BORN (:date_born user)
+                                               :TELEPHON (:telephon user)
+                                               :EMAIL (:email user)
+                                               :ADRES (:adress user)
+                                               :ID_SEX (:sex user)})
+        id-h (:generated_key (first id-human))
+    id-player (jdbc/insert! mysql-db :PLAYER {:RATING_RUS (:rating_rus user)
+                                   :RATING_FIDE (:rating_fide user)
+                                   :ID_TITLE (:title user)
+                                   :ID_TITLE_RUS (:title_rus user)
+                                   :ID_COEFF_MOD 2
+                                   :ID_REGION (:region user)
+                                   :ID_HUMAN id-h})
+        id-p (:generated_key (first id-player))]
+    (jdbc/insert! mysql-db :LIST_PLAYER {:RATING_START_RUS (:rating_rus user)
+                                    :RATING_START_FIDE (:rating_fide user)
+                                    :ID_TOURNAMENT id-t
+                                    :ID_PLAYER id-p})))
+
+(defn get-titles []
+  (jdbc/query mysql-db ["select * from TITLE"]))
+
+(defn get-titles-rus []
+  (jdbc/query mysql-db ["select * from TITLE_RUS"]))

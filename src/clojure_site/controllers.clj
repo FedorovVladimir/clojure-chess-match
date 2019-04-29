@@ -56,7 +56,8 @@
                     :region (get-in request [:form-params "region"])
                     :adress (get-in request [:form-params "adress"])
                     :telephon (get-in request [:form-params "telephon"])
-                    :yes (get-in request [:form-params "yes"])}]
+                    :yes (get-in request [:form-params "yes"])
+                    :tournament (get-in request [:form-params "tournament"])}]
 
     (if (and (not-empty (:last_name user))
              (not-empty (:first_name user))
@@ -71,10 +72,11 @@
              (not-empty (:region user))
              (not-empty (:adress user))
              (not-empty (:telephon user))
-             (not-empty (:yes user)))
+             (not-empty (:yes user))
+             (not-empty (:tournament user)))
 
       (do
-        (db/tournament-register user)
+        (db/tournament-register user (:tournament user))
         (redirect "/"))
 
       "Проверьте правильность введенных данных")))

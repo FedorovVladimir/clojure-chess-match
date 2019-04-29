@@ -68,12 +68,17 @@
             </ul>
         </div>
         <div class="col-md-8 order-md-2 mb-4">
-            <form role="form" method="POST" action="/tournaments/{{ tournament.id }}/register">
+            <form role="form" method="POST" action="/tournaments/register">
                 {% csrf-field %}
 
                 <div class="form-group">
                     <label for="last_name">Фамилия</label>
                     <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Иванов">
+                </div>
+
+                <div class="form-group" hidden>
+                    <label for="tournament">Турнир</label>
+                    <input type="text" class="form-control" name="tournament" id="tournament" value="{{ tournament.id }}">
                 </div>
 
                 <div class="form-group">
@@ -123,13 +128,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Звание</label>
-                    <input type="text" class="form-control" name="title" id="title" placeholder="FM">
+                    <label for="region">Звание</label>
+                    <select class="form-control" name="title" id="title">
+                        {% for title in titles %}
+                        <option value="{{ title.id }}">{{ title.code }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="title_rus">Спортивный разряд</label>
-                    <input type="text" class="form-control" name="title_rus" id="title_rus" placeholder="КМС">
+                    <label for="region">Спортивный разряд</label>
+                    <select class="form-control" name="title_rus" id="title_rus">
+                        {% for title-rus in titles-rus %}
+                            <option value="{{ title-rus.id }}">{{ title-rus.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
                 <div class="form-group">
