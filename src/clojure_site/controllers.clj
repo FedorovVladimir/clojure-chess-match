@@ -85,3 +85,8 @@
   (do
   (db/tournament-delete id)
   (redirect "/")))
+
+(defn mark-player [idt idp activ]
+  (do
+    (db/mark-player idp activ)
+    (redirect (str "/tournaments/" idt "/prev_list"))))

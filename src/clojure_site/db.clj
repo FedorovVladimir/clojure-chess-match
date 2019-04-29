@@ -108,3 +108,9 @@
                           where LIST_PLAYER.ID_PLAYER = PLAYER.ID and
                           PLAYER.ID_HUMAN = HUMAN.ID and
                           ID_TOURNAMENT = " id " order by last, first, patro")]))
+
+(defn mark-player [id activ]
+  (jdbc/update! mysql-db
+                :LIST_PLAYER
+               {:ACTIVE activ}
+               ["id = ? " id]))

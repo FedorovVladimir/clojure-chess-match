@@ -49,6 +49,10 @@
            (POST "/tournaments/register" [request]
              (-> c/tournament-register))
 
+           ; обработчик отметки участника
+           (GET "/tournaments/:idt/list_players/:idp/mark/:activ" [idt idp activ]
+             (c/mark-player idt idp activ))
+
            ; страница турнира
            (GET "/tournaments/info/:id" [id]
              (let [tournament (db/get-tournament id)
