@@ -68,3 +68,11 @@
                      titles false)
            :titles-rus (if (not-empty titles-rus)
                          titles-rus false)}))
+
+(defn tournament-prev-list [players tournament]
+  "Страница предварительного стартового листа"
+  (render "tournament_prev_list.html"
+          {:players (if (not-empty players)
+                      players false)
+           :tournament (if (not-empty tournament)
+                         tournament false)}))

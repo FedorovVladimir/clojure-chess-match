@@ -35,9 +35,15 @@
            (POST "/tournaments/add" [request]
              (-> c/tournament-add))
 
-           ; обработчик создания турнира
+           ; обработчик удаления турнира
            (GET "/tournaments/:id/delete" [id]
              (c/tournament-delete id))
+
+           ; страница стартового списка
+           (GET "/tournaments/:id/prev_list" [id]
+             (let [players (db/get-prev-list-players id)
+                   tournament (db/get-tournament id)]
+               (v/tournament-prev-list players tournament)))
 
            ; обработчик регистрации на турнир
            (POST "/tournaments/register" [request]

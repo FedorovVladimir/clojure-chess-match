@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center m-5">
+                Предварительный список {{ tournament.name }}
+            </h4>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="infoTournament" class="row">
+        <div class="col-md-2 order-md-2 mb-4">
+        </div>
+        <div class="col-md-8 order-md-2 mb-4">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Отчество</th>
+                    <th scope="col">Рейтинг</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for player in players %}
+                <div>
+                    <tr>
+                        <th scope="col">{{ player.last }}</th>
+                        <th scope="col">{{ player.first }}</th>
+                        <th scope="col">{{ player.patro }}</th>
+                        <th scope="col">{{ player.rating_rus }}</th>
+                    </tr>
+                </div>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2 order-md-2 mb-4">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="alert alert-info" role="alert">
-    <a href="/tournaments/{{ tournament.id }}/edit" type="button" class="btn btn-info">Редактировать турнир</a>
+    <a href="/tournaments/{{ tournament.id }}/prev_list" type="button" class="btn btn-info text-light">Предварительный список</a>
     <a type="button" class="btn btn-info text-light" data-toggle="modal" data-target="#exampleModal">Удалить турнир</a>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
