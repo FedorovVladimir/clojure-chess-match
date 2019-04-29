@@ -114,3 +114,16 @@
                 :LIST_PLAYER
                {:ACTIVE activ}
                ["id = ? " id]))
+
+(defn get-start-list-players [id]
+  (jdbc/query mysql-db [(str "select LIST_PLAYER.ID as id_player_list,
+                          HUMAN.LAST as last,
+                          HUMAN.FIRST as first,
+                          HUMAN.PATRO as patro,
+                          PLAYER.RATING_RUS as rating_rus
+                          from LIST_PLAYER,
+                          PLAYER,
+                          HUMAN
+                          where LIST_PLAYER.ID_PLAYER = PLAYER.ID and
+                          PLAYER.ID_HUMAN = HUMAN.ID and
+                          ID_TOURNAMENT = " id " and LIST_PLAYER.ACTIVE = 1 order by last, first, patro")]))

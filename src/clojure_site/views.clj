@@ -43,7 +43,7 @@
 (defn tournament-add-form
   "Форма создания турнира"
   [regions systems-match types-competition indicators citys]
-  (render "tournament_add_form.html"
+  (render "tournaments/add_form.html"
           {:regions (if (not-empty regions)
                        regions false)
            :systems-match (if (not-empty systems-match)
@@ -57,7 +57,7 @@
 
 (defn tournaments-info [tournament regions sex titles titles-rus]
   "Страница турнира"
-  (render "tournament_info.html"
+  (render "tournaments/info.html"
           {:tournament (if (not-empty tournament)
                       tournament false)
            :regions (if (not-empty regions)
@@ -69,10 +69,12 @@
            :titles-rus (if (not-empty titles-rus)
                          titles-rus false)}))
 
-(defn tournament-prev-list [players tournament]
+(defn tournament-list [players tournament text]
   "Страница предварительного стартового листа"
-  (render "tournament_prev_list.html"
+  (render "tournaments/list.html"
           {:players (if (not-empty players)
                       players false)
            :tournament (if (not-empty tournament)
-                         tournament false)}))
+                         tournament false)
+           :text (if (not-empty text)
+                   text false)}))
