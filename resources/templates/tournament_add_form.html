@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center m-5">
+                Создание нового соревнования
+            </h4>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row mb-5">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <form role="form" method="POST" action="/tournaments/add">
+                {% csrf-field %}
+
+                <div class="form-group">
+                    <label for="name">Название</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Этап кубка России">
+                </div>
+
+                <div class="form-group">
+                    <label for="region">Субъект</label>
+                    <select class="form-control" name="region" id="region">
+                       {% for region in regions %}
+                            <option value="{{ region.id }}">{{ region.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">Город</label>
+                    <select class="form-control" name="city" id="city">
+                        {% for city in citys %}
+                        <option value="{{ city.id }}">{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="adress">Адрес</label>
+                    <input type="text" class="form-control" name="adress" id="adress" placeholder="ул. Гоголя 42">
+                </div>
+
+                <div class="form-row">
+                    <div class="container col-6">
+                        <div class="form-group">
+                            <label for="startDate">Введите дату начала:</label>
+                            <input type="date" name="start-date" class="form-control" id="startDate">
+                        </div>
+                    </div>
+                    <div class="container col-6">
+                        <div class="form-group">
+                            <label for="endDate">Введите дату окончания:</label>
+                            <input type="date" name="end-date" class="form-control" id="endDate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="countTour">Количество туров</label>
+                    <input type="text" class="form-control" name="count-tour" id="countTour" placeholder="9">
+                </div>
+
+                <div class="form-group">
+                    <label for="timeControl">Контроль времени</label>
+                    <input type="text" class="form-control" name="time-control" id="timeControl" placeholder="3+2">
+                </div>
+
+                <div class="form-group">
+                    <label for="system">Система проведения</label>
+                    <select class="form-control" name="system-match" id="system">
+                        {% for system-match in systems-match %}
+                            <option value="{{ system-match.id }}">{{ system-match.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="typeCompetition">Тип соревнований</label>
+                    <select class="form-control" name="type-competition" id="typeCompetition">
+                        {% for type-competition in types-competition %}
+                            <option value="{{ type-competition.id }}">{{ type-competition.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="coeff">Дополнительные показатели</label>
+                    <select class="form-control" name="indicator" id="coeff">
+                        {% for indicator in indicators %}
+                            <option value="{{ indicator.id }}">{{ indicator.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-info">
+                    Добавить
+                </button>
+            </form>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

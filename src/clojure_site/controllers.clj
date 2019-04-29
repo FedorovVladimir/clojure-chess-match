@@ -7,59 +7,35 @@
     ; функция для взаимодействия с БД
     [clojure-site.db :as db]))
 
-(defn base-add
-  "Создание базы"
+(defn tournament-add
+  "Создание турнира"
   [request]
-  (let [base {:name (get-in request [:form-params "name"])
-              :description (get-in request [:form-params "description"])}]
+  (let [tournament {:name (get-in request [:form-params "name"])
+              :region (get-in request [:form-params "region"])
+              :adress (get-in request [:form-params "adress"])
+              :start-date (get-in request [:form-params "start-date"])
+              :end-date (get-in request [:form-params "end-date"])
+              :count-tour (get-in request [:form-params "count-tour"])
+              :time-control (get-in request [:form-params "time-control"])
+              :system-match (get-in request [:form-params "system-match"])
+              :type-competition (get-in request [:form-params "type-competition"])
+              :indicator (get-in request [:form-params "indicator"])
+              :city (get-in request [:form-params "city"])}]
 
-    (if (and (not-empty (:name base))
-             (not-empty (:description base)))
+    (if (and (not-empty (:name tournament))
+             (not-empty (:region tournament))
+             (not-empty (:adress tournament))
+             (not-empty (:start-date tournament))
+             (not-empty (:end-date tournament))
+             (not-empty (:count-tour tournament))
+             (not-empty (:time-control tournament))
+             (not-empty (:system-match tournament))
+             (not-empty (:type-competition tournament))
+             (not-empty (:indicator tournament))
+             (not-empty (:city tournament)))
 
       (do
-        (db/create-base base)
-        (redirect "/bases"))
-
-      "Проверьте правильность введенных данных")))
-
-(defn emails-add
-  "Создание email"
-  [request]
-  (let [email {:email (get-in request [:form-params "email"])
-              :name (get-in request [:form-params "name"])
-              :base (db/get-base (get-in request [:form-params "base"]))}]
-
-    (if (and (not-empty (:email email))
-             (not-empty (:name email))
-             (not-empty (:base email)))
-
-      (do
-        (db/create-email email)
-        (redirect "/bases"))
-
-      "Проверьте правильность введенных данных")))
-
-(defn mailing-add
-  "Создание рассылки"
-  [request]
-  (let [mailing {:subject(get-in request [:form-params "subject"])
-               :text (get-in request [:form-params "text"])
-               :base (db/get-base (get-in request [:form-params "base"]))}]
-
-    (if (and (not-empty (:subject mailing))
-             (not-empty (:text mailing))
-             (not-empty (:base mailing)))
-
-      (do
-        (db/create-mailing mailing)
+        (db/create-tournament tournament)
         (redirect "/"))
 
       "Проверьте правильность введенных данных")))
-
-(defn mailing-del
-  "Удаление рассылки"
-  [id]
-  (println id)
-  (do
-    (db/remove-mailing id)
-    (redirect "/")))

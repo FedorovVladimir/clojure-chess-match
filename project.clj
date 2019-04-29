@@ -14,13 +14,11 @@
                   ; Шаблонизатор
                   [selmer "0.8.2"]
 
-                  ; Добавляем Monger
-                  ;[com.novemberain/monger "3.1.0"]
+                  ; jdbc
+                  [org.clojure/java.jdbc "0.7.9"]
 
-                  [org.clojure/java.jdbc "5.1.47"]
-
+                  ; connector
                   [mysql/mysql-connector-java "8.0.15"]]
-
 
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler clojure-site.handler/app}

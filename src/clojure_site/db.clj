@@ -1,17 +1,35 @@
 (ns clojure-site.db
-  (:require
+  (:require [clojure.java.jdbc :as jdbc]))
 
-    ; непосредственно Monger
-    [monger.core :as mg]
-    [monger.collection :as m]
-    [monger.operators :refer :all])
+(defonce mysql-db {:subprotocol "mysql"
+               :subname "//vladimir7.beget.tech/vladimir7_match?serverTimezone=UTC"
+               :user "vladimir7_match"
+               :password "chees_match"})
 
-    ; Импортируем методы из Java библиотек
-    (:import org.bson.types.ObjectId)
-  )
+(defn get-regions []
+  (jdbc/query mysql-db ["select * from REGION"]))
 
-; создадим переменную соединения с БД
-(defonce db
-         (let [uri "mongodb://127.0.0.1:27017/papamail"
-               {:keys [db]} (mg/connect-via-uri uri)]
-           db))
+(defn get-systems-match []
+  (jdbc/query mysql-db ["select * from SYSTEM_MATCH"]))
+
+(defn get-types-competition []
+  (jdbc/query mysql-db ["select * from TYPE_COMPETITION"]))
+
+(defn get-indicators []
+  (jdbc/query mysql-db ["select * from INDICATOR"]))
+
+(defn get-citys []
+  (jdbc/query mysql-db ["select * from CITY"]))
+
+(defn create-tournament [tournament]
+  (jdbc/insert! mysql-db :TOURNAMENT {:NAME (:name tournament)
+                                      :DATE_START (:start-date tournament)
+                                      :DATE_END (:end-date tournament)
+                                      :ADRESS (:adress tournament)
+                                      :TIME_CONTROL (:time-control tournament)
+                                      :ID_TYPE_COMPETITION (:type-competition tournament)
+                                      :ID_SYSTEM_MATCH (:system-match tournament)
+                                      :ID_REGION (:region tournament)
+                                      :ID_INDICATOR (:indicator tournament)
+                                      :ID_CITY (:city tournament)
+                                      :COUNT_TOUR (:count-tour tournament)}))

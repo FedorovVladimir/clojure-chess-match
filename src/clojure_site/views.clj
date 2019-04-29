@@ -9,6 +9,7 @@
 
     ; для CSRF защиты
     [ring.util.anti-forgery :refer [anti-forgery-field]]
+
     [clojure-site.db :as db]))
 
 ; подскажем Selmer где искать наши шаблоны
@@ -35,42 +36,20 @@
 
 (defn index
   "Главная страница приложения. Список писем"
-  [mailing]
-  (render "index.html"
-          {:mailings (if (not-empty mailing)
-                       mailing false)}))
+  []
+  (render "index.html"))
 
-(defn bases [bases]
-  (render "bases.html"
-          {:bases (if (not-empty bases)
-                    bases false)}))
-
-(defn base-add-form []
-  (render "base_add_form.html"))
-
-(defn base-info [base emails]
-  (render "base_info.html"
-          {:base (if (not-empty base)
-                   base false)
-           :emails (if (not-empty emails)
-                     emails false)}))
-
-(defn email-add-form [bases base]
-  (render "email_add_form.html"
-          {:bases (if (not-empty bases)
-                    bases false)
-           :base (if (not-empty base)
-                     base false)}))
-
-(defn templates [templates]
-  (render "templates.html"
-          {:templates (if (not-empty templates)
-                        templates false)}))
-
-(defn mailing-add-form [bases base]
-  "/add"
-  (render "mailing_add_form.html"
-          {:bases (if (not-empty bases)
-                    bases false)
-           :base (if (not-empty base)
-                   base false)}))
+(defn tournament-add-form
+  "Форма создания турнира"
+  [regions systems-match types-competition indicators citys]
+  (render "tournament_add_form.html"
+          {:regions (if (not-empty regions)
+                       regions false)
+           :systems-match (if (not-empty systems-match)
+                            systems-match false)
+           :types-competition (if (not-empty types-competition)
+                                types-competition false)
+           :indicators (if (not-empty indicators)
+                         indicators false)
+           :citys (if (not-empty citys)
+                    citys false)}))
