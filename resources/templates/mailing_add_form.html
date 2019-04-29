@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center m-5">
+                Создание новой рассылки
+            </h4>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <form role="form" method="POST" action="/add">
+                {% csrf-field %}
+                <div class="form-group">
+                    <label for="inputSubject">
+                        Заголовок
+                    </label>
+                    <input type="text" class="form-control" name="subject" id="inputSubject" />
+                </div>
+                <div class="form-group">
+                    <label for="inputText">
+                        Текст
+                    </label>
+                    <textarea rows="10" type="text" class="form-control" name="text" id="inputText"></textarea>
+                </div>
+                {% if bases %}
+                    <div class="form-group">
+                        <label for="inputBase">
+                            База
+                        </label>
+                        <select class="form-control" name="base" id="inputBase">
+                            {% for base in bases %}
+                            <option value="{{ base._id }}">{{ base.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% else %}
+                    <div class="form-group" hidden>
+                        <select class="form-control" name="base">
+                            <option value="{{ base._id }}">{{ base.name }}</option>
+                        </select>
+                    </div>
+                {% endif %}
+                <button type="submit" class="btn btn-info">
+                    Добавить
+                </button>
+            </form>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

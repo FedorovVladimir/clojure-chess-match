@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="alert alert-info" role="alert">
+    <a href="/templates/add" type="button" class="btn btn-info">Добавить шаблон</a>
+</div>
+{% if templates %}
+<h1 class="p-3">Шаблоны</h1>
+
+<div class="container-fluid">
+    {% for template in templates %}
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <h2>
+                    {{ template.name }}
+                </h2>
+                <p>
+                    {{ template.text }}
+                </p>
+                <p>
+                    <a class="btn" href="/template/{{ template._id }}">подробнее</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center m-5">
+                Шаблонов еще нет
+            </h4>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
