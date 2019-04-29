@@ -33,3 +33,29 @@
                                       :ID_INDICATOR (:indicator tournament)
                                       :ID_CITY (:city tournament)
                                       :COUNT_TOUR (:count-tour tournament)}))
+
+(defn get-tournaments []
+  (jdbc/query mysql-db ["select TOURNAMENT.ID as id,
+                                TOURNAMENT.NAME as name,
+                                TOURNAMENT.DATE_START as date_start,
+                                TOURNAMENT.DATE_END as date_end,
+                                TOURNAMENT.ADRESS as adress,
+                                CITY.NAME as city_name
+                                from TOURNAMENT, CITY
+                                where ID_CITY = CITY.ID"]))
+
+(defn get-tournament [id]
+  (first (jdbc/query mysql-db [(str "select TOURNAMENT.ID as id,
+                                TOURNAMENT.NAME as name,
+                                TOURNAMENT.DATE_START as date_start,
+                                TOURNAMENT.DATE_END as date_end,
+                                TOURNAMENT.ADRESS as adress,
+                                TOURNAMENT.TIME_CONTROL as time_control,
+                                CITY.NAME as city_name,
+                                REGION.NAME as region,
+                                INDICATOR.NAME as indicator
+                                from TOURNAMENT, CITY, REGION, INDICATOR
+                                where ID_CITY = CITY.ID and ID_INDICATOR = INDICATOR.ID and TOURNAMENT.ID_REGION = REGION.ID and TOURNAMENT.ID = " id)])) )
+
+(defn get-sex []
+  (jdbc/query mysql-db ["select * from SEX"]))

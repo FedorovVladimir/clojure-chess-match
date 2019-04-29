@@ -39,3 +39,41 @@
         (redirect "/"))
 
       "Проверьте правильность введенных данных")))
+
+(defn tournament-register
+  "Регистрация на турнир"
+  [request]
+  (let [user {:last_name (get-in request [:form-params "last_name"])
+                    :first_name (get-in request [:form-params "first_name"])
+                    :patro (get-in request [:form-params "patro"])
+                    :date_born (get-in request [:form-params "date_born"])
+                    :sex (get-in request [:form-params "sex"])
+                    :email (get-in request [:form-params "email"])
+                    :rating_fide (get-in request [:form-params "rating_fide"])
+                    :rating_rus (get-in request [:form-params "rating_rus"])
+                    :title (get-in request [:form-params "title"])
+                    :title_rus (get-in request [:form-params "title_rus"])
+                    :region (get-in request [:form-params "region"])
+                    :adress (get-in request [:form-params "adress"])
+                    :telephon (get-in request [:form-params "telephon"])
+                    :yes (get-in request [:form-params "yes"])}]
+
+    (println user)
+
+    (if (and (not-empty (:name user))
+             (not-empty (:region user))
+             (not-empty (:adress user))
+             (not-empty (:start-date user))
+             (not-empty (:end-date user))
+             (not-empty (:count-tour user))
+             (not-empty (:time-control user))
+             (not-empty (:system-match user))
+             (not-empty (:type-competition user))
+             (not-empty (:indicator user))
+             (not-empty (:city user)))
+
+      (do
+        (db/create-tournament user)
+        (redirect "/"))
+
+      "Проверьте правильность введенных данных")))

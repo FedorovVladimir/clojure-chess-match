@@ -4,37 +4,33 @@
     <a href="/tournaments/add" type="button" class="btn btn-info">Добавить турнир</a>
 </div>
 {% if tournaments %}
-<h1 class="p-3">Рассылки</h1>
+<h1 class="p-3">Турниры</h1>
 
-<div class="container-fluid">
-    {% for mailing in mailings %}
-        <div class="row mb-4">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4 card pt-3">
-                <div class="mb-1 pb-2 alert alert-info">
-                    {{ mailing.base.name }}
-                </div>
-                <h2>
-                    {{mailing.subject}}
-                </h2>
-                <p>
-                    {{mailing.text}}
-                </p>
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-4">
-                        <a href="/del/{{ mailing._id }}" type="button" class="btn btn-danger">Удалить рассылку</a>
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
+<div class="container">
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th scope="col">Название</th>
+            <th scope="col">Город</th>
+            <th scope="col">Дата начала</th>
+            <th scope="col">Дата окончания</th>
+            <th scope="col">Адрес</th>
+            <th scope="col">Информация</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tournament in tournaments %}
+            <tr>
+                <td>{{ tournament.name }}</td>
+                <td>{{ tournament.city_name }}</td>
+                <td>{{ tournament.date_start }}</td>
+                <td>{{ tournament.date_end }}</td>
+                <td>{{ tournament.adress }}</td>
+                <td><a class="btn btn-ms btn-block btn-outline-primary" href="/tournaments/info/{{ tournament.id }}">Подробнее</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% else %}
 <div class="container-fluid">

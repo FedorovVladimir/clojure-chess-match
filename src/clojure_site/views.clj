@@ -36,8 +36,9 @@
 
 (defn index
   "Главная страница приложения. Список писем"
-  []
-  (render "index.html"))
+  [tournaments]
+  (render "index.html" {:tournaments (if (not-empty tournaments)
+                                       tournaments false)}))
 
 (defn tournament-add-form
   "Форма создания турнира"
@@ -53,3 +54,16 @@
                          indicators false)
            :citys (if (not-empty citys)
                     citys false)}))
+
+(defn tournaments-info [tournament regions sex]
+  "Страница турнира"
+  (println tournament)
+  (println regions)
+  (println sex)
+  (render "tournament_info.html"
+          {:tournament (if (not-empty tournament)
+                      tournament false)
+           :regions (if (not-empty regions)
+                      regions false)
+           :sex (if (not-empty sex)
+                  sex false)}))

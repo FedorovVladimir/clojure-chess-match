@@ -19,7 +19,8 @@
 
            ; главная страница приложения
            (GET "/" []
-               (v/index))
+             (let [tournaments (db/get-tournaments)]
+               (v/index tournaments)))
 
            ; страница с формой создания турнира
            (GET "/tournaments/add" []
@@ -33,6 +34,17 @@
            ; обработчик создания турнира
            (POST "/tournaments/add" [request]
              (-> c/tournament-add))
+
+           ; обработчик регистрации на турнир
+           (POST "/tournaments/:id/register" [request]
+             (-> c/tournament-register))
+
+           ; страница турнира
+           (GET "/tournaments/info/:id" [id]
+             (let [tournament (db/get-tournament id)
+                   regions (db/get-regions)
+                   sex (db/get-sex)]
+             (v/tournaments-info tournament regions sex)))
 
            ; ошибка 404
            (route/not-found "Ничего не найдено"))
