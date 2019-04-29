@@ -154,7 +154,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="region">Звание</label>
+                    <label for="title">Звание</label>
                     <select class="form-control" name="title" id="title">
                         {% for title in titles %}
                         <option value="{{ title.id }}">{{ title.code }}</option>
@@ -163,7 +163,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="region">Спортивный разряд</label>
+                    <label for="title_rus">Спортивный разряд</label>
                     <select class="form-control" name="title_rus" id="title_rus">
                         {% for title-rus in titles-rus %}
                             <option value="{{ title-rus.id }}">{{ title-rus.name }}</option>

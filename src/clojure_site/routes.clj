@@ -43,13 +43,13 @@
            (GET "/tournaments/:id/prev_list" [id]
              (let [players (db/get-prev-list-players id)
                    tournament (db/get-tournament id)]
-               (v/tournament-list players tournament "Предварительный список")))
+               (v/tournament-list players tournament "0")))
 
            ; страница стартового списка
            (GET "/tournaments/:id/start_list" [id]
              (let [players (db/get-start-list-players id)
                    tournament (db/get-tournament id)]
-               (v/tournament-list players tournament "Стартовый список")))
+               (v/tournament-list players tournament "1")))
 
            ; обработчик регистрации на турнир
            (POST "/tournaments/register" [request]

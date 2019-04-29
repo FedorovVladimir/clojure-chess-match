@@ -8,7 +8,12 @@
     <div class="row">
         <div class="col-md-12">
             <h4 class="text-center m-5">
-                {{ text }} "{{ tournament.name }}"
+                {% if text = 0 %}
+                    Предварительный
+                {% else %}
+                    Стартовый
+                {% endif %}
+                список "{{ tournament.name }}"
             </h4>
         </div>
     </div>
@@ -26,7 +31,9 @@
                     <th scope="col">Имя</th>
                     <th scope="col">Отчество</th>
                     <th scope="col">Рейтинг</th>
-                    <th scope="col">Отметка</th>
+                    {% if text = 0 %}
+                        <th scope="col">Отметка</th>
+                    {% endif %}
                 </tr>
                 </thead>
                 <tbody>
@@ -41,10 +48,12 @@
                         <th scope="col">{{ player.first }}</th>
                         <th scope="col">{{ player.patro }}</th>
                         <th scope="col">{{ player.rating_rus }}</th>
-                        {% if player.activ = 1 %}
-                        <th scope="col"><a href="list_players/{{ player.id_player_list }}/mark/0">Отменить</a></th>
-                        {% else %}
-                        <th scope="col"><a href="list_players/{{ player.id_player_list }}/mark/1">Пришел</a></th>
+                        {% if player.activ %}
+                            {% if player.activ = 1 %}
+                                <th scope="col"><a href="list_players/{{ player.id_player_list }}/mark/0">Отменить</a></th>
+                            {% else %}
+                                <th scope="col"><a href="list_players/{{ player.id_player_list }}/mark/1">Пришел</a></th>
+                            {% endif %}
                         {% endif %}
                     </tr>
                 </div>
