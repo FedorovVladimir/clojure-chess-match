@@ -58,22 +58,23 @@
                     :telephon (get-in request [:form-params "telephon"])
                     :yes (get-in request [:form-params "yes"])}]
 
-    (println user)
-
-    (if (and (not-empty (:name user))
+    (if (and (not-empty (:last_name user))
+             (not-empty (:first_name user))
+             (not-empty (:patro user))
+             (not-empty (:date_born user))
+             (not-empty (:sex user))
+             (not-empty (:email user))
+             (not-empty (:rating_fide user))
+             (not-empty (:rating_rus user))
+             (not-empty (:title user))
+             (not-empty (:title_rus user))
              (not-empty (:region user))
              (not-empty (:adress user))
-             (not-empty (:start-date user))
-             (not-empty (:end-date user))
-             (not-empty (:count-tour user))
-             (not-empty (:time-control user))
-             (not-empty (:system-match user))
-             (not-empty (:type-competition user))
-             (not-empty (:indicator user))
-             (not-empty (:city user)))
+             (not-empty (:telephon user))
+             (not-empty (:yes user)))
 
       (do
-        (db/create-tournament user)
+        (db/tournament-register user)
         (redirect "/"))
 
       "Проверьте правильность введенных данных")))

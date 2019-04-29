@@ -95,17 +95,17 @@
                     </div>
                 </div>
 
-<!--                <div class="form-group">-->
-<!--                    <label>Пол</label>-->
-<!--                    {% for s in sex %}-->
-<!--                        <div class="form-check">-->
-<!--                            <input class="form-check-input" type="radio" name="sex" id="sex2" value="{{ s.id }}">-->
-<!--                            <label class="form-check-label" for="sex2">-->
-<!--                                {{ s.name }}-->
-<!--                            </label>-->
-<!--                        </div>-->
-<!--                    {% endfor %}-->
-<!--                </div>-->
+                <div class="form-group">
+                    <label>Пол</label>
+                    {% for s in sex %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sex" id="sex2" value="{{ s.id }}">
+                            <label class="form-check-label" for="sex2">
+                                {{ s.name }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -132,14 +132,14 @@
                     <input type="text" class="form-control" name="title_rus" id="title_rus" placeholder="КМС">
                 </div>
 
-<!--                <div class="form-group">-->
-<!--                    <label for="region">Субъект</label>-->
-<!--                    <select class="form-control" name="region" id="region">-->
-<!--                        {% for region in regions %}-->
-<!--                            <option value="{{ region.id }}">{{ region.name }}</option>-->
-<!--                        {% endfor %}-->
-<!--                    </select>-->
-<!--                </div>-->
+                <div class="form-group">
+                    <label for="region">Субъект</label>
+                    <select class="form-control" name="region" id="region">
+                        {% for region in regions %}
+                            <option value="{{ region.id }}">{{ region.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="adress">Адрес</label>

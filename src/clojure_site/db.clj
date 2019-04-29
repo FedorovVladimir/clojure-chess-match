@@ -59,3 +59,6 @@
 
 (defn get-sex []
   (jdbc/query mysql-db ["select * from SEX"]))
+
+(defn tournament-register [user]
+  (println user))

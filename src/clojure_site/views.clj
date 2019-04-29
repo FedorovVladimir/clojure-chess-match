@@ -57,9 +57,6 @@
 
 (defn tournaments-info [tournament regions sex]
   "Страница турнира"
-  (println tournament)
-  (println regions)
-  (println sex)
   (render "tournament_info.html"
           {:tournament (if (not-empty tournament)
                       tournament false)
