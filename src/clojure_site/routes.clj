@@ -35,6 +35,10 @@
            (POST "/tournaments/add" [request]
              (-> c/tournament-add))
 
+           ; обработчик создания турнира
+           (GET "/tournaments/:id/delete" [id]
+             (c/tournament-delete id))
+
            ; обработчик регистрации на турнир
            (POST "/tournaments/register" [request]
              (-> c/tournament-register))

@@ -1,5 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="alert alert-info" role="alert">
+    <a href="/tournaments/{{ tournament.id }}/edit" type="button" class="btn btn-info">Редактировать турнир</a>
+    <a type="button" class="btn btn-info text-light" data-toggle="modal" data-target="#exampleModal">Удалить турнир</a>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Удаление турнира</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить турнир?
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-secondary text-light" data-dismiss="modal">Отмена</a>
+                    <a href="/tournaments/{{ tournament.id }}/delete" type="button" class="btn btn-primary">Да</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -48,7 +73,7 @@
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                    <div class="text-success">
+                    <div>
                         <h6 class="my-0">Контроль времени</h6>
                         <span class="text-muted">{{ tournament.time_control }}</span>
                     </div>

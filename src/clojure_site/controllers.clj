@@ -80,3 +80,8 @@
         (redirect "/"))
 
       "Проверьте правильность введенных данных")))
+
+(defn tournament-delete [id]
+  (do
+  (db/tournament-delete id)
+  (redirect "/")))

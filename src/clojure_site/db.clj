@@ -91,3 +91,6 @@
 
 (defn get-titles-rus []
   (jdbc/query mysql-db ["select * from TITLE_RUS"]))
+
+(defn tournament-delete [id]
+  (jdbc/delete! mysql-db :TOURNAMENT ["id = ?" id]))
