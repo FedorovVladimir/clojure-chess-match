@@ -1,14 +1,21 @@
 (ns clojure-site.handler-test
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
-            [clojure-site.handler :refer :all]))
+            [clojure-site.handler :refer :all]
+            [clojure-site.db :as db])
+  (:import [excel MyClass]))
 
-(deftest test-app
-  (testing "main route"
-    (let [response (app (mock/request :get "/"))]
-      (is (= (:status response) 200))
-      (is (= (:body response) "Hello World"))))
+(deftest test-calling-java-method
+  (testing "create java class"
+    (.displayText (new MyClass) "Hello, Java!")))
 
-  (testing "not-found route"
-    (let [response (app (mock/request :get "/invalid"))]
-      (is (= (:status response) 404)))))
+(deftest test-calling-java-method-display-db-sex
+  (testing "send db"
+    (.displayDataBase (new MyClass) (java.util.ArrayList. (db/get-sex)))))
+
+(defn test-calling-java-method-display-db [data]
+    (.displayDataBase (new MyClass) (java.util.ArrayList. data)))
+
+;(test-calling-java-method)
+;(test-calling-java-method-display-db-sex)
+(test-calling-java-method-display-db (db/get-start-list-players 1))

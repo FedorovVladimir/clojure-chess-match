@@ -12,18 +12,13 @@
     [clojure-site.views :as v]
 
     ; функции взаимодействия с БД
-    [clojure-site.db :as db])
-  (:import (excel MyClass)))
+    [clojure-site.db :as db]))
 
 ; объявляем маршруты
 (defroutes mail-routes
 
            ; главная страница приложения
            (GET "/" []
-             (def myclass (new MyClass))
-             (.hi myclass)
-             (.hello myclass "Привет")
-
              (let [tournaments (db/get-tournaments)]
                (v/index tournaments)))
 

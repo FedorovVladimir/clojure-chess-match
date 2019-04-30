@@ -1,28 +1,42 @@
 package excel;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.commons.collections4.iterators.IteratorIterable;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.*;
 
 public class MyClass {
+
     public static void main(String[] args) {
-        new MyClass().hi();
+        new MyClass().displayText("hi");
+        Map<String, String> map = new HashMap<String, String>(){{
+            put("id", "1");
+            put("name", "Мужской");
+        }};
+        System.out.println(map);
     }
 
     public MyClass() {
-        System.out.println("create class yees!");
+        System.out.println("Сreate java class MyClass!");
     }
 
-    public void hi() {
-        System.out.println("hi");
-    }
-
-    public void hello(String text) throws IOException {
+    public void displayText(String text) {
         System.out.println(text);
-        String path = "resources/excel/prev.xls";
-        FileInputStream fileXls = new FileInputStream(path);
-        Workbook workbook = new HSSFWorkbook(fileXls);
+    }
+
+    public void displayDataBase(List<Map<String, String>> base) {
+        List<Map<String, String>> list = new LinkedList<>();
+        for (Map<String, String> row : base) {
+            Map<String, String> map = new HashMap<>();
+            Set<String> keys = row.keySet();
+            Collection<String> values = row.values();
+            Iterator<String> iteratorK = keys.iterator();
+            Iterator<String> iteratorV = values.iterator();
+            for (int i = 0; i < keys.size(); i++) {
+                String key = String.valueOf(iteratorK.next());
+                map.put(key.replace(":", ""), iteratorV.next());
+            }
+            list.add(map);
+        }
+        System.out.println(list);
     }
 }
