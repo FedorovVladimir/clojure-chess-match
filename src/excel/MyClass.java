@@ -1,18 +1,11 @@
 package excel;
 
-import org.apache.commons.collections4.iterators.IteratorIterable;
-
 import java.util.*;
 
 public class MyClass {
 
     public static void main(String[] args) {
         new MyClass().displayText("hi");
-        Map<String, String> map = new HashMap<String, String>(){{
-            put("id", "1");
-            put("name", "Мужской");
-        }};
-        System.out.println(map);
     }
 
     public MyClass() {
@@ -24,6 +17,11 @@ public class MyClass {
     }
 
     public void displayDataBase(List<Map<String, String>> base) {
+        List<Map<String, String>> list = getListFromClojure(base);
+        System.out.println(list);
+    }
+
+    private List<Map<String, String>> getListFromClojure(List<Map<String, String>> base) {
         List<Map<String, String>> list = new LinkedList<>();
         for (Map<String, String> row : base) {
             Map<String, String> map = new HashMap<>();
@@ -37,6 +35,6 @@ public class MyClass {
             }
             list.add(map);
         }
-        System.out.println(list);
+        return list;
     }
 }
