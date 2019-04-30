@@ -2,6 +2,7 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
+  :java-source-paths ["src"]
   :dependencies [[org.clojure/clojure "1.10.0"]
 
                   ; Маршруты для GET и POST запросов
@@ -18,7 +19,10 @@
                   [org.clojure/java.jdbc "0.7.9"]
 
                   ; connector
-                  [mysql/mysql-connector-java "8.0.15"]]
+                  [mysql/mysql-connector-java "8.0.15"]
+
+                  ; poi
+                  [org.apache.poi/poi "4.1.0"]]
 
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler clojure-site.handler/app}
