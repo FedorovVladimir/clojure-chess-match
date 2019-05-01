@@ -4,6 +4,12 @@
     ; функция редиректа
     [ring.util.response :refer [redirect]]
 
+    ;Эксопрт стартового листа
+    [excel.functions :refer [test-calling-java-method-display-db-start]]
+
+    ;Эксопрт предварительного списка
+    [excel.functions :refer [test-calling-java-method-display-db]]
+
     ; функция для взаимодействия с БД
     [clojure-site.db :as db]))
 
@@ -90,3 +96,8 @@
   (do
     (db/mark-player idp activ)
     (redirect (str "/tournaments/" idt "/prev_list"))))
+
+(defn tournament-prev-list-export [id]
+  (test-calling-java-method-display-db id)
+  (redirect (str "/tournaments/" id "/prev_list"))
+  )

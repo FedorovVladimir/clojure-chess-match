@@ -95,7 +95,6 @@
 (defn tournament-delete [id]
   (jdbc/delete! mysql-db :TOURNAMENT ["id = ?" id]))
 
-; todo добавить в базу уникальные номера участников
 (defn get-prev-list-players [id]
   (jdbc/query mysql-db ["select LIST_PLAYER.ID as id_player_list,
                             HUMAN.LAST as last,

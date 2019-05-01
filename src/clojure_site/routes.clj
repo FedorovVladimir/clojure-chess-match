@@ -43,6 +43,10 @@
            (GET "/tournaments/:id/delete" [id]
              (c/tournament-delete id))
 
+           ; экспорт файла
+           (GET  "/tournaments/:id/prev_list/export" [id]
+             (c/tournament-prev-list-export id))
+
            ; страница предварительного списка
            (GET "/tournaments/:id/prev_list" [id]
              (let [players (db/get-prev-list-players id)
