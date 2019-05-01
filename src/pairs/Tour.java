@@ -1,5 +1,7 @@
 package pairs;
 
+import javafo.api.JaVaFoApi;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +105,12 @@ public class Tour {
 
         }
         catch(IOException ex){}
+        newTourFinish();
+    }
 
+    private void newTourFinish() throws FileNotFoundException {
+//        String out = JaVaFoApi.exec(1110,   new FileInputStream("test.trf"));
+//        System.out.println(out);
     }
 
     public void print() {

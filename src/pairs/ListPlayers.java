@@ -46,6 +46,8 @@ public class ListPlayers {
                 addPlayer(new Human(lex[2], lex[3],Integer.valueOf(lex[4]),Integer.valueOf(lex[1])));
             }
         }
+        br.close();
+        fstream.close();
         return this;
     }
 

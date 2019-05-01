@@ -119,7 +119,7 @@ public class Tournament {
 
 
     public void createFileTournament() {
-        try(FileWriter writer = new FileWriter(nameOfTurnament + ".trf", false))
+        try(FileWriter writer = new FileWriter("test" + ".trf", false))
         {
             String text = "";
             text += "012 " + nameOfTurnament + '\n';
@@ -134,7 +134,6 @@ public class Tournament {
             text += "122 " + timeSystem + '\n';
             text += "132                                                                                      " + '\n';
             text += "XXR " + countOfTour + '\n';
-            text += "XXC white1"  + '\n';
             text += listPlayers.convertToFile();
             writer.write(text);
             writer.flush();
@@ -148,7 +147,7 @@ public class Tournament {
     public void createTour() throws IOException {
         Tour new_t = new Tour();
         String pairs;
-        pairs = JaVaFoApi.exec(1000,new FileInputStream("test.trf"));
+        pairs = JaVaFoApi.exec(1000, new FileInputStream("test.trf"));
         System.out.println(pairs);
         String[] pair = pairs.split("\n");
         for (int i = 1; i < pair.length - 1; i++) {

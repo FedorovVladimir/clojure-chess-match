@@ -164,22 +164,22 @@ public class Human implements Comparable<Human> {
         else {
             humanInfo += "  " + numberStart;
         }
-        if (sex == false) {
-            humanInfo += " m";
-        }
-        else {
-            humanInfo += " f";
-        }
-        if (title != null) {
-            humanInfo += title;
-            for (int i = 0; i < 4 - title.length(); i++) {
-                humanInfo += " ";
-            }
-        }
-        else {
+//        if (sex == false) {
+//            humanInfo += " m";
+//        }
+//        else {
+//            humanInfo += " f";
+//        }
+//        if (title != null) {
+//            humanInfo += title;
+//            for (int i = 0; i < 4 - title.length(); i++) {
+//                humanInfo += " ";
+//            }
+//        }
+//        else {
             humanInfo += "    ";
-        }
-        String finalName = firstName + ',' +secondName;
+  //      }
+        String finalName = firstName + ' ' +secondName;
         if (finalName.length() > 33) {
             finalName = finalName.substring(0,33);
         }
@@ -194,35 +194,35 @@ public class Human implements Comparable<Human> {
             humanInfo += "0000 ";
         }
 
-        if (region == null) {
-            humanInfo += "   " + "    ";
-        }
-        else if (region.length() > 3) {
-            humanInfo += region.substring(0,3) + "    ";
-        }
-        else {
-            humanInfo += region + "    ";
-        }
-        int localId = id;
-        String strId = "";
-        for (int i = localId; i > 0; i /= 10) {
-            strId += i % 10;
-        }
-        for (int i = 0, len = strId.length(); i < 8 - len; i++) {
-            strId += " ";
-        }
-        if (strId.length() > 0) {
-            humanInfo += new StringBuilder(strId).reverse().toString() + " ";
-        }
-        else {
-            humanInfo += strId + " ";
-        }
-        if (birthDate != 0) {
-            humanInfo += birthDate + "  ";
-        }
-        else {
-            humanInfo += "      ";
-        }
+//        if (region == null) {
+//            humanInfo += "   " + "    ";
+//        }
+//        else if (region.length() > 3) {
+//            humanInfo += region.substring(0,3) + "    ";
+//        }
+//        else {
+//            humanInfo += region + "    ";
+//        }
+//        int localId = id;
+//        String strId = "";
+//        for (int i = localId; i > 0; i /= 10) {
+//            strId += i % 10;
+//        }
+//        for (int i = 0, len = strId.length(); i < 8 - len; i++) {
+//            strId += " ";
+//        }
+//        if (strId.length() > 0) {
+//            humanInfo += new StringBuilder(strId).reverse().toString() + " ";
+//        }
+//        else {
+//            humanInfo += strId + " ";
+//        }
+//        if (birthDate != 0) {
+//            humanInfo += birthDate + "  ";
+//        }
+//        else {
+//            humanInfo += "      ";
+//        }
 
         humanInfo += "0.0";
 
@@ -235,7 +235,7 @@ public class Human implements Comparable<Human> {
         else {
             humanInfo += "  " + numberStart;
         }
-        humanInfo += '\n';
+        humanInfo += "  \n";
         return humanInfo;
     }
 }
