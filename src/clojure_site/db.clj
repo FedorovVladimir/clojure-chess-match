@@ -111,6 +111,7 @@
                             REGION.NAME as region,
                             TITLE_RUS.CODE as title_rus,
                             TITLE.CODE as title,
+                            PLAYER.ID_TITLE as id_title,
                             PLAYER.ID_TITLE_RUS as id_title_rus,
                             PLAYER.IDFIDE as fide,
                             PLAYER.IDRUS as rus,

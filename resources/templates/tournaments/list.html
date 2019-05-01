@@ -56,27 +56,89 @@
                     {% else %}
                     <tr>
                     {% endif %}
-                        <th scope="col">{{ player.last }}</th>
-                        <th scope="col">{{ player.first }}</th>
-                        <th scope="col">{{ player.patro }}</th>
-                        <th scope="col">{{ player.date_born|date:dd.MM.yyyy }}</th>
                         <th scope="col">
-                            <div class="form-group">
-                                <select class="form-control p-0" name="region" id="region">
-                                    {% for region in regions %}
-                                        {% ifequal player.id_region region.id %}
-                                            <option value="{{ region.id }}" selected>{{ region.name }}</option>
-                                        {% else %}
-                                            <option value="{{ region.id }}">{{ region.name }}</option>
-                                        {% endifequal %}
-                                    {% endfor %}
-                                </select>
-                            </div>
+                            {% if player.activ = 1 %}
+                                {{ player.last }}
+                            {% else %}
+                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Иванов" value="{{ player.last }}">
+                            {% endif %}
                         </th>
-                        <th scope="col">{{ player.adres }}</th>
-                        <th scope="col">{{ player.rating_rus }}</th>
-                        <th scope="col">{{ player.rating_fide }}</th>
-                        <th scope="col">{{ player.id_title_rus }}</th>
+                        <th scope="col">
+                            {% if player.activ = 1 %}
+                                {{ player.first }}
+                            {% else %}
+                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Иван" value="{{ player.first }}">
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if player.activ = 1 %}
+                                {{ player.patro }}
+                            {% else %}
+                                <input type="text" class="form-control" name="patro" id="patro" placeholder="Иванович" value="{{ player.patro }}">
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if player.activ = 1 %}
+                                {{ player.date_born|date:dd.MM.yyyy }}
+                            {% else %}
+                                <input type="date" name="date_born" class="form-control" id="date_born" value="{{ player.date_born }}">
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if player.activ = 1 %}
+                                {{ player.region }}
+                            {% else %}
+                                <div class="form-group">
+                                    <select class="form-control p-0" name="region" id="region">
+                                        {% for region in regions %}
+                                            {% ifequal player.id_region region.id %}
+                                                <option value="{{ region.id }}" selected>{{ region.name }}</option>
+                                            {% else %}
+                                                <option value="{{ region.id }}">{{ region.name }}</option>
+                                            {% endifequal %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if player.activ = 1 %}
+                                {{ player.adres }}
+                            {% else %}
+                                <input type="text" class="form-control" name="adress" id="adress" placeholder="ул. Островского 8-108" value="{{ player.adres }}">
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if player.activ = 1 %}
+                                {{ player.rating_rus }}
+                            {% else %}
+                                <input type="text" class="form-control" name="rating_rus" id="rating_rus" placeholder="1000" value="{{ player.rating_rus }}">
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if player.activ = 1 %}
+                                {{ player.rating_fide }}
+                            {% else %}
+                                <input type="text" class="form-control" name="rating_fide" id="rating_fide" placeholder="0" value="{{ player.rating_fide }}">
+                            {% endif %}
+                        </th>
+                        <th scope="col">
+                            {% if player.activ = 1 %}
+                                {{ player.title_rus }}
+                            {% else %}
+                                <div class="form-group">
+                                    <select class="form-control p-0" name="title" id="title">
+                                        {% for title-rus in titles-rus %}
+                                            {% ifequal player.id_title_rus title-rus.id %}
+                                                <option value="{{ title-rus.id }}" selected>{{ title-rus.code }}</option>
+                                            {% else %}
+                                                <option value="{{ title-rus.id }}">{{ title-rus.code }}</option>
+                                            {% endifequal %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+                        </th>
                         {% if player.activ %}
                             {% if player.activ = 1 %}
                                 <th scope="col"><a href="list_players/{{ player.id_player_list }}/mark/0">Отменить</a></th>
