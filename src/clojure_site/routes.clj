@@ -12,17 +12,13 @@
     [clojure-site.views :as v]
 
     ; функции взаимодействия с БД
-    [clojure-site.db :as db])
-  (:import (excel PrevList)))
+    [clojure-site.db :as db]))
 
 ; объявляем маршруты
 (defroutes mail-routes
 
            ; главная страница приложения
            (GET "/" []
-             (def prevlist (new PrevList))
-             (.hi prevlist)
-
              (let [tournaments (db/get-tournaments)]
                (v/index tournaments)))
 
@@ -46,14 +42,15 @@
            ; страница предварительного списка
            (GET "/tournaments/:id/prev_list" [id]
              (let [players (db/get-prev-list-players id)
-                   tournament (db/get-tournament id)]
-               (v/tournament-list players tournament "0")))
+                   tournament (db/get-tournament id)
+                   regions (db/get-regions)]
+               (v/tournament-prev-list players tournament "0" regions)))
 
            ; страница стартового списка
            (GET "/tournaments/:id/start_list" [id]
              (let [players (db/get-start-list-players id)
                    tournament (db/get-tournament id)]
-               (v/tournament-list players tournament "1")))
+               (v/tournament-start-list players tournament "1")))
 
            ; обработчик регистрации на турнир
            (POST "/tournaments/register" [request]
