@@ -44,7 +44,7 @@
              (let [players (db/get-prev-list-players id)
                    tournament (db/get-tournament id)
                    regions (db/get-regions)]
-               (v/tournament-prev-list players tournament "0" regions)))
+               (v/tournament-prev-list players tournament regions "0")))
 
            ; страница стартового списка
            (GET "/tournaments/:id/start_list" [id]

@@ -69,7 +69,7 @@
            :titles-rus (if (not-empty titles-rus)
                          titles-rus false)}))
 
-(defn tournament-prev-list [players tournament text regions]
+(defn tournament-prev-list [players tournament regions text]
   "Страница предварительного листа"
   (render "tournaments/list.html"
           {:players (if (not-empty players)

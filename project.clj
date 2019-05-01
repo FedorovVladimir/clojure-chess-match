@@ -13,7 +13,7 @@
                   [ring/ring-defaults "0.3.2"]
 
                   ; Шаблонизатор
-                  [selmer "0.8.2"]
+                  [selmer "1.12.12"]
 
                   ; jdbc
                   [org.clojure/java.jdbc "0.7.9"]

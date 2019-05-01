@@ -58,8 +58,20 @@
                         <th scope="col">{{ player.last }}</th>
                         <th scope="col">{{ player.first }}</th>
                         <th scope="col">{{ player.patro }}</th>
-                        <th scope="col">{{ player.date_born }}</th>
-                        <th scope="col">{{ player.id_region }}</th>
+                        <th scope="col">{{ player.date_born|date:dd.MM.yyyy }}</th>
+                        <th scope="col">
+                            <div class="form-group">
+                                <select class="form-control p-0" name="region" id="region">
+                                    {% for region in regions %}
+                                        {% ifequal player.id_region region.id %}
+                                            <option value="{{ region.id }}" selected>{{ region.name }}</option>
+                                        {% else %}
+                                            <option value="{{ region.id }}">{{ region.name }}</option>
+                                        {% endifequal %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </th>
                         <th scope="col">{{ player.adres }}</th>
                         <th scope="col">{{ player.rating_rus }}</th>
                         <th scope="col">{{ player.rating_fide }}</th>
