@@ -22,7 +22,10 @@
                   [mysql/mysql-connector-java "8.0.15"]
 
                   ; poi
-                  [org.apache.poi/poi "4.1.0"]]
+                  [org.apache.poi/poi "4.1.0"]
+
+                  ;; https://mvnrepository.com/artifact/junit/junit
+                  [junit/junit "4.12"]]
 
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler clojure-site.handler/app}
