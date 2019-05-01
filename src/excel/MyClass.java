@@ -14,7 +14,7 @@ public class MyClass {
 
     public List<Map<String, String>> displayDataBase(List<Map<String, String>> base) {
         List<Map<String, String>> list = getListFromClojure(base);
-        System.out.println(list);
+//        System.out.println(list);
         return list;
     }
 

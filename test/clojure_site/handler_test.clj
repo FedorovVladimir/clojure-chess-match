@@ -18,5 +18,8 @@
 
 (defn -main []
   (def data (db/get-start-list-players 1))
-  (println data)
-  (println (seq (test-calling-java-method-display-db data))))
+  (println (:last (first data)))
+  (def ret (test-calling-java-method-display-db data))
+  (def retmap (reduce (fn [x [y z]] (assoc x y z)) {} (first ret)))
+  (println retmap)
+  (println (get "last" retmap)))
