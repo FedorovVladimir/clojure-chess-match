@@ -26,20 +26,25 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <div id="infoTournament" class="row">
-        <div class="col-md-2 order-md-2 mb-4">
+        <div class="col-md-1">
         </div>
-        <div class="col-md-8 order-md-2 mb-4">
+        <div class="col-md-10">
             <table class="table table-bordered">
                 <thead class="thead-light">
-                <tr>
-                    <th scope="col">Фамилия</th>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Отчество</th>
-                    <th scope="col">Рейтинг</th>
+                <tr class="text-center">
+                    <th scope="col"><p class="align-middle">Фамилия</p></th>
+                    <th scope="col"><p class="align-middle">Имя</p></th>
+                    <th scope="col"><p class="align-middle">Отчество</p></th>
+                    <th scope="col"><p class="align-middle">Дата рождения</p></th>
+                    <th scope="col"><p class="align-middle">Регион</p></th>
+                    <th scope="col"><p class="align-middle">Адрес</p></th>
+                    <th scope="col"><p class="align-middle">Рейтинг</p></th>
+                    <th scope="col"><p class="align-middle">Рейтинг FIDE</p></th>
+                    <th scope="col"><p class="align-middle">Звание</p></th>
                     {% if text = 0 %}
-                        <th scope="col">Отметка</th>
+                        <th scope="col"><p class="align-middle">Отметка</p></th>
                     {% endif %}
                 </tr>
                 </thead>
@@ -54,7 +59,24 @@
                         <th scope="col">{{ player.last }}</th>
                         <th scope="col">{{ player.first }}</th>
                         <th scope="col">{{ player.patro }}</th>
+                        <th scope="col">{{ player.date_born|date:dd.MM.yyyy }}</th>
+                        <th scope="col">
+                            <div class="form-group">
+                                <select class="form-control p-0" name="region" id="region">
+                                    {% for region in regions %}
+                                        {% ifequal player.id_region region.id %}
+                                            <option value="{{ region.id }}" selected>{{ region.name }}</option>
+                                        {% else %}
+                                            <option value="{{ region.id }}">{{ region.name }}</option>
+                                        {% endifequal %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </th>
+                        <th scope="col">{{ player.adres }}</th>
                         <th scope="col">{{ player.rating_rus }}</th>
+                        <th scope="col">{{ player.rating_fide }}</th>
+                        <th scope="col">{{ player.id_title_rus }}</th>
                         {% if player.activ %}
                             {% if player.activ = 1 %}
                                 <th scope="col"><a href="list_players/{{ player.id_player_list }}/mark/0">Отменить</a></th>
@@ -68,7 +90,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-2 order-md-2 mb-4">
+        <div class="col-md-1">
         </div>
     </div>
 </div>
