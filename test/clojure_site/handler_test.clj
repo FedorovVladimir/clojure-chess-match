@@ -17,4 +17,6 @@
     (.displayDataBase (new MyClass) (new ArrayList data)))
 
 (defn -main []
-  (test-calling-java-method-display-db (db/get-start-list-players 1)))
+  (def data (db/get-start-list-players 1))
+  (println data)
+  (println (seq (test-calling-java-method-display-db data))))

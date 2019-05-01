@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+<script>
+    setTimeout(function(){
+        location.reload();
+    }, 15000);
+</script>
+
 <div class="alert alert-info" role="alert">
     <a href="/tournaments/info/{{ tournament.id }}" type="button" class="btn btn-info text-light">Назад</a>
 </div>
