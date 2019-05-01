@@ -29,10 +29,12 @@ public class PrevList {
         FileInputStream fileXls = new FileInputStream(path);
         Workbook workbook = new HSSFWorkbook(fileXls);
         Sheet sheet = workbook.getSheetAt(0);
-        if (fileName == "prev")
-            textPrevList(workbook, sheet, base, size);
-        else
-            textStartList(workbook, sheet, base, size);
+        if (fileName == "prev.xls") {
+            textPrevList(workbook, sheet, base, size, fileName);
+        }
+        else {
+            textStartList(workbook, sheet, base, size, fileName);
+        }
         writeFile(workbook, fileName);
         try{
             Runtime.getRuntime().exec("cmd /c start " + path);
@@ -41,12 +43,12 @@ public class PrevList {
         }
     }
 
-    private void textPrevList(Workbook workbook, Sheet sheet, List<Map<String, String>> base, int size) throws IOException {
+    private void textPrevList(Workbook workbook, Sheet sheet, List<Map<String, String>> base, int size, String fileName) throws IOException {
         int number = 1;
         int stringList = 0;
         for (int i = 0; i < (size + 3); i++) {
             Row rowNew = sheet.createRow(i);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 15; j++) {
                 if (i == 0 && j == 1) {
                     Cell cellNew = rowNew.createCell(j);
                     cellNew.setCellValue("Предварительный");
@@ -57,7 +59,7 @@ public class PrevList {
                 }
                 if (i == 2){
                     Cell cellNew = rowNew.createCell(j);
-                    setBorder(workbook, cellNew);
+                    setBorder(workbook, cellNew, fileName);
                     if (j == 0){
                         cellNew.setCellValue("№");
                     }
@@ -71,12 +73,42 @@ public class PrevList {
                         cellNew.setCellValue("Отчество");
                     }
                     if (j == 4) {
-                        cellNew.setCellValue("Рейтинг");
+                        cellNew.setCellValue("Рейтинг РШФ");
+                    }
+                    if (j == 5) {
+                        cellNew.setCellValue("Код РШФ");
+                    }
+                    if (j == 6) {
+                        cellNew.setCellValue("Рейтинг FIDE");
+                    }
+                    if (j == 7) {
+                        cellNew.setCellValue("Код FIDE");
+                    }
+                    if (j == 8) {
+                        cellNew.setCellValue("Разряд");
+                    }
+                    if (j == 9) {
+                        cellNew.setCellValue("Звание");
+                    }
+                    if (j == 10) {
+                        cellNew.setCellValue("Дата рождения");
+                    }
+                    if (j == 11) {
+                        cellNew.setCellValue("Субъект");
+                    }
+                    if (j == 12) {
+                        cellNew.setCellValue("Домашний адрес");
+                    }
+                    if (j == 13) {
+                        cellNew.setCellValue("Телефон");
+                    }
+                    if (j == 14) {
+                        cellNew.setCellValue("Email");
                     }
                 }
-                if (i > 2 && stringList < size){
+                if (i > 2){
                     Cell cellNew = rowNew.createCell(j);
-                    setBorder(workbook, cellNew);
+                    setBorder(workbook, cellNew, fileName);
                     if (j == 0){
                         cellNew.setCellValue(number);
                     }
@@ -92,6 +124,36 @@ public class PrevList {
                     if (j == 4) {
                         cellNew.setCellValue(String.valueOf(base.get(stringList).get("rating_rus")));
                     }
+                    if (j == 5) {
+                        cellNew.setCellValue(String.valueOf(base.get(stringList).get("rus")));
+                    }
+                    if (j == 6) {
+                        cellNew.setCellValue(String.valueOf(base.get(stringList).get("rating_fide")));
+                    }
+                    if (j == 7) {
+                        cellNew.setCellValue(String.valueOf(base.get(stringList).get("fide")));
+                    }
+                    if (j == 8) {
+                        cellNew.setCellValue(base.get(stringList).get("title_rus"));
+                    }
+                    if (j == 9) {
+                        cellNew.setCellValue(base.get(stringList).get("title"));
+                    }
+                    if (j == 10) {
+                        cellNew.setCellValue(String.valueOf(base.get(stringList).get("date_born")));
+                    }
+                    if (j == 11) {
+                        cellNew.setCellValue(base.get(stringList).get("region"));
+                    }
+                    if (j == 12) {
+                        cellNew.setCellValue(base.get(stringList).get("adres"));
+                    }
+                    if (j == 13) {
+                        cellNew.setCellValue(base.get(stringList).get("telephon"));
+                    }
+                    if (j == 14) {
+                        cellNew.setCellValue(base.get(stringList).get("email"));
+                    }
                     sheet.autoSizeColumn(j);
                 }
             }
@@ -102,12 +164,12 @@ public class PrevList {
         }
     }
 
-    private void textStartList(Workbook workbook, Sheet sheet, List<Map<String, String>> base, int size) throws IOException {
+    private void textStartList(Workbook workbook, Sheet sheet, List<Map<String, String>> base, int size, String fileName) throws IOException {
         int number = 1;
         int stringList = 0;
         for (int i = 0; i < (size + 3); i++) {
             Row rowNew = sheet.createRow(i);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 7; j++) {
                 if (i == 0 && j == 1) {
                     Cell cellNew = rowNew.createCell(j);
                     cellNew.setCellValue("Стартовый");
@@ -118,7 +180,7 @@ public class PrevList {
                 }
                 if (i == 2){
                     Cell cellNew = rowNew.createCell(j);
-                    setBorder(workbook, cellNew);
+                    setBorder(workbook, cellNew, fileName);
                     if (j == 0){
                         cellNew.setCellValue("№");
                     }
@@ -132,12 +194,18 @@ public class PrevList {
                         cellNew.setCellValue("Отчество");
                     }
                     if (j == 4) {
-                        cellNew.setCellValue("Рейтинг");
+                        cellNew.setCellValue("Рейтинг РШФ");
+                    }
+                    if (j == 5) {
+                        cellNew.setCellValue("Рейтинг FIDE");
+                    }
+                    if (j == 6) {
+                        cellNew.setCellValue("Субъект");
                     }
                 }
                 if (i > 2 && stringList < size){
                     Cell cellNew = rowNew.createCell(j);
-                    setBorder(workbook, cellNew);
+                    setBorder(workbook, cellNew, fileName);
                     if (j == 0){
                         cellNew.setCellValue(number);
                     }
@@ -153,6 +221,12 @@ public class PrevList {
                     if (j == 4) {
                         cellNew.setCellValue(String.valueOf(base.get(stringList).get("rating_rus")));
                     }
+                    if (j == 5) {
+                        cellNew.setCellValue(String.valueOf(base.get(stringList).get("rating_fide")));
+                    }
+                    if (j == 6) {
+                        cellNew.setCellValue(base.get(stringList).get("region"));
+                    }
                     sheet.autoSizeColumn(j);
                 }
             }
@@ -163,9 +237,9 @@ public class PrevList {
         }
     }
 
-    private void setBorder(Workbook workbookTemplate, Cell cell) throws IOException {
-        Sheet sheet = workbookTemplate.getSheetAt(0);
-        CellStyle style = workbookTemplate.createCellStyle();
+    private void setBorder(Workbook workbook, Cell cell, String fileName) throws IOException {
+        //Sheet sheet = workbook.getSheetAt(0);
+        CellStyle style = workbook.createCellStyle();
         style.setBorderBottom(BorderStyle.valueOf(THIN));
         style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
         style.setBorderLeft(BorderStyle.valueOf(THIN));
@@ -175,7 +249,7 @@ public class PrevList {
         style.setBorderTop(BorderStyle.valueOf(THIN));
         style.setTopBorderColor(IndexedColors.BLACK.getIndex());
         cell.setCellStyle(style);
-        writeFile(workbookTemplate, "prev.xls");
+        writeFile(workbook, fileName);
     }
 
     public static void writeFile(Workbook workbook, String nameFile) throws IOException {
