@@ -1,37 +1,28 @@
 package excel;
 
-import java.util.*;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class MyClass {
-
     public static void main(String[] args) {
-        new MyClass().displayText("hi");
+        new MyClass().hi();
     }
 
-    public void displayText(String text) {
+    public MyClass() {
+        System.out.println("create class yees!");
+    }
+
+    public void hi() {
+        System.out.println("hi");
+    }
+
+    public void hello(String text) throws IOException {
         System.out.println(text);
-    }
-
-    public List<Map<String, String>> displayDataBase(List<Map<String, String>> base) {
-        List<Map<String, String>> list = getListFromClojure(base);
-        System.out.println(list);
-        return list;
-    }
-
-    private List<Map<String, String>> getListFromClojure(List<Map<String, String>> base) {
-        List<Map<String, String>> list = new LinkedList<>();
-        for (Map<String, String> row : base) {
-            Map<String, String> map = new HashMap<>();
-            Set<String> keys = row.keySet();
-            Collection<String> values = row.values();
-            Iterator<String> iteratorK = keys.iterator();
-            Iterator<String> iteratorV = values.iterator();
-            for (int i = 0; i < keys.size(); i++) {
-                String key = String.valueOf(iteratorK.next());
-                map.put(key.replace(":", ""), iteratorV.next());
-            }
-            list.add(map);
-        }
-        return list;
+        String path = "resources/excel/prev.xls";
+        FileInputStream fileXls = new FileInputStream(path);
+        Workbook workbook = new HSSFWorkbook(fileXls);
     }
 }
