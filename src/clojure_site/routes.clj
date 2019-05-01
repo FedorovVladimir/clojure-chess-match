@@ -22,7 +22,6 @@
            (GET "/" []
              (def prevlist (new PrevList))
              (.hi prevlist)
-             (.enterPrevList prevlist "resources/excel/prev.xls")
 
              (let [tournaments (db/get-tournaments)]
                (v/index tournaments)))
