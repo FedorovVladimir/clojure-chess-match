@@ -8,10 +8,6 @@ public class MyClass {
         new MyClass().displayText("hi");
     }
 
-    public MyClass() {
-        System.out.println("Сreate java class MyClass!");
-    }
-
     public void displayText(String text) {
         System.out.println(text);
     }
