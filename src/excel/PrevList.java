@@ -24,13 +24,16 @@ public class PrevList {
         System.out.println("hi");
     }
 
-    private void enterPrevList(String path, List<Map<String, String>> base, int size) throws IOException {
+    private void enterPrevList(String path, List<Map<String, String>> base, int size, String fileName) throws IOException {
         System.out.println(path);
         FileInputStream fileXls = new FileInputStream(path);
         Workbook workbook = new HSSFWorkbook(fileXls);
         Sheet sheet = workbook.getSheetAt(0);
-        textPrevList(workbook, sheet, base, size);
-        writeFile(workbook, "prev.xls");
+        if (fileName == "prev")
+            textPrevList(workbook, sheet, base, size);
+        else
+            textStartList(workbook, sheet, base, size);
+        writeFile(workbook, fileName);
         try{
             Runtime.getRuntime().exec("cmd /c start " + path);
         }catch(Exception e){
@@ -51,6 +54,67 @@ public class PrevList {
                 if (i == 0 && j == 2) {
                     Cell cellNew = rowNew.createCell(j);
                     cellNew.setCellValue("список");
+                }
+                if (i == 2){
+                    Cell cellNew = rowNew.createCell(j);
+                    setBorder(workbook, cellNew);
+                    if (j == 0){
+                        cellNew.setCellValue("№");
+                    }
+                    if (j == 1) {
+                        cellNew.setCellValue("Фамилия");
+                    }
+                    if (j == 2) {
+                        cellNew.setCellValue("Имя");
+                    }
+                    if (j == 3) {
+                        cellNew.setCellValue("Отчество");
+                    }
+                    if (j == 4) {
+                        cellNew.setCellValue("Рейтинг");
+                    }
+                }
+                if (i > 2 && stringList < size){
+                    Cell cellNew = rowNew.createCell(j);
+                    setBorder(workbook, cellNew);
+                    if (j == 0){
+                        cellNew.setCellValue(number);
+                    }
+                    if (j == 1) {
+                        cellNew.setCellValue(base.get(stringList).get("last"));
+                    }
+                    if (j == 2) {
+                        cellNew.setCellValue(base.get(stringList).get("first"));
+                    }
+                    if (j == 3) {
+                        cellNew.setCellValue(base.get(stringList).get("patro"));
+                    }
+                    if (j == 4) {
+                        cellNew.setCellValue(String.valueOf(base.get(stringList).get("rating_rus")));
+                    }
+                    sheet.autoSizeColumn(j);
+                }
+            }
+            if (i > 2){
+                stringList++;
+                number++;
+            }
+        }
+    }
+
+    private void textStartList(Workbook workbook, Sheet sheet, List<Map<String, String>> base, int size) throws IOException {
+        int number = 1;
+        int stringList = 0;
+        for (int i = 0; i < (size + 3); i++) {
+            Row rowNew = sheet.createRow(i);
+            for (int j = 0; j < 5; j++) {
+                if (i == 0 && j == 1) {
+                    Cell cellNew = rowNew.createCell(j);
+                    cellNew.setCellValue("Стартовый");
+                }
+                if (i == 0 && j == 2) {
+                    Cell cellNew = rowNew.createCell(j);
+                    cellNew.setCellValue("лист");
                 }
                 if (i == 2){
                     Cell cellNew = rowNew.createCell(j);
@@ -131,11 +195,11 @@ public class PrevList {
 
 
 
-    public List<Map<String, String>> EnterPrevListDataBase(List<Map<String, String>> base, String path) throws IOException {
+    public List<Map<String, String>> EnterPrevListDataBase(List<Map<String, String>> base, String path, String fileName) throws IOException {
         List<Map<String, String>> list = getListFromClojure(base);
         System.out.println(list);
         System.out.println(list.size());
-        enterPrevList(path, list, list.size());
+        enterPrevList(path, list, list.size(), fileName);
         return list;
     }
 
