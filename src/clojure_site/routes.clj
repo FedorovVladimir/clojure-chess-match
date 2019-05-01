@@ -13,16 +13,16 @@
 
     ; функции взаимодействия с БД
     [clojure-site.db :as db])
-  (:import (excel MyClass)))
+  (:import (excel PrevList)))
 
 ; объявляем маршруты
 (defroutes mail-routes
 
            ; главная страница приложения
            (GET "/" []
-             (def myclass (new MyClass))
-             (.hi myclass)
-             (.hello myclass "Привет")
+             (def prevlist (new PrevList))
+             (.hi prevlist)
+             (.enterPrevList prevlist "resources/excel/prev.xls")
 
              (let [tournaments (db/get-tournaments)]
                (v/index tournaments)))
