@@ -1,10 +1,16 @@
-(ns excel.functions)
+(ns excel.functions
+  (:require [clojure-site.db :as db])
+  (:import (excel PrevList)
+           (java.util ArrayList)))
 
-(defn testing
-  [x y]
-  (println "Hello, Clojure!")
-  (+ x y))
+(defn test-calling-java-method-display-db [data]
+  (.EnterPrevListDataBase (new PrevList) (new ArrayList data)))
+
 
 (defn -main []
-  (println (str "(testing 5 3): " (testing 5 3)))
-  (println (str "(testing 10042 111): " (testing 10042 111))))
+  (doto (new PrevList)
+    (.hi))
+
+  ;(.enterPrevList prevList "resources/excel/prev.xls")
+  (def data (db/get-start-list-players 1))
+(println (test-calling-java-method-display-db data)))

@@ -1,15 +1,15 @@
 package excel;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.*;
+
+import static org.apache.poi.hssf.record.ExtendedFormatRecord.THIN;
 
 public class PrevList {
     public static void main(String[] args) {
@@ -24,28 +24,66 @@ public class PrevList {
         System.out.println("hi");
     }
 
-    public void enterPrevList(String path) throws IOException {
+    private void enterPrevList(String path, List<Map<String, String>> base, int size) throws IOException {
         System.out.println(path);
         FileInputStream fileXls = new FileInputStream(path);
         Workbook workbook = new HSSFWorkbook(fileXls);
-
+        int number = 1;
+        int stringList = 0;
         Sheet sheet = workbook.getSheetAt(0);
-        for (int i = 0; i < 200; i++) {
+
+        for (int i = 0; i < (size + 3); i++) {
             Row rowNew = sheet.createRow(i);
-            for (int j = 0; j < 30; j++) {
-                if (i == 0 && j == 0) {
+            for (int j = 0; j < 5; j++) {
+                if (i == 0 && j == 1) {
                     Cell cellNew = rowNew.createCell(j);
                     cellNew.setCellValue("Предварительный список");
                 }
-
-                if (i == 2 && j == 0){
+                if (i == 2){
                     Cell cellNew = rowNew.createCell(j);
-                    cellNew.setCellValue("Название турнира");
+                    setBorder(workbook, cellNew);
+                    if (j == 0){
+                        cellNew.setCellValue("№");
+                    }
+                    if (j == 1) {
+                        cellNew.setCellValue("Фамилия");
+                    }
+                    if (j == 2) {
+                        cellNew.setCellValue("Имя");
+                    }
+                    if (j == 3) {
+                        cellNew.setCellValue("Отчество");
+                    }
+                    if (j == 4) {
+                        cellNew.setCellValue("Рейтинг");
+                    }
+                }
+                if (i > 2 && stringList < size){
+                    Cell cellNew = rowNew.createCell(j);
+                    setBorder(workbook, cellNew);
+                    if (j == 0){
+                        cellNew.setCellValue(number);
+                    }
+                    if (j == 1) {
+                        cellNew.setCellValue(base.get(stringList).get("last"));
+                    }
+                    if (j == 2) {
+                        cellNew.setCellValue(base.get(stringList).get("first"));
+                    }
+                    if (j == 3) {
+                        cellNew.setCellValue(base.get(stringList).get("patro"));
+                    }
+                    if (j == 4) {
+                        cellNew.setCellValue(String.valueOf(base.get(stringList).get("rating_rus")));
+                    }
+                    sheet.autoSizeColumn(j);
                 }
             }
+            if (i > 2){
+                stringList++;
+                number++;
+            }
         }
-        //addMerged(sheet, 0,0, 0, 2);
-        //addMerged(sheet, 2,2, 0, 2);
         writeFile(workbook, "prev.xls");
         try{
             Runtime.getRuntime().exec("cmd /c start " + path);
@@ -53,9 +91,23 @@ public class PrevList {
             e.printStackTrace();
         }
     }
+    private void setBorder(Workbook workbookTemplate, Cell cell) throws IOException {
+        Sheet sheet = workbookTemplate.getSheetAt(0);
+        CellStyle style = workbookTemplate.createCellStyle();
+        style.setBorderBottom(BorderStyle.valueOf(THIN));
+        style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderLeft(BorderStyle.valueOf(THIN));
+        style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderRight(BorderStyle.valueOf(THIN));
+        style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderTop(BorderStyle.valueOf(THIN));
+        style.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        cell.setCellStyle(style);
+        writeFile(workbookTemplate, "prev.xls");
+    }
 
     public static void writeFile(Workbook workbook, String nameFile) throws IOException {
-        FileOutputStream file = new FileOutputStream("C:\\Users\\Mikhail\\IdeaProjects\\ChessMatch\\src\\main\\resources\\excel\\" + nameFile);
+        FileOutputStream file = new FileOutputStream("resources/excel/"+ nameFile);
         workbook.write(file);
         file.close();
     }
@@ -67,5 +119,33 @@ public class PrevList {
                 firstCol, //first column (0-based)
                 lastCol //last column (0-based)
         ));
+    }
+
+ 
+
+    public List<Map<String, String>> EnterPrevListDataBase(List<Map<String, String>> base) throws IOException {
+        List<Map<String, String>> list = getListFromClojure(base);
+        String path = "resources/excel/prev.xls";
+        System.out.println(list);
+        System.out.println(list.size());
+        enterPrevList(path,list,list.size());
+        return list;
+    }
+
+    private List<Map<String, String>> getListFromClojure(List<Map<String, String>> base) {
+        List<Map<String, String>> list = new LinkedList<>();
+        for (Map<String, String> row : base) {
+            Map<String, String> map = new HashMap<>();
+            Set<String> keys = row.keySet();
+            Collection<String> values = row.values();
+            Iterator<String> iteratorK = keys.iterator();
+            Iterator<String> iteratorV = values.iterator();
+            for (int i = 0; i < keys.size(); i++) {
+                String key = String.valueOf(iteratorK.next());
+                map.put(key.replace(":", ""), iteratorV.next());
+            }
+            list.add(map);
+        }
+        return list;
     }
 }
