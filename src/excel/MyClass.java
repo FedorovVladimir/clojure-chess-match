@@ -8,17 +8,14 @@ public class MyClass {
         new MyClass().displayText("hi");
     }
 
-    public MyClass() {
-        System.out.println("Сreate java class MyClass!");
-    }
-
     public void displayText(String text) {
         System.out.println(text);
     }
 
-    public void displayDataBase(List<Map<String, String>> base) {
+    public List<Map<String, String>> displayDataBase(List<Map<String, String>> base) {
         List<Map<String, String>> list = getListFromClojure(base);
         System.out.println(list);
+        return list;
     }
 
     private List<Map<String, String>> getListFromClojure(List<Map<String, String>> base) {
