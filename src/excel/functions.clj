@@ -3,14 +3,15 @@
   (:import (excel PrevList)
            (java.util ArrayList)))
 
-(defn test-calling-java-method-display-db [data]
-  (.EnterPrevListDataBase (new PrevList) (new ArrayList data)))
+(defn test-calling-java-method-display-db []
+  (def data (db/get-prev-list-players 1))
+  (.EnterPrevListDataBase (new PrevList) (new ArrayList data) "resources/excel/prev.xls"))
+
+(defn test-calling-java-method-display-db-start []
+  (def data (db/get-start-list-players 1))
+  (.EnterPrevListDataBase (new PrevList) (new ArrayList data) "resources/excel/start.xls"))
 
 
 (defn -main []
-  (doto (new PrevList)
-    (.hi))
-
-  ;(.enterPrevList prevList "resources/excel/prev.xls")
-  (def data (db/get-start-list-players 1))
-(println (test-calling-java-method-display-db data)))
+    (test-calling-java-method-display-db)
+  )

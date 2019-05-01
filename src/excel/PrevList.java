@@ -28,16 +28,29 @@ public class PrevList {
         System.out.println(path);
         FileInputStream fileXls = new FileInputStream(path);
         Workbook workbook = new HSSFWorkbook(fileXls);
+        Sheet sheet = workbook.getSheetAt(0);
+        textPrevList(workbook, sheet, base, size);
+        writeFile(workbook, "prev.xls");
+        try{
+            Runtime.getRuntime().exec("cmd /c start " + path);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void textPrevList(Workbook workbook, Sheet sheet, List<Map<String, String>> base, int size) throws IOException {
         int number = 1;
         int stringList = 0;
-        Sheet sheet = workbook.getSheetAt(0);
-
         for (int i = 0; i < (size + 3); i++) {
             Row rowNew = sheet.createRow(i);
             for (int j = 0; j < 5; j++) {
                 if (i == 0 && j == 1) {
                     Cell cellNew = rowNew.createCell(j);
-                    cellNew.setCellValue("Предварительный список");
+                    cellNew.setCellValue("Предварительный");
+                }
+                if (i == 0 && j == 2) {
+                    Cell cellNew = rowNew.createCell(j);
+                    cellNew.setCellValue("список");
                 }
                 if (i == 2){
                     Cell cellNew = rowNew.createCell(j);
@@ -84,13 +97,8 @@ public class PrevList {
                 number++;
             }
         }
-        writeFile(workbook, "prev.xls");
-        try{
-            Runtime.getRuntime().exec("cmd /c start " + path);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
     }
+
     private void setBorder(Workbook workbookTemplate, Cell cell) throws IOException {
         Sheet sheet = workbookTemplate.getSheetAt(0);
         CellStyle style = workbookTemplate.createCellStyle();
@@ -121,14 +129,13 @@ public class PrevList {
         ));
     }
 
- 
 
-    public List<Map<String, String>> EnterPrevListDataBase(List<Map<String, String>> base) throws IOException {
+
+    public List<Map<String, String>> EnterPrevListDataBase(List<Map<String, String>> base, String path) throws IOException {
         List<Map<String, String>> list = getListFromClojure(base);
-        String path = "resources/excel/prev.xls";
         System.out.println(list);
         System.out.println(list.size());
-        enterPrevList(path,list,list.size());
+        enterPrevList(path, list, list.size());
         return list;
     }
 
