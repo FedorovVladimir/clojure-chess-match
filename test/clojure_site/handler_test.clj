@@ -18,4 +18,5 @@
 
 (defn -main []
   (def data (db/get-start-list-players 1))
-  (println (test-calling-java-method-display-db data)))
+  (println data)
+  (println (seq (test-calling-java-method-display-db data))))
