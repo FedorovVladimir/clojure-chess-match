@@ -132,18 +132,31 @@
                ["id = ? " id]))
 
 (defn get-start-list-players [id-tournament]
-  (jdbc/query mysql-db [(str "select LIST_PLAYER.ID as id_player_list,
-                          HUMAN.LAST as last,
-                          HUMAN.FIRST as first,
-                          HUMAN.PATRO as patro,
-                          PLAYER.RATING_RUS as rating_rus,
-                          PLAYER.RATING_FIDE as rating_fide,
-                          REGION.NAME as region
-                          from LIST_PLAYER,
-                          PLAYER,
-                          HUMAN,
-                          REGION
-                          where LIST_PLAYER.ID_PLAYER = PLAYER.ID and
-                          PLAYER.ID_HUMAN = HUMAN.ID and
-                          PLAYER.ID_REGION = REGION.ID and
-                          ID_TOURNAMENT = " id-tournament " and LIST_PLAYER.ACTIVE = 1 order by last, first, patro")]))
+  (jdbc/query mysql-db ["select LIST_PLAYER.ID as id_player_list,
+                            HUMAN.LAST as last,
+                            HUMAN.id as id_human,
+                            HUMAN.DATE_BORN as date_born,
+                            HUMAN.ADRES as adres,
+                            HUMAN.FIRST as first,
+                            HUMAN.PATRO as patro,
+                            HUMAN.TELEPHON as telephon,
+                            HUMAN.EMAIL as email,
+                            PLAYER.RATING_RUS as rating_rus,
+                            PLAYER.RATING_FIDE as rating_fide,
+                            PLAYER.ID_REGION as id_region,
+                            REGION.NAME as region,
+                            TITLE_RUS.CODE as title_rus,
+                            TITLE.CODE as title,
+                            PLAYER.ID_TITLE as id_title,
+                            PLAYER.ID_TITLE_RUS as id_title_rus,
+                            PLAYER.IDFIDE as fide,
+                            PLAYER.IDRUS as rus,
+                            LIST_PLAYER.ACTIVE as activ
+                            from LIST_PLAYER,
+                            PLAYER, HUMAN, REGION, TITLE_RUS, TITLE
+                            where LIST_PLAYER.ID_PLAYER = PLAYER.ID and
+                            PLAYER.ID_HUMAN = HUMAN.ID and
+                            REGION.ID = PLAYER.ID_REGION and
+                            TITLE_RUS.ID = PLAYER.ID_TITLE_RUS and
+                            TITLE.ID = PLAYER.ID_TITLE and
+                            ID_TOURNAMENT = ? order by last, first, patro" id-tournament]))

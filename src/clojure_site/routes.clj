@@ -43,6 +43,10 @@
            (GET  "/tournaments/:id/prev_list/export" [id]
              (c/tournament-prev-list-export id))
 
+           ; экспорт файла
+           (GET  "/tournaments/:id/start_list/export" [id]
+             (c/tournament-start-list-export id))
+
            ; страница предварительного списка
            (GET "/tournaments/:id/prev_list" [id]
              (let [players (db/get-prev-list-players id)

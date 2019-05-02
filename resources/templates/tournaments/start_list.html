@@ -8,7 +8,7 @@
 
 <div class="alert alert-info" role="alert">
     <a href="/tournaments/info/{{ tournament.id }}" type="button" class="btn btn-info text-light">Назад</a>
-    <a href="/tournaments/{{ tournament.id }}/prev_list/export" type="button" class="btn btn-info text-light">Экспорт</a>
+    <a href="/tournaments/{{ tournament.id }}/start_list/export" type="button" class="btn btn-info text-light">Экспорт</a>
 </div>
 
 <div class="container-fluid">
@@ -49,11 +49,7 @@
                 <tbody>
                 {% for player in players %}
                 <div>
-                    {% if player.activ = 1 %}
-                    <tr class="alert-success">
-                    {% else %}
                     <tr  style="height: 10px">
-                    {% endif %}
                         <th scope="col" class="p-1">{{ player.last }}</th>
                         <th scope="col" class="p-1">{{ player.first }}</th>
                         <th scope="col" class="p-1">{{ player.patro }}</th>
