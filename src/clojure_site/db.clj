@@ -170,3 +170,6 @@
   (jdbc/insert! mysql-db :GAME {:ID_TOUR id-tour
                                 :ID_PLAYER_WHITE first
                                 :ID_PLAYER_BLACK second}))
+
+(defn get-tours [id-tournament]
+  (jdbc/query mysql-db ["select * from TOUR where ID_TOURNAMENT = ?" id-tournament]))

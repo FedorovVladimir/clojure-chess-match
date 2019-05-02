@@ -8,6 +8,8 @@
     [excel.functions :refer [test-calling-java-method-display-db-start
                              test-calling-java-method-display-db]]
 
+    [pairs.pairs :refer [create-tour-pairs]]
+
     ; функция для взаимодействия с БД
     [clojure-site.db :as db]))
 
@@ -102,3 +104,7 @@
 (defn tournament-start-list-export [id]
   (test-calling-java-method-display-db-start id)
   (redirect (str "/tournaments/" id "/start_list")))
+
+(defn create-tour [id number-tour]
+  (create-tour-pairs id number-tour)
+  (redirect (str "/tournaments/" id "/tours")))

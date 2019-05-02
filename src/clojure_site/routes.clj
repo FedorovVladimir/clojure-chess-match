@@ -12,7 +12,9 @@
     [clojure-site.views :as v]
 
     ; функции взаимодействия с БД
-    [clojure-site.db :as db]))
+    [clojure-site.db :as db]
+
+    [pairs.pairs :as pairs]))
 
 ; объявляем маршруты
 (defroutes mail-routes
@@ -80,11 +82,12 @@
              (v/tournaments-info tournament regions sex titles titles-rus)))
 
            (GET "/tournaments/:id/tours" [id]
-             (let [tournament (db/get-tournament id)]
-               (v/tournaments-tours tournament)))
+             (let [tournament (db/get-tournament id)
+                   tours (db/get-tours id)]
+               (v/tournaments-tours tournament tours)))
 
            (GET  "/tournaments/:id/pairs" [id]
-             )
+             (c/create-tour id 1))
 
              ; ошибка 404
            (route/not-found "Ничего не найдено"))
