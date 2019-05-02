@@ -53,6 +53,7 @@
                                 TOURNAMENT.TIME_CONTROL as time_control,
                                 CITY.NAME as city_name,
                                 REGION.NAME as region,
+                                TOURNAMENT.COUNT_TOUR as count_tour,
                                 INDICATOR.NAME as indicator
                                 from TOURNAMENT, CITY, REGION, INDICATOR
                                 where ID_CITY = CITY.ID and
@@ -160,3 +161,12 @@
                             TITLE_RUS.ID = PLAYER.ID_TITLE_RUS and
                             TITLE.ID = PLAYER.ID_TITLE and
                             ID_TOURNAMENT = ? order by last, first, patro" id-tournament]))
+
+(defn set-tour [number-tour id-tournament]
+  (:generated_key (first (jdbc/insert! mysql-db :TOUR {:ID_TOURNAMENT id-tournament
+                                                       :NUMBER number-tour}))))
+
+(defn set-pair-tour [first second id-tour]
+  (jdbc/insert! mysql-db :GAME {:ID_TOUR id-tour
+                                :ID_PLAYER_WHITE first
+                                :ID_PLAYER_BLACK second}))

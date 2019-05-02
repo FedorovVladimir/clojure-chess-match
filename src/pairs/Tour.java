@@ -1,7 +1,5 @@
 package pairs;
 
-import javafo.api.JaVaFoApi;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +45,11 @@ public class Tour {
     public Game getGame(int i) {
         return listGame.get(i - 1);
     }
+
+    public int getSize() {
+        return listGame.size();
+    }
+
 
     public void random() {
         for (Game g: listGame) {
@@ -122,8 +125,9 @@ public class Tour {
             }
 
         }
-        catch(IOException ex){}
-        newTourFinish();
+        catch(IOException ex) {
+
+        }
     }
 
     private void newTourFinish() throws FileNotFoundException {

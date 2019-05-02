@@ -1,5 +1,6 @@
 package excel;
 
+import convert.Convert;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -245,7 +246,7 @@ public class PrevList {
         writeFile(workbook, fileName);
     }
 
-    public static void writeFile(Workbook workbook, String nameFile) throws IOException {
+    private static void writeFile(Workbook workbook, String nameFile) throws IOException {
         FileOutputStream file = new FileOutputStream("resources/excel/"+ nameFile);
         workbook.write(file);
         file.close();
@@ -260,30 +261,11 @@ public class PrevList {
         ));
     }
 
-
-
     public List<Map<String, String>> EnterPrevListDataBase(List<Map<String, String>> base, String path, String fileName) throws IOException {
-        List<Map<String, String>> list = getListFromClojure(base);
+        List<Map<String, String>> list = Convert.getListFromClojure(base);
         System.out.println(list);
         System.out.println(list.size());
         enterPrevList(path, list, list.size(), fileName);
-        return list;
-    }
-
-    private List<Map<String, String>> getListFromClojure(List<Map<String, String>> base) {
-        List<Map<String, String>> list = new LinkedList<>();
-        for (Map<String, String> row : base) {
-            Map<String, String> map = new HashMap<>();
-            Set<String> keys = row.keySet();
-            Collection<String> values = row.values();
-            Iterator<String> iteratorK = keys.iterator();
-            Iterator<String> iteratorV = values.iterator();
-            for (int i = 0; i < keys.size(); i++) {
-                String key = String.valueOf(iteratorK.next());
-                map.put(key.replace(":", ""), iteratorV.next());
-            }
-            list.add(map);
-        }
         return list;
     }
 }

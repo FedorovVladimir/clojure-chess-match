@@ -1,5 +1,7 @@
 package pairs;
 
+import convert.Convert;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -9,36 +11,34 @@ public class AdapterPairs {
 
     }
 
-    public void run(List<Map<String, String>> base) {
-        List<Map<String, String>> playersList = getListFromClojure(base);
+    public List<Integer> run(List<Map<String, String>> base, int countOfTour) throws IOException {
+        List<Map<String, String>> playersList = Convert.getListFromClojure(base);
 
         ListPlayers listPlayers = new ListPlayers();
         for (int i = 0; i < playersList.size(); i++) {
             Map<String, String> players = playersList.get(i);
-                Human h = new Human(players.get("first"),
+
+            Human h = new Human(players.get("first"),
                 players.get("last"),
                 Integer.parseInt(String.valueOf(players.get("rating_fide"))),
-                i,
+                i + 1,
                 Integer.parseInt(String.valueOf(players.get("id_player_list"))));
-            System.out.println(h.toString());
+
             listPlayers.addPlayer(h);
         }
-    }
 
-    private List<Map<String, String>> getListFromClojure(List<Map<String, String>> base) {
-        List<Map<String, String>> list = new LinkedList<>();
-        for (Map<String, String> row : base) {
-            Map<String, String> map = new HashMap<>();
-            Set<String> keys = row.keySet();
-            Collection<String> values = row.values();
-            Iterator<String> iteratorK = keys.iterator();
-            Iterator<String> iteratorV = values.iterator();
-            for (int i = 0; i < keys.size(); i++) {
-                String key = String.valueOf(iteratorK.next());
-                map.put(key.replace(":", ""), iteratorV.next());
-            }
-            list.add(map);
+        Tournament tournament = new Tournament();
+        tournament.setListPlayers(listPlayers);
+        tournament.setFileName("test");
+        tournament.setCountOfTour(countOfTour);
+        tournament.createFileTournament();
+        tournament.createTour();
+
+        List<Integer> listList = new ArrayList<>();
+        for (int i = 1; i < tournament.getTour(1).getSize() + 1; i++ ){
+            listList.add(tournament.getTour(1).getGame(i).getWhite().getId());
+            listList.add(tournament.getTour(1).getGame(i).getBlack().getId());
         }
-        return list;
+        return listList;
     }
 }

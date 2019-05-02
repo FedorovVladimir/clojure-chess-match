@@ -65,11 +65,11 @@ public class Human implements Comparable<Human> {
     }
 
     public int getId() {
-        return idFIDE;
+        return id;
     }
 
-    public void setId(int idFIDE) {
-        this.idFIDE = idFIDE;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSex() {
