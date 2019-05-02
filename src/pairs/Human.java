@@ -153,11 +153,12 @@ public class Human implements Comparable<Human> {
         this.secondName = secondName;
         this.ratingWorld = rating;
     }
-    public Human(String firstName, String secondName, int rating, int numberStart) {
+    public Human(String firstName, String secondName, int rating, int numberStart, int id) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.ratingWorld = rating;
         this.numberStart = numberStart;
+        this.id = id;
     }
 
     @Override

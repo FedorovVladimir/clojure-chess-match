@@ -13,5 +13,4 @@
 
 
 (defn -main []
-    (test-calling-java-method-display-db-start 1)
-  )
+    (test-calling-java-method-display-db-start 1))

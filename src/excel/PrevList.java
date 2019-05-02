@@ -12,16 +12,9 @@ import java.util.*;
 import static org.apache.poi.hssf.record.ExtendedFormatRecord.THIN;
 
 public class PrevList {
+
     public static void main(String[] args) {
-        new PrevList().hi();
-    }
 
-    public PrevList() {
-        System.out.println("create class yees!");
-    }
-
-    public void hi() {
-        System.out.println("hi");
     }
 
     private void enterPrevList(String path, List<Map<String, String>> base, int size, String fileName) throws IOException {
@@ -29,7 +22,7 @@ public class PrevList {
         FileInputStream fileXls = new FileInputStream(path);
         Workbook workbook = new HSSFWorkbook(fileXls);
         Sheet sheet = workbook.getSheetAt(0);
-        if (fileName == "prev.xls") {
+        if (fileName.equals("prev.xls")) {
             textPrevList(workbook, sheet, base, size, fileName);
         }
         else {
