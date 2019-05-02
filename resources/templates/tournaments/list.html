@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<script>
-    setTimeout(function(){
-        location.reload();
-    }, 15000);
-</script>
+<!--<script>-->
+<!--    setTimeout(function(){-->
+<!--        location.reload();-->
+<!--    }, 15000);-->
+<!--</script>-->
 
 <div class="alert alert-info" role="alert">
     <a href="/tournaments/info/{{ tournament.id }}" type="button" class="btn btn-info text-light">Назад</a>
@@ -28,133 +28,136 @@
 
 <div class="container-fluid">
     <div id="infoTournament" class="row">
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <table class="table table-bordered">
                 <thead class="thead-light">
                 <tr class="text-center">
-                    <th scope="col"><p class="align-middle">Фамилия</p></th>
-                    <th scope="col"><p class="align-middle">Имя</p></th>
-                    <th scope="col"><p class="align-middle">Отчество</p></th>
+                    <th scope="col" style="width: 160px"><p class="align-middle">Фамилия</p></th>
+                    <th scope="col" style="width: 160px"><p class="align-middle">Имя</p></th>
+                    <th scope="col" style="width: 190px"><p class="align-middle">Отчество</p></th>
                     <th scope="col"><p class="align-middle">Дата рождения</p></th>
                     <th scope="col"><p class="align-middle">Регион</p></th>
                     <th scope="col"><p class="align-middle">Адрес</p></th>
-                    <th scope="col"><p class="align-middle">Рейтинг</p></th>
-                    <th scope="col"><p class="align-middle">Рейтинг FIDE</p></th>
-                    <th scope="col"><p class="align-middle">Звание</p></th>
+                    <th scope="col" style="width: 100px"><p class="align-middle">Рейтинг</p></th>
+                    <th scope="col" style="width: 100px"><p class="align-middle">Рейтинг FIDE</p></th>
+                    <th scope="col" style="width: 100px"><p class="align-middle">Звание</p></th>
                     {% if text = 0 %}
-                        <th scope="col"><p class="align-middle">Отметка</p></th>
+                        <th scope="col" style="width: 110px"><p class="align-middle">Действие</p></th>
                     {% endif %}
                 </tr>
                 </thead>
                 <tbody>
                 {% for player in players %}
+
+                <form>
                 <div>
                     {% if player.activ = 1 %}
                     <tr class="alert-success">
                     {% else %}
-                    <tr>
+                    <tr  style="height: 10px">
                     {% endif %}
-                        <th scope="col">
+                        <th scope="col" class="p-1">
                             {% if player.activ = 1 %}
                                 {{ player.last }}
                             {% else %}
-                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Иванов" value="{{ player.last }}">
+                                <input type="text" class="form-control" name="last_name" id="last_name{{ player.id_player_list }}" oninput="saveButton({{ player.id_player_list }})" value="{{ player.last }}">
                             {% endif %}
                         </th>
-                        <th scope="col">
+                        <th scope="col" class="p-1">
                             {% if player.activ = 1 %}
                                 {{ player.first }}
                             {% else %}
-                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Иван" value="{{ player.first }}">
+                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Иван" oninput="saveButton({{ player.id_player_list }})" value="{{ player.first }}">
                             {% endif %}
                         </th>
-                        <th scope="col">
+                        <th scope="col" class="p-1">
                             {% if player.activ = 1 %}
                                 {{ player.patro }}
                             {% else %}
-                                <input type="text" class="form-control" name="patro" id="patro" placeholder="Иванович" value="{{ player.patro }}">
+                                <input type="text" class="form-control" name="patro" id="patro" placeholder="Иванович" oninput="saveButton({{ player.id_player_list }})" value="{{ player.patro }}">
                             {% endif %}
                         </th>
-                        <th scope="col">
+                        <th scope="col" class="p-1">
                             {% if player.activ = 1 %}
                                 {{ player.date_born|date:dd.MM.yyyy }}
                             {% else %}
-                                <input type="date" name="date_born" class="form-control" id="date_born" value="{{ player.date_born }}">
+                                <input type="date" name="date_born" class="form-control" id="date_born" oninput="saveButton({{ player.id_player_list }})" value="{{ player.date_born }}">
                             {% endif %}
                         </th>
-                        <th scope="col">
+                        <th scope="col" class="p-1">
                             {% if player.activ = 1 %}
                                 {{ player.region }}
                             {% else %}
-                                <div class="form-group">
-                                    <select class="form-control p-0" name="region" id="region">
-                                        {% for region in regions %}
-                                            {% ifequal player.id_region region.id %}
-                                                <option value="{{ region.id }}" selected>{{ region.name }}</option>
-                                            {% else %}
-                                                <option value="{{ region.id }}">{{ region.name }}</option>
-                                            {% endifequal %}
-                                        {% endfor %}
-                                    </select>
-                                </div>
+                                <select class="form-control p-0" name="region" id="region" onclick="saveButton({{ player.id_player_list }})">
+                                    {% for region in regions %}
+                                        {% ifequal player.id_region region.id %}
+                                            <option value="{{ region.id }}" selected>{{ region.name }}</option>
+                                        {% else %}
+                                            <option value="{{ region.id }}">{{ region.name }}</option>
+                                        {% endifequal %}
+                                    {% endfor %}
+                                </select>
                             {% endif %}
                         </th>
-                        <th scope="col">
+                        <th scope="col" class="p-1">
                             {% if player.activ = 1 %}
                                 {{ player.adres }}
                             {% else %}
-                                <input type="text" class="form-control" name="adress" id="adress" placeholder="ул. Островского 8-108" value="{{ player.adres }}">
+                                <input type="text" class="form-control" name="adress" id="adress" oninput="saveButton({{ player.id_player_list }})" placeholder="ул. Островского 8-108" value="{{ player.adres }}">
                             {% endif %}
                         </th>
-                        <th scope="col">
+                        <th scope="col" class="p-1">
                             {% if player.activ = 1 %}
                                 {{ player.rating_rus }}
                             {% else %}
-                                <input type="text" class="form-control" name="rating_rus" id="rating_rus" placeholder="1000" value="{{ player.rating_rus }}">
+                                <input type="text" class="form-control" name="rating_rus" id="rating_rus" oninput="saveButton({{ player.id_player_list }})" placeholder="1000" value="{{ player.rating_rus }}">
                             {% endif %}
                         </th>
-                        <th scope="col">
+                        <th scope="col" class="p-1">
                             {% if player.activ = 1 %}
                                 {{ player.rating_fide }}
                             {% else %}
-                                <input type="text" class="form-control" name="rating_fide" id="rating_fide" placeholder="0" value="{{ player.rating_fide }}">
+                                <input type="text" class="form-control" name="rating_fide" id="rating_fide" oninput="saveButton({{ player.id_player_list }})" placeholder="0" value="{{ player.rating_fide }}">
                             {% endif %}
                         </th>
-                        <th scope="col">
+                        <th scope="col" class="p-1">
                             {% if player.activ = 1 %}
                                 {{ player.title_rus }}
                             {% else %}
-                                <div class="form-group">
-                                    <select class="form-control p-0" name="title" id="title">
-                                        {% for title-rus in titles-rus %}
-                                            {% ifequal player.id_title_rus title-rus.id %}
-                                                <option value="{{ title-rus.id }}" selected>{{ title-rus.code }}</option>
-                                            {% else %}
-                                                <option value="{{ title-rus.id }}">{{ title-rus.code }}</option>
-                                            {% endifequal %}
-                                        {% endfor %}
-                                    </select>
-                                </div>
+                                <select class="form-control p-0" name="title" id="title" onclick="saveButton({{ player.id_player_list }})">
+                                    {% for title-rus in titles-rus %}
+                                        {% ifequal player.id_title_rus title-rus.id %}
+                                            <option value="{{ title-rus.id }}" selected>{{ title-rus.code }}</option>
+                                        {% else %}
+                                            <option value="{{ title-rus.id }}">{{ title-rus.code }}</option>
+                                        {% endifequal %}
+                                    {% endfor %}
+                                </select>
                             {% endif %}
                         </th>
                         {% if player.activ %}
                             {% if player.activ = 1 %}
-                                <th scope="col"><a href="list_players/{{ player.id_player_list }}/mark/0">Отменить</a></th>
+                                <th scope="col" class="p-1"><a type='button' style="width: 110px" class='btn btn-success' href="list_players/{{ player.id_player_list }}/mark/0">Отменить</a></th>
                             {% else %}
-                                <th scope="col"><a href="list_players/{{ player.id_player_list }}/mark/1">Пришел</a></th>
+                                <th id="th{{ player.id_player_list }}" scope="col" class="p-1"><a type='button' style="width: 110px" class='btn btn-muted' href="list_players/{{ player.id_player_list }}/mark/1">Пришел</a></th>
                             {% endif %}
                         {% endif %}
                     </tr>
                 </div>
+                </form>
+
+
                 {% endfor %}
                 </tbody>
             </table>
         </div>
-        <div class="col-md-1">
-        </div>
     </div>
 </div>
 
+
+<script>
+    function saveButton(id) {
+        document.getElementById('th' + id).innerHTML = "<a type='button' style='width: 110px' id='text'" + id + " class='btn btn-warning'>Сохранить</a>";
+    }
+</script>
 {% endblock %}
