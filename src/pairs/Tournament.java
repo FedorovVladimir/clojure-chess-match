@@ -139,6 +139,7 @@ public class Tournament {
             writer.flush();
         }
         catch(IOException ex){}
+
     }
     public Tour getTour(int i) {
         return listTour.get(i - 1);
@@ -148,9 +149,13 @@ public class Tournament {
         Tour new_t = new Tour();
         String pairs;
         pairs = JaVaFoApi.exec(1000, new FileInputStream("test.trf"));
-        System.out.println(pairs);
         String[] pair = pairs.split("\n");
-        for (int i = 1; i < pair.length - 1; i++) {
+
+        int countPairs = pair.length;
+        if (listPlayers.size() % 2 == 1) {
+            countPairs -= 1;
+        }
+        for (int i = 1; i < countPairs; i++) {
             String[] s = pair[i].split(" ");
             new_t.addGame(new Game(
                     listPlayers.getPlayer(Integer.valueOf(s[0])),

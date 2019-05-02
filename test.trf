@@ -1,26 +1,26 @@
-012 AutoTest 19259208798633              
-022 F93Q13Z14R0H23F1H2545L1800G2S50WW1BW1WD.5BD.5WL0BL0ZP0HP.5FP1PA1FW1FL0              
-032 FIDE              
-042               
-052               
-062 13              
-072 13              
-082 0              
-092 Individual  Swiss Dutch 2017 rules              
-102 Auto-Generator              
-122               
-132                                                                                                      
+012 XII SDS - Classic               
+022 Gelendzhik              
+032 RUS              
+042 2016/06/28              
+052 2016/06/28              
+062 14              
+072 14              
+092 Swiss System              
+102 24148296 Sakhvadze Georgy              
+122 Standard: 90 minutes with 30 second increment from move 1              
+132                                                                                                    
 XXR 7              
-001    1      Test0001 Player0001               2545                             0.0    1     7 b 1     9 w 0     6 b 0    13 w =    12 b 1    10 w 1     4 b 1  
-001    2      Test0002 Player0002               2536                             0.0    2     8 w 0    10 b 1    11 w =     5 b 1     9 w 0     3 b =     7 w 1  
-001    3      Test0003 Player0003               2456                             0.0    3     9 b 0     7 w 1    13 b =    12 w 1     4 b 1     2 w =     6 b =  
-001    4      Test0004 Player0004               2410                             0.0    4    10 w =    12 b 1     8 w 0    11 b 0     3 w 0     9 b =     1 w 0  
-001    5      Test0005 Player0005               2374                             0.0    5    11 b 0    13 w =     9 b 0     2 w 0     7 b 0     6 w 0    12 b =  
-001    6      Test0006 Player0006               2249                             0.0    6    12 w =     8 b 0     1 w 1    10 b 0    11 w =     5 b 1     3 w =  
-001    7      Test0007 Player0007               2186                             0.0    7     1 w 0     3 b 0    10 w 0     8 b 0     5 w 1  0000 - U     2 b 0  
-001    8      Test0008 Player0008               2168                             0.0    8     2 b 1     6 w 1     4 b 1     7 w 1    13 b =    12 w 0  0000 - U  
-001    9      Test0009 Player0009               2153                             0.0    9     3 w 1     1 b 1     5 w 1  0000 - U     2 b 1     4 w =    13 b 1  
-001   10      Test0010 Player0010               2130                             0.0   10     4 b =     2 w 0     7 b 1     6 w 1  0000 - U     1 b 0    11 w 1  
-001   11      Test0011 Player0011               2109                             0.0   11     5 w 1  0000 - U     2 b =     4 w 1     6 b =    13 w 0    10 b 0  
-001   12      Test0012 Player0012               2036                             0.0   12     6 b =     4 w 0  0000 - U     3 b 0     1 w 0     8 b 1     5 w =  
-001   13      Test0013 Player0013               1913                             0.0   13  0000 - U     5 b =     3 w =     1 b =     8 w =    11 b 1     9 w 0  
+001    1    F Vitaly Boiarintsev                2427 RUS    34128384 1982        0.0    1     8 b 1    10 w 0    12 b =     6 w 1    14 b 0     4 w =     2 b 1  
+001    2      Alexandr Piskunov                 2409 RUS     4115490 1994        0.0    2     9 w =    11 b 0    13 w =     5 b 1     7 w 1     3 b =     1 w 0  
+001    3      Kardashevskiy Evgeny              2310 RUS    24112593 1994        0.0    3    10 b 1     8 w =    14 b 1    12 w =     6 b 0     2 w =     4 b 0  
+001    4      Gaydym Michail                    2299 RUS    24108138 1994        0.0    4    11 w =    13 b 1     9 w 1     7 b 0     5 w =     1 b =     3 w 1  
+001    5      Efanov Mikhail                    2222 RUS    24180211 1994        0.0    5    12 b 0    14 w 1     8 b 1     2 w 0     4 b =    10 w 0     6 b 1  
+001    6      Kuprin Vladimir                   2157 RUS    24159620 1994        0.0    6    13 w 0     9 b =    11 w =     1 b 0     3 w 1     7 b =     5 w 0  
+001    7      Reutov Anton                      2127 RUS    34101583 1994        0.0    7    14 b =    12 w 0    10 b 0     4 w 1     2 b 0     6 w =     8 b 0  
+001    8      Razgovorov Yurii                  2107 RUS     4155440 1994        0.0    8     1 w 0     3 b =     5 w 0    11 b 1    13 w 1     9 b =     7 w 1  
+001    9      Kazantsev Alexander               2079                             0.0    9     2 b =     6 w =     4 b 0    14 w =    12 b 0     8 w =    10 b 0  
+001   10      Radionov Timur                    2040 RUS    34135755             0.0   10     3 w 0     1 b 1     7 w 1    13 b 0    11 w 0     5 b 1     9 w 1  
+001   11      Skorikov Dmitry                   2017        24183210 1994        0.0   11     4 b =     2 w 1     6 b =     8 w 0    10 b 1    14 w 0    12 b 0  
+001   12      Vasiliev Maxim                    2016 RUS             1994        0.0   12     5 w 1     7 b 1     1 w =     3 b =     9 w 1    13 b 1    11 w 1  
+001   13      Kataev Vladimir                   1900                             0.0   13     6 b 1     4 w 0     2 b =    10 w 1     8 b 0    12 w 0    14 b 1  
+001   14      Zakharova Viktoriya               0000 RUS    34178772 1994        0.0   14     7 w =     5 b 0     3 w 0     9 b =     1 w 1    11 b 1    13 w 0  

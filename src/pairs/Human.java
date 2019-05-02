@@ -10,7 +10,7 @@ public class Human implements Comparable<Human> {
     private String secondName;
     private int ratingRus;
     private int ratingWorld;
-    private boolean sex;
+    private String sex;
     private List<Game> listGamePlayed = new ArrayList<>();
     private String title;
     private String titleRus;
@@ -54,11 +54,11 @@ public class Human implements Comparable<Human> {
         this.id = id;
     }
 
-    public boolean isSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -154,34 +154,34 @@ public class Human implements Comparable<Human> {
     }
 
     public String convetToFile() {
-        String humanInfo = "001";
+        String humanInfo = "001  ";
         if (numberStart / 10 == 0) {
-            humanInfo += "    " + numberStart;
-        }
-        else if (numberStart / 100 == 0) {
-            humanInfo += "   " + numberStart;
-        }
-        else {
             humanInfo += "  " + numberStart;
         }
-//        if (sex == false) {
-//            humanInfo += " m";
-//        }
-//        else {
-//            humanInfo += " f";
-//        }
-//        if (title != null) {
-//            humanInfo += title;
-//            for (int i = 0; i < 4 - title.length(); i++) {
-//                humanInfo += " ";
-//            }
-//        }
-//        else {
+        else if (numberStart / 100 == 0) {
+            humanInfo += " " + numberStart;
+        }
+        else {
+            humanInfo +=  numberStart;
+        }
+        if (sex == null) {
             humanInfo += "    ";
-  //      }
+        }
+        else if (sex.equals("m") ){
+            humanInfo += " m  ";
+        }
+        else {
+            humanInfo += " f  ";
+        }
+        if (title != null) {
+            humanInfo += title.charAt(0) + " ";
+        }
+        else {
+            humanInfo += "  ";
+        }
         String finalName = firstName + ' ' +secondName;
         if (finalName.length() > 33) {
-            finalName = finalName.substring(0,33);
+            finalName = finalName.substring(    0,33);
         }
         humanInfo += finalName;
         for (int i = 0; i < 34 - finalName.length(); i++) {
@@ -194,35 +194,35 @@ public class Human implements Comparable<Human> {
             humanInfo += "0000 ";
         }
 
-//        if (region == null) {
-//            humanInfo += "   " + "    ";
-//        }
-//        else if (region.length() > 3) {
-//            humanInfo += region.substring(0,3) + "    ";
-//        }
-//        else {
-//            humanInfo += region + "    ";
-//        }
-//        int localId = id;
-//        String strId = "";
-//        for (int i = localId; i > 0; i /= 10) {
-//            strId += i % 10;
-//        }
-//        for (int i = 0, len = strId.length(); i < 8 - len; i++) {
-//            strId += " ";
-//        }
-//        if (strId.length() > 0) {
-//            humanInfo += new StringBuilder(strId).reverse().toString() + " ";
-//        }
-//        else {
-//            humanInfo += strId + " ";
-//        }
-//        if (birthDate != 0) {
-//            humanInfo += birthDate + "  ";
-//        }
-//        else {
-//            humanInfo += "      ";
-//        }
+        if (region == null) {
+            humanInfo += "   " + "    ";
+        }
+        else if (region.length() > 3) {
+            humanInfo += region.substring(0,3) + "    ";
+        }
+        else {
+            humanInfo += region + "    ";
+        }
+        int localId = id;
+        String strId = "";
+        for (int i = localId; i > 0; i /= 10) {
+            strId += i % 10;
+        }
+        for (int i = 0, len = strId.length(); i < 8 - len; i++) {
+            strId += " ";
+        }
+        if (strId.length() > 0) {
+            humanInfo += new StringBuilder(strId).reverse().toString() + " ";
+        }
+        else {
+            humanInfo += strId + " ";
+        }
+        if (birthDate != 0) {
+            humanInfo += birthDate + "        ";
+        }
+        else {
+            humanInfo += "            ";
+        }
 
         humanInfo += "0.0";
 

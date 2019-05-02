@@ -54,13 +54,9 @@ public class TournamentTest {
         ls.getPlayer(8).setId(34101583);
         ls.getPlayer(8).setBirthDate(1994);
         ls.addPlayer(new Human("Kazantsev","Alexander", 2079));
-//        ls.getPlayer(8).setRegion("RUS");
-//        ls.getPlayer(8).setId(24160903);
-//        ls.getPlayer(8).setBirthDate(1994);
         ls.addPlayer(new Human("Radionov","Timur", 2040));
         ls.getPlayer(10).setRegion("RUS");
         ls.getPlayer(10).setId(34135755);
-        //ls.getPlayer(9).setBirthDate(1994);
         ls.addPlayer(new Human("Zakharova","Viktoriya", 0));
         ls.getPlayer(11).setRegion("RUS");
         ls.getPlayer(11).setId(34178772);
@@ -73,40 +69,25 @@ public class TournamentTest {
         //ls.getPlayer(12).setRegion("RUS");
         ls.getPlayer(13).setId(24183210);
         ls.getPlayer(13).setBirthDate(1994);
+        ls.addPlayer(new Human("Kataev","Vladimir", 1900));
 
-
-        //        ls.sort();
-        //tournament.createTour(2);
-//        for (Game g : tournament.getTour(0).listGame) {
-//            g.setResult(ResultGame.BLACK_WINS);
-//        }
-//        tournament.getTour(0).listGame.get(3).setResult(ResultGame.DRAW);
-//        tournament.getTour(0).listGame.get(7).setResult(ResultGame.DRAW);
-//        tournament.getTour(0).listGame.get(1).setResult(ResultGame.DRAW);
-//        tournament.getTour(0).listGame.get(4).setResult(ResultGame.WHITE_WINS);
-//        tournament.getTour(0).listGame.get(0).setResult(ResultGame.WHITE_WINS);
-//        tournament.getTour(0).listGame.get(9).setResult(ResultGame.WHITE_WINS);
-//        tournament.getTour(0).print();
-//        System.out.println();
         ls.sort();
-        ls.readFromFile("test.trf");
-//        ls.print();
         Tournament tournament = new Tournament();
         tournament.setNameOfTurnament("XII SDS - Classic ");
         tournament.setLocation("Gelendzhik");
         tournament.setRegion("RUS");
         tournament.setStartDate("2016/06/28");
         tournament.setEndDate("2016/06/28");
-        tournament.setCountOfPlayers(28);
-        tournament.setCountOfPlayersWithRating(27);
+        tournament.setCountOfPlayers(14);
+        tournament.setCountOfPlayersWithRating(14);
         tournament.setConductionSystem("Swiss System");
         tournament.setMainArbiter("24148296 Sakhvadze Georgy");
         tournament.setTimeSystem("Standard: 90 minutes with 30 second increment from move 1");
-        tournament.setCountOfTour(9);
-        //tournament.setListPlayers(ls);
-        //tournament.createFileTournament();
-        tournament.createRandomTournament(13,7,0);
-        tournament.setListPlayers(new ListPlayers().readFromFile("test.trf"));
+        tournament.setCountOfTour(7);
+        tournament.setListPlayers(ls);
+        tournament.createFileTournament();
+        //tournament.createRandomTournament(13,7,0);
+        //tournament.setListPlayers(new ListPlayers().readFromFile("test.trf"));
         String out;
         tournament.createTour();
         tournament.createTour();
