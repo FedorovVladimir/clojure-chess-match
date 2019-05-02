@@ -21,6 +21,16 @@ public class Tournament {
     private int countOfTour;
     List<Tour> listTour = new ArrayList<>();
     ListPlayers listPlayers;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNameOfTurnament() {
         return nameOfTurnament;
     }
@@ -145,6 +155,10 @@ public class Tournament {
         return listTour.get(i - 1);
     }
 
+    public Tour getTourLast() {
+        return listTour.get(listTour.size() - 1);
+    }
+
     public void createTour() throws IOException {
         Tour new_t = new Tour();
         String pairs;
@@ -163,8 +177,6 @@ public class Tournament {
                     i, listTour.size() + 1));
         }
         listTour.add(new_t);
-        new_t.random();
-        new_t.writeResult();
     }
 
     public void createRandomTournament(int countPlayers, int countTour, int countFinallyTour) throws IOException {

@@ -8,6 +8,15 @@ import java.util.List;
 
 public class Tour {
     private int numberOfTour;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     List <Game> listGame = new ArrayList<Game>();
 
     public void setNumberOfTour(int numberOfTour) {
@@ -24,6 +33,10 @@ public class Tour {
 
     public void addGame(Game game) {
         this.listGame.add(game);
+    }
+
+    public Game getGame(int i) {
+        return listGame.get(i - 1);
     }
 
     public void random() {
@@ -49,7 +62,6 @@ public class Tour {
         String finalText = "";
         String drop = "";
         while ((str = br.readLine()) != null){
-
             String[] lex = str.split("\\s+");
             if (lex[0].equals("001")) {
                 Game g = findGame(Integer.parseInt(lex[1]));
@@ -93,9 +105,6 @@ public class Tour {
                 }
             }
             strLine.add(str + "  " + '\n');
-//            else {
-//                drop += str + '\n';
-//            }
         }
         try(FileWriter writer = new FileWriter("test" + ".trf", false))
         {

@@ -6,6 +6,24 @@ public class Game {
     private ResultGame resultGame;
     private int numberOfDesk;
     private int numberOfTour;
+    private int id;
+    private Tour tour;
+
+    public Tour getTour() {
+        return tour;
+    }
+
+    public void setTour(Tour tour) {
+        this.tour = tour;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public ResultGame getResultGame() {
         return resultGame;
@@ -71,6 +89,8 @@ public class Game {
     public Game(Human white, Human black, int numberOfDesk, int numberOfTour) {
         this.white = white;
         this.black = black;
+        white.addGame(this);
+        black.addGame(this);
         this.numberOfDesk = numberOfDesk;
         this.numberOfTour = numberOfTour;
     }

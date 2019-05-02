@@ -4,6 +4,7 @@ import javafo.api.JaVaFoApi;
 import org.junit.Test;
 import pairs.Human;
 import pairs.ListPlayers;
+import pairs.ResultGame;
 import pairs.Tournament;
 
 import java.io.*;
@@ -12,10 +13,6 @@ import java.util.Properties;
 import static org.junit.Assert.*;
 
 public class TournamentTest {
-
-    @Test
-    public void setListOfTour() {
-    }
 
     @Test
     public void createTour() throws IOException {
@@ -66,12 +63,12 @@ public class TournamentTest {
         ls.getPlayer(12).setId(0);
         ls.getPlayer(12).setBirthDate(1994);
         ls.addPlayer(new Human("Skorikov","Dmitry", 2017));
-        //ls.getPlayer(12).setRegion("RUS");
         ls.getPlayer(13).setId(24183210);
         ls.getPlayer(13).setBirthDate(1994);
-        ls.addPlayer(new Human("Kataev","Vladimir", 1900));
+        //ls.addPlayer(new Human("Kataev","Vladimir", 1900));
 
         ls.sort();
+        ls.toNumber();
         Tournament tournament = new Tournament();
         tournament.setNameOfTurnament("XII SDS - Classic ");
         tournament.setLocation("Gelendzhik");
@@ -85,17 +82,40 @@ public class TournamentTest {
         tournament.setTimeSystem("Standard: 90 minutes with 30 second increment from move 1");
         tournament.setCountOfTour(7);
         tournament.setListPlayers(ls);
-        tournament.createFileTournament();
-        //tournament.createRandomTournament(13,7,0);
-        //tournament.setListPlayers(new ListPlayers().readFromFile("test.trf"));
+//        tournament.createFileTournament();
         String out;
-        tournament.createTour();
-        tournament.createTour();
-        tournament.createTour();
-        tournament.createTour();
-        tournament.createTour();
-        tournament.createTour();
-        tournament.createTour();
+//        tournament.createTour();
+//        tournament.getTourLast().random();
+//        tournament.getTourLast().getGame(1).setResult(ResultGame.WHITE_WINS);
+//        tournament.getTourLast().writeResult();
+//
+//        tournament.createTour();
+//        tournament.getTourLast().random();
+//        tournament.getTourLast().writeResult();
+//        tournament.createTour();
+//        tournament.getTourLast().random();
+//        tournament.getTourLast().writeResult();
+//        tournament.createTour();
+//        tournament.getTourLast().random();
+//        tournament.getTourLast().writeResult();
+//        tournament.createTour();
+//        tournament.getTourLast().random();
+//        tournament.getTourLast().writeResult();
+//        tournament.createTour();
+//        tournament.getTourLast().random();
+//        tournament.getTourLast().writeResult();
+//        tournament.createTour();
+//        tournament.getTourLast().random();
+//        tournament.getTourLast().writeResult();
+
+//        for (int i = 1; i < tournament.getListPlayers().size() + 1; i++) {
+//            System.out.println(tournament.getListPlayers().getPlayer(i).getNumberPoint());
+//        }
+        tournament.getListPlayers().toFinally();
+        tournament.getListPlayers().print();
+        //ls.sort();
+        //ls.print();
+
         out = JaVaFoApi.exec(1200,   new FileInputStream("test.trf"));
         System.out.println(out);
 

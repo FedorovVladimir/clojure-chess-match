@@ -1,5 +1,6 @@
 package pairs;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,9 +16,18 @@ public class Human implements Comparable<Human> {
     private String title;
     private String titleRus;
     private String region;
-    private int id;
+    private int idFIDE;
     private int numberStart;
     private int numberCurrent;
+    private int id;
+
+    public int getIdFIDE() {
+        return idFIDE;
+    }
+
+    public void setIdFIDE(int idFIDE) {
+        this.idFIDE = idFIDE;
+    }
 
     public int getBirthDate() {
         return birthDate;
@@ -47,11 +57,11 @@ public class Human implements Comparable<Human> {
     }
 
     public int getId() {
-        return id;
+        return idFIDE;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idFIDE) {
+        this.idFIDE = idFIDE;
     }
 
     public String getSex() {
@@ -144,6 +154,28 @@ public class Human implements Comparable<Human> {
 
     @Override
     public int compareTo(Human human) {
+        try {
+            if (human.getNumberPoint() > this.getNumberPoint()) {
+                return 1;
+            }
+            if (human.getNumberPoint() < this.getNumberPoint()) {
+                return -1;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (this.getNumberPointBuchholz() < human.getNumberPointBuchholz()) {
+                return 1;
+            }
+            if (this.getNumberPointBuchholz() > human.getNumberPointBuchholz()) {
+                return -1;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         if (human.getRatingWorld() > this.getRatingWorld()) {
             return 1;
         }
@@ -151,6 +183,62 @@ public class Human implements Comparable<Human> {
             return -1;
         }
         return human.getSecondName().compareTo(this.getSecondName());
+    }
+
+    public double getNumberPoint() throws IOException {
+        return numberPoint(this.numberStart);
+    }
+
+    public double getNumberPoint(int number) throws IOException {
+        return numberPoint(number);
+    }
+
+    private double numberPoint(int number) throws IOException {
+        double sum = 0;
+        FileInputStream fstream = new FileInputStream("test.trf");
+        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+        String str;
+        while ((str = br.readLine()) != null){
+            String[] lex = str.split("\\s+");
+            if (lex[0].equals("001") && lex[1].equals(Integer.toString(number))) {
+                for (int i = 0; i < lex.length; i++) {
+                    if (lex[i].equals("0.0")) {
+                        i += 4;
+                        for (; i < lex.length; i += 3) {
+                            if (lex[i].equals("1") || lex[i].equals("+") || lex[i].equals("U")) {
+                                sum += 1;
+                            }
+                            else if (lex[i].equals("=")) {
+                                sum += 0.5;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return sum;
+    }
+
+
+    public double getNumberPointBuchholz() throws IOException {
+        double sum = 0;
+        FileInputStream fstream = new FileInputStream("test.trf");
+        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+        String str;
+        while ((str = br.readLine()) != null){
+            String[] lex = str.split("\\s+");
+            if (lex[0].equals("001") && lex[1].equals(Integer.toString(this.numberStart))) {
+                for (int i = 0; i < lex.length; i++) {
+                    if (lex[i].equals("0.0")) {
+                        i += 2;
+                        for (; i < lex.length; i += 3) {
+                            sum += getNumberPoint(Integer.parseInt(lex[i]));// lex[i].equals(Integer.toString(this.numberStart);
+                        }
+                    }
+                }
+            }
+        }
+        return sum;
     }
 
     public String convetToFile() {
@@ -193,7 +281,6 @@ public class Human implements Comparable<Human> {
         else {
             humanInfo += "0000 ";
         }
-
         if (region == null) {
             humanInfo += "   " + "    ";
         }
@@ -203,7 +290,7 @@ public class Human implements Comparable<Human> {
         else {
             humanInfo += region + "    ";
         }
-        int localId = id;
+        int localId = idFIDE;
         String strId = "";
         for (int i = localId; i > 0; i /= 10) {
             strId += i % 10;
