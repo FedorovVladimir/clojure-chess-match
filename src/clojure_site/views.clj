@@ -87,10 +87,13 @@
 
 (defn tournament-start-list [players tournament text]
   "Страница стартового листа"
-  (render "tournaments/list.html"
+  (render "tournaments/start_list.html"
           {:players (if (not-empty players)
                       players false)
            :tournament (if (not-empty tournament)
                          tournament false)
            :text (if (not-empty text)
                    text false)}))
+
+(defn tournament-tours []
+  (render "tournaments/tours.html"))

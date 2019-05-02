@@ -58,6 +58,9 @@
                    tournament (db/get-tournament id)]
                (v/tournament-start-list players tournament "1")))
 
+           (GET "/tournaments/:id/tours" [id]
+               (v/tournament-tours))
+
            ; обработчик регистрации на турнир
            (POST "/tournaments/register" [request]
              (-> c/tournament-register))

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<!--<script>-->
+<!--    setTimeout(function(){-->
+<!--        location.reload();-->
+<!--    }, 15000);-->
+<!--</script>-->
+
+<div class="alert alert-info" role="alert">
+    <a href="/tournaments/info/{{ tournament.id }}" type="button" class="btn btn-info text-light">Назад</a>
+    <a href="/tournaments/{{ tournament.id }}/prev_list/export" type="button" class="btn btn-info text-light">Экспорт</a>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center m-5">
+                {% if text = 0 %}
+                    Предварительный
+                {% else %}
+                    Стартовый
+                {% endif %}
+                список "{{ tournament.name }}"
+            </h4>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div id="infoTournament" class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr class="text-center">
+                    <th scope="col" style="width: 160px"><p class="align-middle">Фамилия</p></th>
+                    <th scope="col" style="width: 160px"><p class="align-middle">Имя</p></th>
+                    <th scope="col" style="width: 190px"><p class="align-middle">Отчество</p></th>
+                    <th scope="col"><p class="align-middle">Дата рождения</p></th>
+                    <th scope="col"><p class="align-middle">Регион</p></th>
+                    <th scope="col"><p class="align-middle">Адрес</p></th>
+                    <th scope="col" style="width: 100px"><p class="align-middle">Рейтинг</p></th>
+                    <th scope="col" style="width: 100px"><p class="align-middle">Рейтинг FIDE</p></th>
+                    <th scope="col" style="width: 100px"><p class="align-middle">Звание</p></th>
+                    {% if text = 0 %}
+                        <th scope="col" style="width: 110px"><p class="align-middle">Действие</p></th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for player in players %}
+                <div>
+                    {% if player.activ = 1 %}
+                    <tr class="alert-success">
+                    {% else %}
+                    <tr  style="height: 10px">
+                    {% endif %}
+                        <th scope="col" class="p-1">{{ player.last }}</th>
+                        <th scope="col" class="p-1">{{ player.first }}</th>
+                        <th scope="col" class="p-1">{{ player.patro }}</th>
+                        <th scope="col" class="p-1">{{ player.date_born|date:dd.MM.yyyy }}</th>
+                        <th scope="col" class="p-1">{{ player.region }}</th>
+                        <th scope="col" class="p-1">{{ player.adres }}</th>
+                        <th scope="col" class="p-1">{{ player.rating_rus }}</th>
+                        <th scope="col" class="p-1">{{ player.rating_fide }}</th>
+                        <th scope="col" class="p-1">{{ player.title_rus }}</th>
+                    </tr>
+                </div>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function saveButton(id) {
+        document.getElementById('th' + id).innerHTML = "<a type='button' style='width: 110px' id='text'" + id + " class='btn btn-warning'>Сохранить</a>";
+    }
+</script>
+{% endblock %}
