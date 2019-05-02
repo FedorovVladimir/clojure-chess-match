@@ -62,10 +62,7 @@
                    tournament (db/get-tournament id)]
                (v/tournament-start-list players tournament "1")))
 
-           (GET "/tournaments/:id/tours" [id]
-               (v/tournament-tours))
-
-           ; обработчик регистрации на турнир
+             ; обработчик регистрации на турнир
            (POST "/tournaments/register" [request]
              (-> c/tournament-register))
 
@@ -82,5 +79,12 @@
                    titles-rus (db/get-titles-rus)]
              (v/tournaments-info tournament regions sex titles titles-rus)))
 
-           ; ошибка 404
+           (GET "/tournaments/:id/tours" [id]
+             (let [tournament (db/get-tournament id)]
+               (v/tournaments-tours tournament)))
+
+           (GET  "/tournaments/:id/pairs" [id]
+             )
+
+             ; ошибка 404
            (route/not-found "Ничего не найдено"))

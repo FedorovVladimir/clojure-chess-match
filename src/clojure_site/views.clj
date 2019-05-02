@@ -95,5 +95,7 @@
            :text (if (not-empty text)
                    text false)}))
 
-(defn tournament-tours []
-  (render "tournaments/tours.html"))
+(defn tournaments-tours [tournament]
+  (render "tournaments/tours.html"
+          {:tournament (if (not-empty tournament)
+                         tournament false)}))
