@@ -3,15 +3,17 @@ package pairs;
 import convert.Convert;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class AdapterPairs {
 
     public static void main(String[] args) {
-
+        System.out.println(System.getProperty("java classpath"));
     }
 
-    public List<Integer> run(List<Map<String, String>> base, int countOfTour) throws IOException {
+    public static List<Integer> run(List<Map<String, String>> base, int countOfTour) throws IOException {
         List<Map<String, String>> playersList = Convert.getListFromClojure(base);
 
         ListPlayers listPlayers = new ListPlayers();

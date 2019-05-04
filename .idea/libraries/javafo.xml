@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="javafo">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/javafo.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/main.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

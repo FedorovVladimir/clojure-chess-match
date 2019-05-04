@@ -3,6 +3,7 @@
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
   :java-source-paths ["src"]
+  :resource-paths ["lib/main.jar" "resources"]
   :dependencies [[org.clojure/clojure "1.10.0"]
 
                   ; Маршруты для GET и POST запросов

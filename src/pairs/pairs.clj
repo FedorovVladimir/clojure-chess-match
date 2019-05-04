@@ -8,8 +8,9 @@
     (db-pairs (drop 1 (drop 1 pairs)) id-tour)))
 
 (defn create-tour-pairs [id-tournament number-tour]
-  (let [tour (.run (new AdapterPairs) (db/get-start-list-players id-tournament) (:count_tour (db/get-tournament id-tournament)))
+  (let [tour (AdapterPairs/run (db/get-start-list-players id-tournament) (:count_tour (db/get-tournament id-tournament)))
         id-tour (db/set-tour number-tour id-tournament)]
+    (println (seq tour))
     (db-pairs (seq tour) id-tour)))
 
 (defn -main []
