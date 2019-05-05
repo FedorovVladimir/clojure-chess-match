@@ -83,8 +83,9 @@
 
            (GET "/tournaments/:id/tours" [id]
              (let [tournament (db/get-tournament id)
-                   tours (db/get-tours id)]
-               (v/tournaments-tours tournament tours)))
+                   tours (db/get-tours id)
+                   games (db/get-rusult-tour 34)]
+               (v/tournaments-tours tournament tours games)))
 
            (GET  "/tournaments/:id/pairs" [id]
              (c/create-tour id 1))
