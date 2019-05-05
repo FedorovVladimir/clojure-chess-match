@@ -163,26 +163,18 @@ public class Human implements Comparable<Human> {
 
     @Override
     public int compareTo(Human human) {
-        try {
-            if (human.getNumberPoint() > this.getNumberPoint()) {
-                return 1;
-            }
-            if (human.getNumberPoint() < this.getNumberPoint()) {
-                return -1;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            if (this.getNumberPointBuchholz() < human.getNumberPointBuchholz()) {
-                return 1;
-            }
-            if (this.getNumberPointBuchholz() > human.getNumberPointBuchholz()) {
-                return -1;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//            if (human.getNumberPoint() > this.getNumberPoint()) {
+//                return 1;
+//            }
+//            if (human.getNumberPoint() < this.getNumberPoint()) {
+//                return -1;
+//            }
+//            if (this.getNumberPointBuchholz() < human.getNumberPointBuchholz()) {
+//                return 1;
+//            }
+//            if (this.getNumberPointBuchholz() > human.getNumberPointBuchholz()) {
+//                return -1;
+//            }
 
 
         if (human.getRatingWorld() > this.getRatingWorld()) {
@@ -194,26 +186,24 @@ public class Human implements Comparable<Human> {
         return human.getSecondName().compareTo(this.getSecondName());
     }
 
-    public double getNumberPoint() throws IOException {
-        return numberPoint(this.numberStart);
+    public double getNumberPoint(int tour) {
+        return numberPoint(this.numberStart, tour);
     }
 
-    public double getNumberPoint(int number) throws IOException {
-        return numberPoint(number);
+    public double getNumberPoint(int number, int tour) {
+        return numberPoint(number, tour);
     }
 
-    private double numberPoint(int number) throws IOException {
+    private double numberPoint(int number, int tour) {
         double sum = 0;
-        FileInputStream fstream = new FileInputStream(file + ".trf");
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        String str;
-        while ((str = br.readLine()) != null){
+        String[] fileT = file.split("\n");
+        for (String str : fileT) {
             String[] lex = str.split("\\s+");
             if (lex[0].equals("001") && lex[1].equals(Integer.toString(number))) {
                 for (int i = 0; i < lex.length; i++) {
                     if (lex[i].equals("0.0")) {
                         i += 4;
-                        for (; i < lex.length; i += 3) {
+                        for (int j = 1; i < lex.length && j < tour; i += 3, j++) {
                             if (lex[i].equals("1") || lex[i].equals("+") || lex[i].equals("U")) {
                                 sum += 1;
                             }
@@ -228,19 +218,17 @@ public class Human implements Comparable<Human> {
         return sum;
     }
 
-    public double getNumberPointBuchholz() throws IOException {
+    public double getNumberPointBuchholz(int tour) {
         double sum = 0;
-        FileInputStream fstream = new FileInputStream(file + ".trf");
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        String str;
-        while ((str = br.readLine()) != null){
+        String[] fileT = file.split("\n");
+        for (String str : fileT) {
             String[] lex = str.split("\\s+");
             if (lex[0].equals("001") && lex[1].equals(Integer.toString(this.numberStart))) {
                 for (int i = 0; i < lex.length; i++) {
                     if (lex[i].equals("0.0")) {
                         i += 2;
-                        for (; i < lex.length; i += 3) {
-                            sum += getNumberPoint(Integer.parseInt(lex[i]));// lex[i].equals(Integer.toString(this.numberStart);
+                        for (int j = 1; i < lex.length && j < tour; i += 3, j++) {
+                            sum += getNumberPoint(Integer.parseInt(lex[i]), tour);// lex[i].equals(Integer.toString(this.numberStart);
                         }
                     }
                 }

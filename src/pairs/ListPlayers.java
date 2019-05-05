@@ -71,17 +71,4 @@ public class ListPlayers {
         }
         return null;
     }
-
-    public void print() throws IOException {
-        System.out.println();
-        for (int i = 0; i < listHuman.size(); i++) {
-            if (i < 9) {
-                System.out.print("  ");
-            }
-            else if (i < 99) {
-                System.out.print(" ");
-            }
-            System.out.println(i + 1 + ": " + listHuman.get(i).getNumberPoint() + " " + listHuman.get(i).getNumberPointBuchholz() + " " + listHuman.get(i));
-        }
-    }
 }
