@@ -11,12 +11,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
+            {% for tour in tours %}
+                <a href="/tournaments/{{ tournament.id }}/tour/{{ tour.id }}" type="button" class="btn btn-secondary text-light">Тур {{ tour.number }}</a>
+            {% endfor %}
+
             <h4 class="text-center m-5">
                 Туры {{ tournament.name }}
             </h4>
             {% if games %}
                 {% for game in games %}
-                    <p>{{ game.last_w }}   {{ game.code }}  {{ game.last_b }}</p>
+                    <p>{{ game.last_w }} {{ game.code }} {{ game.last_b }}</p>
                 {% endfor %}
             {% endif %}
         </div>

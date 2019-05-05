@@ -16,6 +16,7 @@
     (db/update-file (first (seq tour)) id-tournament)))
 
 (defn -main []
+  (println (:id (first (db/get-tours 1))))
   ;(println (db/get-rusult-tour 29))
   ;(println (:table_tournament (first (db/get-file-tournament 1))))
   ;(create-tour-pairs 1 1)
