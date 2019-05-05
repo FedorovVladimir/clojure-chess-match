@@ -19,8 +19,9 @@
   ;(println (db/get-rusult-tour 29))
   ;(println (:table_tournament (first (db/get-file-tournament 1))))
   ;(create-tour-pairs 1 1)
+
   ;(db/update-file (AdapterPairs/setResultTour (db/get-start-list-players 1)
-  ;                                            (db/get-rusult-tour 36)
+  ;                                            (db/get-rusult-tour 37)
   ;                                            (:table_tournament (first (db/get-file-tournament 1)))) 1)
-  ;(create-tour-pairs 1 2)
+  ;(create-tour-pairs 1 3)
   )
