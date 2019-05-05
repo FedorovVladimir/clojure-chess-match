@@ -173,3 +173,18 @@
 
 (defn get-tours [id-tournament]
   (jdbc/query mysql-db ["select * from TOUR where ID_TOURNAMENT = ?" id-tournament]))
+
+(defn get-file-tournament [id-tournament]
+  (jdbc/query mysql-db ["select TABLE_TOURNAMENT as table_tournament from TOURNAMENT where ID = ?" id-tournament]))
+
+(defn update-file [text-file id-tournament]
+  (jdbc/update! mysql-db
+                :TOURNAMENT
+                {:TABLE_TOURNAMENT text-file}
+                ["id = ? " id-tournament]))
+
+(defn get-rusult-tour [id-tour]
+  (jdbc/query mysql-db ["select GAME.ID_PLAYER_WHITE,
+         GAME.ID_PLAYER_BLACK, RESULT.CODE
+         from TOUR, GAME, RESULT
+         where TOUR.ID = ? and GAME.ID_TOUR = TOUR.ID and RESULT.ID = GAME.ID_RESULT" id-tour]))

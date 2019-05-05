@@ -63,20 +63,14 @@ public class ListPlayers {
         return finalString;
     }
 
-//    public ListPlayers readFromFile(String file) throws IOException {
-//        FileInputStream fstream = new FileInputStream("test.trf");
-//        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-//        String str;
-//        while ((str = br.readLine()) != null){
-//            String[] lex = str.split("\\s+");
-//            if (lex[0].equals("001")) {
-//                addPlayer(new Human(lex[2], lex[3],Integer.valueOf(lex[4]),Integer.valueOf(lex[1])));
-//            }
-//        }
-//        br.close();
-//        fstream.close();
-//        return this;
-//    }
+    public Human findPlayerById(int id) {
+        for (Human h : listHuman) {
+            if (id == h.getId()) {
+                return h;
+            }
+        }
+        return null;
+    }
 
     public void print() throws IOException {
         System.out.println();

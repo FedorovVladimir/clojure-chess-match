@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Human implements Comparable<Human> {
 
-    String file;
+    private String file;
     private String firstName;
     private String secondName;
     private int ratingRus;

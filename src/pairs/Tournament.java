@@ -5,9 +5,11 @@ import javafo.api.JaVaFoApi;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 public class Tournament {
+    private String tournamentFile;
     private String nameOfTurnament;
     private String location;
     private String region;
@@ -19,19 +21,36 @@ public class Tournament {
     private String mainArbiter;
     private String timeSystem;
     private int countOfTour;
-    private String fileName;
+    //private String fileName;
     List<Tour> listTour = new ArrayList<>();
     ListPlayers listPlayers;
     private int id;
 
-
-    public String getFileName() {
-        return fileName;
+    public List<Tour> getListTour() {
+        return listTour;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setListTour(List<Tour> listTour) {
+        this.listTour = listTour;
     }
+
+    public Tournament(String tournamentFile) {
+        this.tournamentFile = tournamentFile;
+    }
+
+    public String getTournamentFile() {
+        return tournamentFile;
+    }
+
+    public void setTournamentFile(String tournamentFile) {
+        this.tournamentFile = tournamentFile;
+    }
+
+    public Tournament(String tournamentFile, int countOfTour) {
+        this.tournamentFile = tournamentFile;
+        this.countOfTour = countOfTour;
+    }
+
 
     public int getId() {
         return id;
@@ -130,7 +149,7 @@ public class Tournament {
     }
 
     public void addPlayer(Human human) {
-        human.setFile(this.getFileName());
+        human.setFile(this.tournamentFile);
         listPlayers.addPlayer(human);
     }
 
@@ -142,32 +161,26 @@ public class Tournament {
         this.listPlayers = listPlayers;
         listPlayers.setTournament(this);
         for (int i = 1; i < listPlayers.size() + 1; i++) {
-            listPlayers.getPlayer(i).setFile(fileName);
+            listPlayers.getPlayer(i).setFile(this.tournamentFile);
         }
     }
 
     public void createFileTournament() {
-        try(FileWriter writer = new FileWriter(fileName + ".trf", false))
-        {
-            String text = "";
-            text += "012 " + nameOfTurnament + '\n';
-            text += "022 " + location + '\n';
-            text += "032 " + region + '\n';
-            text += "042 " + startDate + '\n';
-            text += "052 " + endDate + '\n';
-            text += "062 " + countOfPlayers + '\n';
-            text += "072 " + countOfPlayersWithRating + '\n';
-            text += "092 " + conductionSystem + '\n';
-            text += "102 " + mainArbiter + '\n';
-            text += "122 " + timeSystem + '\n';
-            text += "132                                                                                      " + '\n';
-            text += "XXR " + countOfTour + '\n';
-            text += listPlayers.convertToFile();
-            writer.write(text);
-            writer.flush();
-        }
-        catch(IOException ex){}
-
+        String text = "";
+        text += "012 " + nameOfTurnament + '\n';
+        text += "022 " + location + '\n';
+        text += "032 " + region + '\n';
+        text += "042 " + startDate + '\n';
+        text += "052 " + endDate + '\n';
+        text += "062 " + countOfPlayers + '\n';
+        text += "072 " + countOfPlayersWithRating + '\n';
+        text += "092 " + conductionSystem + '\n';
+        text += "102 " + mainArbiter + '\n';
+        text += "122 " + timeSystem + '\n';
+        text += "132                                                                                      " + '\n';
+        text += "XXR " + countOfTour + '\n';
+        text += listPlayers.convertToFile();
+        tournamentFile = text;
     }
     public Tour getTour(int i) {
         return listTour.get(i - 1);
@@ -177,13 +190,21 @@ public class Tournament {
         return listTour.get(listTour.size() - 1);
     }
 
-    public void createTour() throws IOException {
+    public void createTourFromBD(List<Map<String, String>> list) {
+        Tour new_t = new Tour();
+        new_t.setTournament(this);
+        new_t.loadFromList(list);
+        tournamentFile = new_t.writeResult(tournamentFile);
+    }
+
+    public void createTour()  {
         Tour new_t = new Tour();
         new_t.setTournament(this);
         String pairs;
-        System.out.println(fileName);
+        //System.out.println(fileName);
 
-        pairs = JaVaFoApi.exec(1000, new FileInputStream(fileName + ".trf"));
+        pairs = JaVaFoApi.exec(1000, tournamentFile);
+        //System.out.println(tournamentFile);
         String[] pair = pairs.split("\n");
 
         int countPairs = pair.length;
@@ -199,28 +220,4 @@ public class Tournament {
         }
         listTour.add(new_t);
     }
-
-    public void createRandomTournament(int countPlayers, int countTour, int countFinallyTour) throws IOException {
-        Properties cfg = new Properties();
-        cfg.setProperty("PlayersNumber", String.valueOf(countPlayers));
-        cfg.setProperty("RoundsNumber", String.valueOf(countFinallyTour));
-        JaVaFoApi.exec(1300, cfg, new FileOutputStream("test.trf"));
-
-        FileInputStream fstream = new FileInputStream("test.trf");
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        String str;
-        List <String> strLine = new ArrayList<>();
-        while ((str = br.readLine()) != null){
-            strLine.add(str);
-        }
-        strLine.add(12,"XXR " + countTour);
-
-        try(FileWriter writer = new FileWriter("test" + ".trf", false))
-        {
-            for (String st : strLine)
-                writer.write(st + '\n');
-        }
-        catch(IOException ex){}
-    }
-
 }

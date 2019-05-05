@@ -89,8 +89,6 @@ public class Game {
     public Game(Human white, Human black, int numberOfDesk, int numberOfTour) {
         this.white = white;
         this.black = black;
-//        white.addGame(this);
-//        black.addGame(this);
         this.numberOfDesk = numberOfDesk;
         this.numberOfTour = numberOfTour;
     }

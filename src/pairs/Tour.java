@@ -3,6 +3,7 @@ package pairs;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Tour {
     private Tournament tournament;
@@ -50,6 +51,14 @@ public class Tour {
         return listGame.size();
     }
 
+    public void loadFromList(List<Map<String, String>> list) {
+        for (Map<String, String> m : list) {
+            Game game = new Game(tournament.getListPlayers().findPlayerById(Integer.parseInt(String.valueOf(m.get("id_player_white")))),
+            tournament.getListPlayers().findPlayerById(Integer.parseInt(String.valueOf(m.get("id_player_black")))));
+            game.setResult(ResultGame.loadFromBD(m.get("code")));
+            listGame.add(game);
+        }
+    }
 
     public void random() {
         for (Game g: listGame) {
@@ -66,14 +75,11 @@ public class Tour {
         return null;
     }
 
-    public void writeResult() throws IOException {
-        FileInputStream fstream = new FileInputStream(tournament.getFileName() + ".trf");
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        String str;
+    public String writeResult(String file) {
         List <String> strLine = new ArrayList<>();
         String finalText = "";
-        String drop = "";
-        while ((str = br.readLine()) != null){
+        String[] fileT = file.split("\n");
+        for (String str : fileT) {
             String[] lex = str.split("\\s+");
             if (lex[0].equals("001")) {
                 Game g = findGame(Integer.parseInt(lex[1]));
@@ -118,21 +124,10 @@ public class Tour {
             }
             strLine.add(str + "  " + '\n');
         }
-        try(FileWriter writer = new FileWriter(tournament.getFileName() + ".trf", false))
-        {
-            for (String s : strLine) {
-                writer.write(s);
-            }
-
+        for (String s : strLine) {
+            finalText += s;
         }
-        catch(IOException ex) {
-
-        }
-    }
-
-    private void newTourFinish() throws FileNotFoundException {
-//        String out = JaVaFoApi.exec(1110,   new FileInputStream("test.trf"));
-//        System.out.println(out);
+        return finalText;
     }
 
     public void print() {
