@@ -108,3 +108,6 @@
 (defn create-tour [id number-tour]
   (create-tour-pairs id number-tour)
   (redirect (str "/tournaments/" id "/tours")))
+
+(defn update-player [idt idp]
+  (println "здесь должно быть обновление игрока"))

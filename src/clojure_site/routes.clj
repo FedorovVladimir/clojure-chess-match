@@ -72,6 +72,9 @@
            (GET "/tournaments/:idt/list_players/:idp/mark/:activ" [idt idp activ]
              (c/mark-player idt idp activ))
 
+           (POST "/tournaments/:idt/list_players/:idp/update" [idt idp]
+             (c/update-player idt idp))
+
            ; страница турнира
            (GET "/tournaments/info/:id" [id]
              (let [tournament (db/get-tournament id)
