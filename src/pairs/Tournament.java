@@ -201,10 +201,7 @@ public class Tournament {
         Tour new_t = new Tour();
         new_t.setTournament(this);
         String pairs;
-        //System.out.println(fileName);
-
         pairs = JaVaFoApi.exec(1000, tournamentFile);
-        //System.out.println(tournamentFile);
         String[] pair = pairs.split("\n");
 
         int countPairs = pair.length;

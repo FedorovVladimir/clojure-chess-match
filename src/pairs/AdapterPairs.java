@@ -17,12 +17,12 @@ public class AdapterPairs {
         ListPlayers listPlayers = createListPlayer(base);
         Tournament tournament = new Tournament(file, countOfTour);
         tournament.setListPlayers(listPlayers);
-        if (tournament.getTournamentFile() == null)
+        if (tournament.getTournamentFile() == null || tournament.getTournamentFile().equals(""))
             tournament.createFileTournament();
         tournament.createTour();
         List<Object> list = new ArrayList<>();
         list.add(tournament.getTournamentFile());
-        for (int i = 1; i < tournament.getTour(1).getSize() + 1; i++ ){
+        for (int i = 1; i < tournament.getTour(1).getSize() + 1; i++ ) {
             list.add(tournament.getTour(1).getGame(i).getWhite().getId());
             list.add(tournament.getTour(1).getGame(i).getBlack().getId());
         }

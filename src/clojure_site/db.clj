@@ -185,6 +185,23 @@
 
 (defn get-rusult-tour [id-tour]
   (jdbc/query mysql-db ["select GAME.ID_PLAYER_WHITE,
-         GAME.ID_PLAYER_BLACK, RESULT.CODE
-         from TOUR, GAME, RESULT
-         where TOUR.ID = ? and GAME.ID_TOUR = TOUR.ID and RESULT.ID = GAME.ID_RESULT" id-tour]))
+                        GAME.ID_PLAYER_BLACK,
+                        RESULT.CODE,
+                        human_w.LAST as last_w,
+                        human_b.LAST as last_b
+                        from GAME,
+                        RESULT,
+                        LIST_PLAYER as list_b,
+                        LIST_PLAYER as list_w,
+                        PLAYER as player_w,
+                        PLAYER as player_b,
+                        HUMAN as human_w,
+                        HUMAN as human_b
+                        where GAME.ID_TOUR = ? and
+                        RESULT.ID = GAME.ID_RESULT and
+                        GAME.ID_PLAYER_WHITE = list_w.ID and
+                        GAME.ID_PLAYER_BLACK = list_b.ID and
+                        list_w.ID_PLAYER = player_w.ID and
+                        list_b.ID_PLAYER = player_b.ID and
+                        player_w.ID_HUMAN = human_w.ID and
+                        player_b.ID_HUMAN = human_b.ID" id-tour]))
