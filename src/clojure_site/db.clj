@@ -205,3 +205,9 @@
                         list_b.ID_PLAYER = player_b.ID and
                         player_w.ID_HUMAN = human_w.ID and
                         player_b.ID_HUMAN = human_b.ID" id-tour]))
+
+(defn get-tours [id-tournament]
+  (jdbc/query mysql-db ["select *
+    from TOUR
+    where TOUR.ID_TOURNAMENT = ?
+    order by TOUR.NUMBER" id-tournament]))
