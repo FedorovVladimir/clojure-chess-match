@@ -192,18 +192,32 @@ public class Tournament {
     }
 
     public void createTourFromBD(List<Map<String, String>> list) {
-        Tour new_t = new Tour();
-        new_t.setTournament(this);
-        new_t.loadFromList(list);
-        tournamentFile = new_t.writeResult(tournamentFile);
+        int max = 0;
+        for (Map<String, String> m : list) {
+            System.out.println(m);
+            Integer in = Integer.valueOf( String.valueOf(m.get("number")));
+            if (max < in) {
+                max = in;
+            }
+        }
+        for (int i = 1; i < max + 1; i++) {
+            Tour new_t = new Tour();
+            new_t.setTournament(this);
+            new_t.loadFromList(list, i);
+            tournamentFile = new_t.writeResult(tournamentFile);
+            listTour.add(new_t);
+        }
     }
 
     public void createTour()  {
         Tour new_t = new Tour();
         new_t.setTournament(this);
         String pairs;
+        System.out.println(tournamentFile);
         pairs = JaVaFoApi.exec(1000, tournamentFile);
         String[] pair = pairs.split("\n");
+        System.out.println(pairs);
+
         int countPairs = pair.length;
         if (listPlayers.size() % 2 == 1) {
             countPairs -= 1;

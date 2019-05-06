@@ -51,12 +51,14 @@ public class Tour {
         return listGame.size();
     }
 
-    public void loadFromList(List<Map<String, String>> list) {
+    public void loadFromList(List<Map<String, String>> list, int tour) {
         for (Map<String, String> m : list) {
-            Game game = new Game(tournament.getListPlayers().findPlayerById(Integer.parseInt(String.valueOf(m.get("id_player_white")))),
-            tournament.getListPlayers().findPlayerById(Integer.parseInt(String.valueOf(m.get("id_player_black")))));
-            game.setResult(ResultGame.loadFromBD(m.get("code")));
-            listGame.add(game);
+            if (tour == Integer.parseInt(String.valueOf(m.get("number")))) {
+                Game game = new Game(tournament.getListPlayers().findPlayerById(Integer.parseInt(String.valueOf(m.get("id_player_white")))),
+                        tournament.getListPlayers().findPlayerById(Integer.parseInt(String.valueOf(m.get("id_player_black")))));
+                game.setResult(ResultGame.loadFromBD(m.get("code")));
+                listGame.add(game);
+            }
         }
     }
 

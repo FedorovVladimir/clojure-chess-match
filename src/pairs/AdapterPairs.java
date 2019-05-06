@@ -13,19 +13,21 @@ public class AdapterPairs {
 
     }
 
-    public static List<Object> createTournament(List<Map<String, String>> base, int countOfTour, String file) {
+    public static List<Object> createTournament(List<Map<String, String>> base, List<Map<String, String>> games, int tour, String file) {
         ListPlayers listPlayers = createListPlayer(base);
-        Tournament tournament = new Tournament(file, countOfTour);
+        Tournament tournament = new Tournament(file, tour);
         tournament.setListPlayers(listPlayers);
-        if (tournament.getTournamentFile() == null || tournament.getTournamentFile().equals(""))
-            tournament.createFileTournament();
+        //if (tournament.getTournamentFile() == null || tournament.getTournamentFile().equals(""))
+        tournament.createFileTournament();
+        tournament.createTourFromBD(Convert.getListFromClojure(games));
         tournament.createTour();
         List<Object> list = new ArrayList<>();
         list.add(tournament.getTournamentFile());
         for (int i = 1; i < tournament.getTour(1).getSize() + 1; i++ ) {
-            list.add(tournament.getTour(1).getGame(i).getWhite().getId());
-            list.add(tournament.getTour(1).getGame(i).getBlack().getId());
+            list.add(tournament.getTour(tour).getGame(i).getWhite().getId());
+            list.add(tournament.getTour(tour).getGame(i).getBlack().getId());
         }
+        System.out.println(list);
         return list;
     }
 

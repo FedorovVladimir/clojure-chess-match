@@ -211,3 +211,16 @@
     from TOUR
     where TOUR.ID_TOURNAMENT = ?
     order by TOUR.NUMBER" id-tournament]))
+
+(defn get-result-all-games [id-tournament]
+  (jdbc/query mysql-db ["select TOUR.NUMBER,
+                        GAME.ID_PLAYER_WHITE,
+                        GAME.ID_PLAYER_BLACK,
+                        RESULT.CODE
+                        from TOUR, GAME, RESULT
+                        where GAME.ID_TOUR = TOUR.ID and
+                        RESULT.ID = GAME.ID_RESULT and
+                        TOUR.ID_TOURNAMENT = ? " id-tournament]))
+
+(defn -main []
+  (println (get-result-all-games 1)))
