@@ -95,7 +95,7 @@
            :text (if (not-empty text)
                    text false)}))
 
-(defn tournaments-tours [tournament tours games results id-tour]
+(defn tournaments-tours [tournament tours games results id-tour number-tour]
   (render "tournaments/tours.html"
           {:tournament (if (not-empty tournament)
                          tournament false)
@@ -105,4 +105,5 @@
                     games false)
            :results (if (not-empty results)
                       results false)
-           :id-tour id-tour}))
+           :id-tour id-tour
+           :number-tour number-tour}))

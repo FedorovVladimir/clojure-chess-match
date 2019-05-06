@@ -3,6 +3,7 @@
 <div class="alert alert-info" role="alert">
     <a href="/tournaments/{{ tournament.id }}/start_list" type="button" class="btn btn-info text-light">Стартовый список</a>
     {% if tours %}
+        <a type="button" href="/tournaments/{{ tournament.id }}/pairs/{{ number-tour }}/tour" class="btn btn-info text-light">Сгенерировать следующий тур</a>
     {% else %}
         <a href="/tournaments/{{ tournament.id }}/pairs" type="button" class="btn btn-info text-light">Провести жеребьевку</a>
     {% endif %}

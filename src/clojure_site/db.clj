@@ -223,3 +223,8 @@
                 :GAME
                 {:ID_RESULT result}
                 ["id = ? " id-game]))
+
+(defn get-number-tour [id-tour]
+  (jdbc/query mysql-db ["select TOUR.NUMBER
+                        from TOUR
+                        where TOUR.ID = ? " id-tour]))
