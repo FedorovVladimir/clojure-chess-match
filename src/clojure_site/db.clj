@@ -219,8 +219,6 @@
                         from RESULT"]))
 
 (defn update-game [id-game result]
-  (println id-game)
-  (println result)
   (jdbc/update! mysql-db
                 :GAME
                 {:ID_RESULT result}

@@ -41,7 +41,7 @@
                         <td>{{ game.last_w }}</td>
                         <td>
                             {% if game.id_result = 9 %}
-                                <select form="form{{ game.id }}" class="form-control p-0" name="result" id="result">
+                                <select form="form{{ game.id }}" style="width: 50%; display: inline" class="form-control p-0" name="result" id="result">
                                     {% for result in results %}
                                         {% ifequal game.id_result result.id %}
                                             <option value="{{ result.id }}" selected>{{ result.code }}</option>
@@ -50,7 +50,7 @@
                                         {% endifequal %}
                                     {% endfor %}
                                 </select>
-                                <input form="form{{ game.id }}" type="submit">
+                                <input style="display: inline" form="form{{ game.id }}" type="submit">
                             {% else %}
                                 {{ game.code }}
                             {% endif %}
