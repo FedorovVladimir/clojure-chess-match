@@ -34,13 +34,27 @@ public class AdapterPairs {
         Tournament tournament = new Tournament(file);
         tournament.setListPlayers(listPlayers);
         tournament.createTourFromBD(Convert.getListFromClojure(games));
-
         return tournament.getTournamentFile();
     }
 
+    public static List <Integer> showTour(List<Map<String, String>> base,  String file, Long integer) {
+        ListPlayers listPlayers = createListPlayer(base);
+        Tournament tournament = new Tournament(file);
+        tournament.setListPlayers(listPlayers);
+        List <Map <String,Integer> > lm = tournament.showTour(Math.toIntExact(integer));
+        List <Integer> finalList = new ArrayList<>();
+        for (Map <String, Integer> m :  lm) {
+            finalList.add(m.get("id_human"));
+            finalList.add(m.get("point"));
+            finalList.add(m.get("point_buh"));
+        }
+        return finalList;
+    }
+
+
+
     private static ListPlayers createListPlayer(List<Map<String, String>> base) {
         List<Map<String, String>> playersList = Convert.getListFromClojure(base);
-
         ListPlayers listPlayers = new ListPlayers();
         for (int i = 0; i < playersList.size(); i++) {
             Map<String, String> players = playersList.get(i);

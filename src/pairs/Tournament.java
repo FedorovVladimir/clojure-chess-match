@@ -182,6 +182,7 @@ public class Tournament {
         text += listPlayers.convertToFile();
         tournamentFile = text;
     }
+
     public Tour getTour(int i) {
         return listTour.get(i - 1);
     }
@@ -203,7 +204,6 @@ public class Tournament {
         String pairs;
         pairs = JaVaFoApi.exec(1000, tournamentFile);
         String[] pair = pairs.split("\n");
-
         int countPairs = pair.length;
         if (listPlayers.size() % 2 == 1) {
             countPairs -= 1;
@@ -216,5 +216,9 @@ public class Tournament {
                     i, listTour.size() + 1));
         }
         listTour.add(new_t);
+    }
+
+    public List <Map <String,Integer> > showTour(int tour) {
+        return listPlayers.showTour(tour);
     }
 }

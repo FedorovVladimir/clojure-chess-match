@@ -53,6 +53,21 @@ public class ListPlayers {
         Collections.sort(listHuman);
     }
 
+    public List <Map <String,Integer> > showTour(int tour) {
+
+        List <Map <String,Integer> > list = new ArrayList<>();
+        for (Human h: listHuman) {
+            Map <String, Integer> map = new HashMap<>();
+            map.put("point", (int) h.getNumberPoint(tour));
+            map.put("point_buh", (int) h.getNumberPointBuchholz(tour));
+            map.put("id_human", h.getId());
+            list.add(map);
+        }
+        Collections.sort(list, mapComparator);
+        int a;
+        return list;
+    }
+
 
 
     public String convertToFile () {
@@ -71,4 +86,27 @@ public class ListPlayers {
         }
         return null;
     }
+
+
+    public Comparator<Map<String, Integer>> mapComparator = new Comparator<Map<String, Integer>>() {
+        public int compare(Map<String, Integer> m1, Map<String, Integer> m2) {
+            if (m1.get("point") > m2.get("point"))
+            {
+                return -1;
+            }
+            if (m1.get("point") < m2.get("point"))
+            {
+                return 1;
+            }
+            if (m1.get("point_buh") > m2.get("point_buh"))
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+    };
+
 }
