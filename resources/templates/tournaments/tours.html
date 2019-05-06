@@ -10,19 +10,59 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
+
+        <div class="col-md-3">
             {% for tour in tours %}
-                <a href="/tournaments/{{ tournament.id }}/tour/{{ tour.id }}" type="button" class="btn btn-secondary text-light">Тур {{ tour.number }}</a>
+            <a href="/tournaments/{{ tournament.id }}/tour/{{ tour.id }}" type="button" class="btn btn-secondary text-light">Тур {{ tour.number }}</a>
             {% endfor %}
+        </div>
+        <div class="col-md-6">
 
             <h4 class="text-center m-5">
                 Туры {{ tournament.name }}
             </h4>
-            {% if games %}
-                {% for game in games %}
-                    <p>{{ game.last_w }} {{ game.code }} {{ game.last_b }}</p>
-                {% endfor %}
-            {% endif %}
+
+            <table class="table table-sm text-center">
+                <thead>
+                <tr>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Результат</th>
+                    <th scope="col">Фамилия</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if games %}
+                    {% for game in games %}
+                    <form id="form{{ game.id }}" method="POST" action="/game/update">{% csrf-field %}</form>
+                    <tr>
+                        <input name="id-tournament" form="form{{ game.id }}" type="text" hidden value="{{ tournament.id }}">
+                        <input name="id-tour" form="form{{ game.id }}" type="text" hidden value="{{ id-tour }}">
+                        <input name="id-game" form="form{{ game.id }}" type="text" hidden value="{{ game.id }}">
+                        <td>{{ game.last_w }}</td>
+                        <td>
+                            {% if game.id_result = 9 %}
+                                <select form="form{{ game.id }}" style="width: 50%; display: inline" class="form-control p-0" name="result" id="result">
+                                    {% for result in results %}
+                                        {% ifequal game.id_result result.id %}
+                                            <option value="{{ result.id }}" selected>{{ result.code }}</option>
+                                        {% else %}
+                                            <option value="{{ result.id }}">{{ result.code }}</option>
+                                        {% endifequal %}
+                                    {% endfor %}
+                                </select>
+                                <input style="display: inline" form="form{{ game.id }}" type="submit">
+                            {% else %}
+                                {{ game.code }}
+                            {% endif %}
+                        </td>
+                        <td>{{ game.last_b }}</td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3">
         </div>
     </div>
 </div>

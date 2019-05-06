@@ -184,8 +184,10 @@
                 ["id = ? " id-tournament]))
 
 (defn get-rusult-tour [id-tour]
-  (jdbc/query mysql-db ["select GAME.ID_PLAYER_WHITE,
+  (jdbc/query mysql-db ["select GAME.ID,
+                        GAME.ID_PLAYER_WHITE,
                         GAME.ID_PLAYER_BLACK,
+                        RESULT.ID as id_result,
                         RESULT.CODE,
                         human_w.LAST as last_w,
                         human_b.LAST as last_b
@@ -212,6 +214,7 @@
     where TOUR.ID_TOURNAMENT = ?
     order by TOUR.NUMBER" id-tournament]))
 
+
 (defn get-result-all-games [id-tournament]
   (jdbc/query mysql-db ["select TOUR.NUMBER,
                         GAME.ID_PLAYER_WHITE,
@@ -221,6 +224,3 @@
                         where GAME.ID_TOUR = TOUR.ID and
                         RESULT.ID = GAME.ID_RESULT and
                         TOUR.ID_TOURNAMENT = ? " id-tournament]))
-
-(defn -main []
-  (println (get-result-all-games 1)))

@@ -12,9 +12,7 @@
     [clojure-site.views :as v]
 
     ; функции взаимодействия с БД
-    [clojure-site.db :as db]
-
-    [pairs.pairs :as pairs]))
+    [clojure-site.db :as db]))
 
 ; объявляем маршруты
 (defroutes mail-routes
@@ -72,6 +70,9 @@
            (GET "/tournaments/:idt/list_players/:idp/mark/:activ" [idt idp activ]
              (c/mark-player idt idp activ))
 
+           (POST "/tournaments/:idt/list_players/:idp/update" [idt idp]
+             (c/update-player idt idp))
+
            ; страница турнира
            (GET "/tournaments/info/:id" [id]
              (let [tournament (db/get-tournament id)
@@ -84,17 +85,22 @@
            (GET "/tournaments/:id/tours" [id]
              (let [tournament (db/get-tournament id)
                    tours (db/get-tours id)
-                   games (db/get-rusult-tour (:id (first (db/get-tours 1))))]
-               (v/tournaments-tours tournament tours games)))
+                   games (db/get-rusult-tour (:id (first (db/get-tours 1))))
+                   result (db/get-results)]
+               (v/tournaments-tours tournament tours games result 1)))
 
            (GET "/tournaments/:id/tour/:id-tour" [id id-tour]
              (let [tournament (db/get-tournament id)
                    tours (db/get-tours id)
-                   games (db/get-rusult-tour id-tour)]
-               (v/tournaments-tours tournament tours games)))
+                   games (db/get-rusult-tour id-tour)
+                   result (db/get-results)]
+               (v/tournaments-tours tournament tours games result id-tour)))
 
            (GET  "/tournaments/:id/pairs" [id]
              (c/create-tour id 1))
 
-             ; ошибка 404
+           (POST "/game/update" [request]
+             (-> c/update-game))
+
+           ; ошибка 404
            (route/not-found "Ничего не найдено"))
