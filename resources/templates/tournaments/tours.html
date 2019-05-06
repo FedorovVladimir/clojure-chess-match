@@ -13,10 +13,14 @@
     <div class="row">
 
         <div class="col-md-3">
+        {% if tours %}
             {% for tour in tours %}
             <a href="/tournaments/{{ tournament.id }}/tour/{{ tour.id }}" type="button" class="btn btn-secondary text-light">Тур {{ tour.number }}</a>
             {% endfor %}
+        {% endif %}
         </div>
+
+        {% if tours %}
         <div class="col-md-6">
 
             <h4 class="text-center m-5">
@@ -63,6 +67,11 @@
                 </tbody>
             </table>
         </div>
+        {% else %}
+        <h4 class="m-5">
+            Ниодного тура ещё не создано
+        </h4>
+        {% endif %}
         <div class="col-md-3">
         </div>
     </div>
