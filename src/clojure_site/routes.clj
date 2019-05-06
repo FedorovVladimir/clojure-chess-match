@@ -85,19 +85,24 @@
            (GET "/tournaments/:id/tours" [id]
              (let [tournament (db/get-tournament id)
                    tours (db/get-tours id)
-                   games (db/get-rusult-tour (:id (first (db/get-tours 1))))
+                   games (db/get-rusult-tour (:id (first (db/get-tours id))))
                    result (db/get-results)]
-               (v/tournaments-tours tournament tours games result 1)))
+               (v/tournaments-tours tournament tours games result (:id (first (db/get-tours id))) 1)))
 
            (GET "/tournaments/:id/tour/:id-tour" [id id-tour]
+             (println (db/get-number-tour id-tour))
              (let [tournament (db/get-tournament id)
                    tours (db/get-tours id)
                    games (db/get-rusult-tour id-tour)
-                   result (db/get-results)]
-               (v/tournaments-tours tournament tours games result id-tour)))
+                   result (db/get-results)
+                   number-tour (db/get-number-tour id-tour)]
+               (v/tournaments-tours tournament tours games result id-tour (:number (first number-tour)))))
 
            (GET  "/tournaments/:id/pairs" [id]
              (c/create-tour id 1))
+
+           (GET  "/tournaments/:id/pairs/:number/tour" [id number]
+             (c/create-tour id number))
 
            (POST "/game/update" [request]
              (-> c/update-game))

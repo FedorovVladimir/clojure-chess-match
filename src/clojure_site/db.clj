@@ -214,6 +214,15 @@
     where TOUR.ID_TOURNAMENT = ?
     order by TOUR.NUMBER" id-tournament]))
 
+(defn get-results []
+  (jdbc/query mysql-db ["select *
+                        from RESULT"]))
+
+(defn update-game [id-game result]
+  (jdbc/update! mysql-db
+                :GAME
+                {:ID_RESULT result}
+                ["id = ? " id-game]))
 
 (defn get-result-all-games [id-tournament]
   (jdbc/query mysql-db ["select TOUR.NUMBER,
