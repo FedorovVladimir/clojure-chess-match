@@ -87,16 +87,16 @@
                    tours (db/get-tours id)
                    games (db/get-rusult-tour (:id (first (db/get-tours id))))
                    result (db/get-results)]
-               (v/tournaments-tours tournament tours games result (:id (first (db/get-tours id))) 1)))
+               (v/tournaments-tours tournament tours games result (:id (first (db/get-tours id))) 1 true)))
 
-           ;(GET "/tournaments/:id/tour/:id-tour" [id id-tour]
-           ;  (let [tournament (db/get-tournament id)
-           ;        tours (db/get-tours id)
-           ;        games (db/get-rusult-tour id-tour)
-           ;        result (db/get-results)
-           ;        number-tour (db/get-number-tour id-tour)
-           ;        button (< (db/get-number-tour id-tour) (:count_tour (first (db/get-tournament id))))]
-           ;    (v/tournaments-tours tournament tours games result id-tour (:number (first number-tour)) button)))
+           (GET "/tournaments/:id/tour/:id-tour" [id id-tour]
+             (let [tournament (db/get-tournament id)
+                   tours (db/get-tours id)
+                   games (db/get-rusult-tour id-tour)
+                   result (db/get-results)
+                   number-tour (db/get-number-tour id-tour)
+                   button (< (db/get-number-tour id-tour) (:count_tour (first (db/get-tournament id))))]
+               (v/tournaments-tours tournament tours games result id-tour (:number (first number-tour)) button)))
 
            (GET  "/tournaments/:id/pairs" [id]
              (c/create-tour id 1))
