@@ -111,3 +111,16 @@
 
 (defn update-player [idt idp]
   (println "здесь должно быть обновление игрока"))
+
+(defn update-game [request]
+  (let [result {:result (get-in request [:form-params "result"])}
+        id-tournament {:id-tournament (get-in request [:form-params "id-tournament"])}
+        id-tour {:id-tour (get-in request [:form-params "id-tour"])}
+        id-game {:id-game (get-in request [:form-params "id-game"])}]
+
+    (if (not-empty (:result result))
+      (do
+        (db/update-game (:id-game id-game) (:result result))
+        (redirect (str "/tournaments/" (:id-tournament id-tournament) "/tour/" (:id-tour id-tour))))
+
+      "Проверьте правильность введенных данных")))
