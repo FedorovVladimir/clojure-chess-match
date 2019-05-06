@@ -233,3 +233,8 @@
                         where GAME.ID_TOUR = TOUR.ID and
                         RESULT.ID = GAME.ID_RESULT and
                         TOUR.ID_TOURNAMENT = ? " id-tournament]))
+
+(defn get-number-tour [id-tour]
+  (jdbc/query mysql-db ["select TOUR.NUMBER
+    from TOUR
+    where TOUR.ID = ? " id-tour]))

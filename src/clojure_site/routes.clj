@@ -90,7 +90,6 @@
                (v/tournaments-tours tournament tours games result (:id (first (db/get-tours id))) 1)))
 
            (GET "/tournaments/:id/tour/:id-tour" [id id-tour]
-             (println (db/get-number-tour id-tour))
              (let [tournament (db/get-tournament id)
                    tours (db/get-tours id)
                    games (db/get-rusult-tour id-tour)
@@ -102,7 +101,7 @@
              (c/create-tour id 1))
 
            (GET  "/tournaments/:id/pairs/:number/tour" [id number]
-             (c/create-tour id number))
+             (c/create-tour id (+ (new Integer number) 1)))
 
            (POST "/game/update" [request]
              (-> c/update-game))
