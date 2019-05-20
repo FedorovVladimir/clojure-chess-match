@@ -1,15 +1,14 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% block content %}
-<!--<script>-->
-<!--    setTimeout(function(){-->
-<!--        location.reload();-->
-<!--    }, 15000);-->
-<!--</script>-->
 
-<div class="alert alert-info" role="alert">
-    <a href="/tournaments/info/{{ tournament.id }}" type="button" class="btn btn-info text-light">К турниру</a>
-    <a href="/tournaments/{{ tournament.id }}/start_list/export" type="button" class="btn btn-info text-light">Экспорт</a>
-</div>
+<nav class="nav nav-pills nav-justified  bg-light">
+    <a href="/tournaments/info/{{ tournament.id }}" class="nav-item nav-link">Общая информация</a>
+    <a href="/tournaments/{{ tournament.id }}/prev_list" class="nav-item nav-link">Предварительный список</a>
+    <a href="/tournaments/{{ tournament.id }}/start_list" class="nav-item nav-link active">Стартовый список</a>
+    <a href="/tournaments/{{ tournament.id }}/tours" class="nav-item nav-link">Туры</a>
+    <a href="#" class="nav-item nav-link">Результаты</a>
+    </div>
+</nav>
 
 <div class="container-fluid">
     <div class="row">
@@ -21,6 +20,7 @@
                     Стартовый
                 {% endif %}
                 список "{{ tournament.name }}"
+                <a href="/tournaments/{{ tournament.id }}/start_list/export" type="button" class="btn btn-outline-success">Экспорт</a>
             </h4>
         </div>
     </div>
@@ -44,6 +44,7 @@
                     {% if text = 0 %}
                         <th scope="col" style="width: 110px"><p class="align-middle">Действие</p></th>
                     {% endif %}
+                    <th scope="col"><p class="align-middle">Действие</p></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +60,7 @@
                         <th scope="col" class="p-1">{{ player.rating_rus }}</th>
                         <th scope="col" class="p-1">{{ player.rating_fide }}</th>
                         <th scope="col" class="p-1">{{ player.title_rus }}</th>
+                        <th scope="col" class="p-1"><a type="button" class="btn btn-outline-danger">Исключить</a></th>
                     </tr>
                 </div>
                 {% endfor %}

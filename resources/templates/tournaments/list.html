@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% block content %}
 <!--<script>-->
 <!--    setTimeout(function(){-->
@@ -6,10 +6,14 @@
 <!--    }, 15000);-->
 <!--</script>-->
 
-<div class="alert alert-info" role="alert">
-    <a href="/tournaments/info/{{ tournament.id }}" type="button" class="btn btn-info text-light">К турниру</a>
-    <a href="/tournaments/{{ tournament.id }}/prev_list/export" type="button" class="btn btn-info text-light">Экспорт</a>
-</div>
+<nav class="nav nav-pills nav-justified  bg-light">
+    <a href="/tournaments/info/{{ tournament.id }}" class="nav-item nav-link">Общая информация</a>
+    <a href="/tournaments/{{ tournament.id }}/prev_list" class="nav-item nav-link active">Предварительный список</a>
+    <a href="/tournaments/{{ tournament.id }}/start_list" class="nav-item nav-link">Стартовый список</a>
+    <a href="/tournaments/{{ tournament.id }}/tours" class="nav-item nav-link">Туры</a>
+    <a href="#" class="nav-item nav-link">Результаты</a>
+    </div>
+</nav>
 
 <div class="container-fluid">
     <div class="row">
@@ -21,6 +25,7 @@
                     Стартовый
                 {% endif %}
                 список "{{ tournament.name }}"
+                <a href="/tournaments/{{ tournament.id }}/prev_list/export" type="button" class="btn btn-outline-success">Экспорт</a>
             </h4>
         </div>
     </div>

@@ -1,40 +1,42 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% block content %}
-<div class="alert alert-info" role="alert">
-    <a href="/tournaments/{{ tournament.id }}/prev_list" type="button" class="btn btn-info text-light">Предварительный список</a>
-    <a href="/tournaments/{{ tournament.id }}/start_list" type="button" class="btn btn-info text-light">Стартовый список</a>
-    <a href="/tournaments/{{ tournament.id }}/tours" type="button" class="btn btn-info text-light">Туры</a>
-    <a type="button" class="btn btn-info text-light" data-toggle="modal" data-target="#exampleModal">Удалить турнир</a>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Удаление турнира</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Вы уверены, что хотите удалить турнир?
-                </div>
-                <div class="modal-footer">
-                    <a type="button" class="btn btn-secondary text-light" data-dismiss="modal">Отмена</a>
-                    <a href="/tournaments/{{ tournament.id }}/delete" type="button" class="btn btn-primary">Да</a>
-                </div>
-            </div>
-        </div>
+<nav class="nav nav-pills nav-justified  bg-light">
+    <a href="/tournaments/info/{{ tournament.id }}" class="nav-item nav-link active">Общая информация</a>
+    <a href="/tournaments/{{ tournament.id }}/prev_list" class="nav-item nav-link">Предварительный список</a>
+    <a href="/tournaments/{{ tournament.id }}/start_list" class="nav-item nav-link">Стартовый список</a>
+    <a href="/tournaments/{{ tournament.id }}/tours" class="nav-item nav-link">Туры</a>
+    <a href="#" class="nav-item nav-link">Результаты</a>
     </div>
-</div>
+</nav>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <h4 class="text-center m-5">
-                Соревнование {{ tournament.name }}
+                Соревнование {{ tournament.name }} <a type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#Modal">Удалить</a>
+
+                <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalLabel">Удаление турнира</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Вы уверены, что хотите удалить турнир?
+                            </div>
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-secondary text-light" data-dismiss="modal">Отмена</a>
+                                <a href="/tournaments/{{ tournament.id }}/delete" type="button" class="btn btn-primary">Да</a>
+                            </div>
+                        </div>
+                    </div>
             </h4>
         </div>
     </div>
+
 </div>
 
 <div class="container">
@@ -94,6 +96,7 @@
                 </li>
             </ul>
         </div>
+
         <div class="col-md-8 order-md-2 mb-4">
             <form role="form" method="POST" action="/tournaments/register">
                 {% csrf-field %}

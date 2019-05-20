@@ -1,10 +1,26 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% block content %}
+
+<nav class="nav nav-pills nav-justified  bg-light">
+    <a href="/tournaments/info/{{ tournament.id }}" class="nav-item nav-link">Общая информация</a>
+    <a href="/tournaments/{{ tournament.id }}/prev_list" class="nav-item nav-link">Предварительный список</a>
+    <a href="/tournaments/{{ tournament.id }}/start_list" class="nav-item nav-link">Стартовый список</a>
+    <a href="/tournaments/{{ tournament.id }}/tours" class="nav-item nav-link active">Туры</a>
+    <a href="#" class="nav-item nav-link">Результаты</a>
+    </div>
+</nav>
+
 <div class="alert alert-info" role="alert">
-    <a href="/tournaments/{{ tournament.id }}/start_list" type="button" class="btn btn-info text-light">Стартовый список</a>
+    {% if tours %}
+    <div class="btn-group" role="group" aria-label="First group">
+        {% for tour in tours %}
+        <a href="/tournaments/{{ tournament.id }}/tour/{{ tour.id }}" type="button" class="btn btn-outline-secondary">{{ tour.number }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
     {% if tours %}
         {% if button %}
-            <a type="button" href="/tournaments/{{ tournament.id }}/pairs/{{ number-tour }}/tour" class="btn btn-info text-light">Сгенерировать следующий тур</a>
+            <a type="button" href="/tournaments/{{ tournament.id }}/pairs/{{ number-tour }}/tour" class="btn btn-info text-light">Составить пары</a>
         {% endif %}
     {% else %}
         <a href="/tournaments/{{ tournament.id }}/pairs" type="button" class="btn btn-info text-light">Провести жеребьевку</a>
@@ -14,19 +30,16 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="col-md-3">
-        {% if tours %}
-            {% for tour in tours %}
-            <a href="/tournaments/{{ tournament.id }}/tour/{{ tour.id }}" type="button" class="btn btn-secondary text-light">Тур {{ tour.number }}</a>
-            {% endfor %}
-        {% endif %}
+        <div class="col-md-2">
+
         </div>
 
         {% if tours %}
-        <div class="col-md-6">
+        <div class="col-md-8">
 
             <h4 class="text-center m-5">
-                Туры {{ tournament.name }}
+                Пары{{ tournament.name }}
+                <a href="#" type="button" class="btn btn-outline-success">Экспорт</a>
             </h4>
 
             <table class="table table-sm text-center">
@@ -74,7 +87,7 @@
             Ниодного тура ещё не создано
         </h4>
         {% endif %}
-        <div class="col-md-3">
+        <div class="col-md-2">
         </div>
     </div>
 </div>
