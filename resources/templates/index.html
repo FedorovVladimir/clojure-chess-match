@@ -1,59 +1,64 @@
 {% extends "new_base.html" %}
 {% block content %}
-<div class="alert alert-info" role="alert">
-    <a href="/tournaments/add" type="button" class="btn btn-info">Добавить турнир</a>
-</div>
-{% if tournaments %}
+<!-- Page Content -->
 <div class="container">
-    <div class="row">
-    <div class="col-8">
-        <h2>Турниры</h2>
-    </div>
-    <div class="col-4">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Название турнира" aria-label="Search">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Искать</button>
-        </form>
-    </div>
-    </div>
-</div>
-<br>
-<div class="container">
-    <table class="table table-sm">
-        <thead>
-        <tr>
-            <th scope="col">Название</th>
-            <th scope="col">Город</th>
-            <th scope="col">Дата начала</th>
-            <th scope="col">Дата окончания</th>
-            <th scope="col">Адрес</th>
-            <th scope="col">Информация</th>
-        </tr>
-        </thead>
-        <tbody>
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+        <h1 class="display-3">Новости шахмат</h1>
+        <p class="lead">На нашем сайте вы найдете анонсы, результаты, промежуточные итоги соревнований. Также доступна онлайн-регистрация на соревнования.</p>
+    </header>
+
+    <!-- Page Features -->
+    <div class="row text-center">
         {% for tournament in tournaments %}
-            <tr>
-                <td>{{ tournament.name }}</td>
-                <td>{{ tournament.city_name }}</td>
-                <td>{{ tournament.date_start }}</td>
-                <td>{{ tournament.date_end }}</td>
-                <td>{{ tournament.adress }}</td>
-                <td><a class="btn btn-ms btn-block btn-outline-primary" href="/tournaments/info/{{ tournament.id }}">Подробнее</a></td>
-            </tr>
+            {% ifequal tournament.name "Этап Кубка России по шахматам 2019 года" %}
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://www.chess22.ru/images/albums/kubok-altaya-2019-nagrazhdenie/dsc_0003.jpg" height="160" alt="Кубок России">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ tournament.name }}</h4>
+                            <p class="card-text">Турнир состоится с {{ tournament.date_start }} по {{ tournament.date_end }} в городе {{ tournament.city_name }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-5">
+                            <a href="/tournaments/info/{{ tournament.id }}" class="btn btn-primary">Подробнее</a>
+                                </div>
+                                <div class="col-7">
+                            <a href="#" class="btn btn-primary">Регистрация</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endifequal %}
+            {% ifequal tournament.name "Чемпионат подъезда 2019" %}
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://www.chess22.ru/images/albums/quot-estafeta-pobedyi-quot-v-kamne-chast-2/280.jpg" height="160" alt="Кубок России">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ tournament.name }}</h4>
+                            <p class="card-text">Турнир состоится с {{ tournament.date_start }} по {{ tournament.date_end }} в городе {{ tournament.city_name }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-5">
+                                    <a href="/tournaments/info/{{ tournament.id }}" class="btn btn-primary">Подробнее</a>
+                                </div>
+                                <div class="col-7">
+                                    <a href="#" class="btn btn-primary">Регистрация</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endifequal %}
         {% endfor %}
-        </tbody>
-    </table>
-</div>
-{% else %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <h4 class="text-center m-5">
-                Турниров еще нет
-            </h4>
-        </div>
     </div>
+    <!-- /.row -->
+
 </div>
-{% endif %}
+<!-- /.container -->
 
 {% endblock %}
