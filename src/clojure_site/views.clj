@@ -110,8 +110,23 @@
            :button button}))
 
 (defn tournaments
-  "Главная страница приложения. Список турниров"
+  "Список турниров"
   [tournaments]
-  (render "tournaments/tournaments.html" {:tournaments (if (not-empty tournaments)
+  (render "tournaments.html" {:tournaments (if (not-empty tournaments)
                                        tournaments false)})
+  )
+
+(defn tournaments-registration [tournament regions sex titles titles-rus]
+  "Страница регистрации на турнир"
+  (render "tournaments/registration.html"
+          {:tournament (if (not-empty tournament)
+                         tournament false)
+           :regions (if (not-empty regions)
+                      regions false)
+           :sex (if (not-empty sex)
+                  sex false)
+           :titles (if (not-empty titles)
+                     titles false)
+           :titles-rus (if (not-empty titles-rus)
+                         titles-rus false)})
   )

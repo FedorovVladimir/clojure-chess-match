@@ -86,6 +86,15 @@
                    titles-rus (db/get-titles-rus)]
              (v/tournaments-info tournament regions sex titles titles-rus)))
 
+           ; регистрация на турнир
+           (GET "/tournaments/registration/:id" [id]
+             (let [tournament (db/get-tournament id)
+                   regions (db/get-regions)
+                   sex (db/get-sex)
+                   titles (db/get-titles)
+                   titles-rus (db/get-titles-rus)]
+             (v/tournaments-registration tournament regions sex titles titles-rus)))
+
            (GET "/tournaments/:id/tours" [id]
              (let [tournament (db/get-tournament id)
                    tours (db/get-tours id)
