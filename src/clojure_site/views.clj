@@ -35,7 +35,7 @@
       (content-type "text/html; charset=utf-8")))
 
 (defn index
-  "Главная страница приложения. Список писем"
+  "Главная страница приложения. Список турниров"
   [tournaments]
   (render "index.html" {:tournaments (if (not-empty tournaments)
                                        tournaments false)}))
@@ -108,3 +108,10 @@
            :id-tour id-tour
            :number-tour number-tour
            :button button}))
+
+(defn tournaments
+  "Главная страница приложения. Список турниров"
+  [tournaments]
+  (render "tournaments/tournaments.html" {:tournaments (if (not-empty tournaments)
+                                       tournaments false)})
+  )

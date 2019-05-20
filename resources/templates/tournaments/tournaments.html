@@ -4,20 +4,7 @@
     <a href="/tournaments/add" type="button" class="btn btn-info">Добавить турнир</a>
 </div>
 {% if tournaments %}
-<div class="container">
-    <div class="row">
-    <div class="col-8">
-        <h2>Турниры</h2>
-    </div>
-    <div class="col-4">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Название турнира" aria-label="Search">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Искать</button>
-        </form>
-    </div>
-    </div>
-</div>
-<br>
+<h1 class="p-3">Турниры</h1>
 <div class="container">
     <table class="table table-sm">
         <thead>
@@ -32,14 +19,14 @@
         </thead>
         <tbody>
         {% for tournament in tournaments %}
-            <tr>
-                <td>{{ tournament.name }}</td>
-                <td>{{ tournament.city_name }}</td>
-                <td>{{ tournament.date_start }}</td>
-                <td>{{ tournament.date_end }}</td>
-                <td>{{ tournament.adress }}</td>
-                <td><a class="btn btn-ms btn-block btn-outline-primary" href="/tournaments/info/{{ tournament.id }}">Подробнее</a></td>
-            </tr>
+        <tr>
+            <td>{{ tournament.name }}</td>
+            <td>{{ tournament.city_name }}</td>
+            <td>{{ tournament.date_start }}</td>
+            <td>{{ tournament.date_end }}</td>
+            <td>{{ tournament.adress }}</td>
+            <td><a class="btn btn-ms btn-block btn-outline-primary" href="/tournaments/info/{{ tournament.id }}">Подробнее</a></td>
+        </tr>
         {% endfor %}
         </tbody>
     </table>

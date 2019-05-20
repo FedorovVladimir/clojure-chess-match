@@ -21,6 +21,10 @@
            (GET "/" []
              (let [tournaments (db/get-tournaments)]
                (v/index tournaments)))
+           ; список турниров
+           (GET "/tournaments" []
+             (let [tournaments (db/get-tournaments)]
+               (v/tournaments tournaments)))
 
            ; страница с формой создания турнира
            (GET "/tournaments/add" []
