@@ -5,12 +5,10 @@
     [selmer.parser :as parser]
 
     ; для HTTP заголовков
-    [ring.util.response :refer [content-type response]]
+    [ring.util.response :refer [content-type response redirect]]
 
     ; для CSRF защиты
-    [ring.util.anti-forgery :refer [anti-forgery-field]]
-
-    [clojure-site.db :as db]))
+    [ring.util.anti-forgery :refer [anti-forgery-field]]))
 
 ; подскажем Selmer где искать наши шаблоны
 (parser/set-resource-path! (clojure.java.io/resource "templates"))
@@ -129,4 +127,41 @@
                      titles false)
            :titles-rus (if (not-empty titles-rus)
                          titles-rus false)})
+  )
+
+(def users {"admin" {:username "admin"
+                     :hashed-password "adminpass"
+                     :roles #{:user :admin}}
+            "user"  {:username "user"
+                     :hashed-password "userpass"
+                     :roles #{:user}}})
+
+
+(defn lookup-user [username password]
+  (if-let [user (get users username)]  ; Use a database IRL
+    (if (.equals password (get user :hashed-password))
+      (dissoc user :hashed-password)))) ; Strip out user password
+
+(defn do-login [{{username "username" password "password" next "next"} :params
+                 session :session :as req}]
+  (if-let [user (lookup-user username password)]    ; lookup-user defined elsewhere
+    (assoc (redirect (or next "/"))                 ; Redirect to "next" or /
+      :session (assoc session :identity user)) ; Add an :identity to the session
+    (response "Login page goes here")))             ; If no user, show a login page
+
+
+(defn do-logout [{session :session}]
+  (-> (redirect "/login")                           ; Redirect to login
+      (assoc :session (dissoc session :identity)))) ; Remove :identity from session
+
+(defn login-go [username password]
+  (println "-----")
+  ;(println (do-login {{username password "/"}} ))
+  )
+
+(defn login
+  "Страница для входа"
+  [users]
+  (render "login.html" {:users (if (not-empty users)
+                                             users false)})
   )

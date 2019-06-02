@@ -11,7 +11,9 @@
     [pairs.pairs :refer [create-tour-pairs]]
 
     ; функция для взаимодействия с БД
-    [clojure-site.db :as db]))
+    [clojure-site.db :as db]
+    [clojure-site.views :as v]))
+
 
 (defn tournament-add
   "Создание турнира"
@@ -124,3 +126,10 @@
         (redirect (str "/tournaments/" (:id-tournament id-tournament) "/tour/" (:id-tour id-tour))))
 
       "Проверьте правильность введенных данных")))
+
+(defn login [request]
+  ;(let [user {:login    (get-in request [:form-params "login"])
+  ;            :password (get-in request [:form-params "password"])}]
+  ;  ;(clojure-site.views/login (:login user) (:password user))
+  ;  )
+    (v/login-go "admin" "adminpass"))

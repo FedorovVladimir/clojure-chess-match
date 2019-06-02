@@ -3,7 +3,7 @@
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
   :java-source-paths ["src"]
-  :resource-paths ["lib/main.jar" "resources"]
+  :resource-paths   ["lib/main.jar" "resources"]
   :dependencies [[org.clojure/clojure "1.10.0"]
 
                   ; Маршруты для GET и POST запросов
@@ -23,7 +23,10 @@
                   [mysql/mysql-connector-java "8.0.15"]
 
                   ; poi
-                  [org.apache.poi/poi "4.1.0"]]
+                  [org.apache.poi/poi "4.1.0"]
+
+                 ; buddy
+                  [buddy/buddy-auth "2.1.0"]]
 
 
   :plugins [[lein-ring "0.12.5"]]

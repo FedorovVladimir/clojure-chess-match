@@ -14,6 +14,7 @@
     ; функции взаимодействия с БД
     [clojure-site.db :as db]))
 
+
 ; объявляем маршруты
 (defroutes mail-routes
 
@@ -21,6 +22,13 @@
            (GET "/" []
              (let [tournaments (db/get-tournaments)]
                (v/index tournaments)))
+
+           ; страница авторизации
+           (GET "/login" []
+             (let [users (db/get-user)]
+               (v/login users)
+               (println users)))
+
            ; список турниров
            (GET "/tournaments" []
              (let [tournaments (db/get-tournaments)]
@@ -38,6 +46,9 @@
            ; обработчик создания турнира
            (POST "/tournaments/add" [request]
              (-> c/tournament-add))
+
+           (POST "/login" [request]
+             (-> c/login))
 
            ; обработчик удаления турнира
            (GET "/tournaments/:id/delete" [id]

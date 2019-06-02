@@ -5,6 +5,8 @@
       <entry name="!dev-resources:*" />
       <entry name="!main.jar:*" />
       <entry name="!resources:*" />
+      <entry name="!log.png:*" />
+      <entry name="!img:*" />
       <entry name="!?*.java" />
       <entry name="!?*.form" />
       <entry name="!?*.class" />
