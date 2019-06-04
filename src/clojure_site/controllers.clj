@@ -12,7 +12,8 @@
 
     ; функция для взаимодействия с БД
     [clojure-site.db :as db]
-    [clojure-site.views :as v]))
+    [clojure-site.views :as v])
+  (:import (autorization User)))
 
 
 (defn tournament-add
@@ -127,9 +128,29 @@
 
       "Проверьте правильность введенных данных")))
 
+(defn equal-user [user]
+  (println (second (first user)))
+  (println (second (second user)))
+
+  ;(let [user-login (first user)]
+  ;(println (second user-login)))
+  )
+
 (defn login [request]
-  ;(let [user {:login    (get-in request [:form-params "login"])
-  ;            :password (get-in request [:form-params "password"])}]
-  ;  ;(clojure-site.views/login (:login user) (:password user))
-  ;  )
-    (v/login-go "admin" "adminpass"))
+  (let [user {:login    (get-in request [:form-params "login"])
+              :password (get-in request [:form-params "password"])}]
+    (let [us (db/get-user (second (first user)) (second (second user)))]
+      (println us)
+      (if (== 0 (count us))
+        (redirect "/tournaments")
+        (User/setAuthorization false)
+        ; 1 to singlton
+        (redirect "/"))
+      )
+    ;(redirect "/")
+    ;(println us)
+    ;(redirect "/")
+    ;(equal-user user)
+    ;(clojure-site.views/login (:login user) (:password user))
+    ;(println user)
+    ))

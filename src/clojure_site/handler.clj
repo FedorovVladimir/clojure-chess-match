@@ -1,9 +1,7 @@
 (ns clojure-site.handler
   (:require
     [clojure-site.routes :refer [mail-routes]]
-    [buddy.auth.backends.session :refer [session-backend]]
-    [buddy.auth.middleware :refer [wrap-authentication]]))
+    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
-(def backend (session-backend))
 
-(def app (wrap-authentication mail-routes backend))
+(def app (wrap-defaults mail-routes site-defaults))

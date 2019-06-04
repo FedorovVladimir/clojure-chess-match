@@ -20,14 +20,13 @@
 
            ; главная страница приложения
            (GET "/" []
+             ;if 1 in singltot ...
              (let [tournaments (db/get-tournaments)]
                (v/index tournaments)))
 
            ; страница авторизации
            (GET "/login" []
-             (let [users (db/get-user)]
-               (v/login users)
-               (println users)))
+               (v/login-page))
 
            ; список турниров
            (GET "/tournaments" []
@@ -132,4 +131,4 @@
              (-> c/update-game))
 
            ; ошибка 404
-           (route/not-found "Ничего не найдено"))
+           (route/not-found "Ошибка 404. Страница не найдена"))

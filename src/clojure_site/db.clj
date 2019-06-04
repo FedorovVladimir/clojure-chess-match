@@ -9,8 +9,10 @@
 (defn get-regions []
   (jdbc/query mysql-db ["select * from REGION"]))
 
-(defn get-user []
-  (jdbc/query mysql-db ["select * from USERS"]))
+(defn get-user [login password]
+  (jdbc/query mysql-db ["select * from USERS
+                                  where LOGIN = ? and
+                                  PASSWORD = ?" login password]))
 
 (defn get-systems-match []
   (jdbc/query mysql-db ["select * from SYSTEM_MATCH"]))

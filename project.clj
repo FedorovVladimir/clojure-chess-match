@@ -23,10 +23,7 @@
                   [mysql/mysql-connector-java "8.0.15"]
 
                   ; poi
-                  [org.apache.poi/poi "4.1.0"]
-
-                 ; buddy
-                  [buddy/buddy-auth "2.1.0"]]
+                  [org.apache.poi/poi "4.1.0"]]
 
 
   :plugins [[lein-ring "0.12.5"]]

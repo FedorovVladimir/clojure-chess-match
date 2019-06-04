@@ -49,9 +49,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Leiningen: buddy/buddy-auth:2.1.0" level="project" />
-    <orderEntry type="library" name="Leiningen: buddy/buddy-core:1.4.0" level="project" />
-    <orderEntry type="library" name="Leiningen: buddy/buddy-sign:2.2.0" level="project" />
     <orderEntry type="library" name="Leiningen: cheshire:5.8.1" level="project" />
     <orderEntry type="library" name="Leiningen: clj-time:0.11.0" level="project" />
     <orderEntry type="library" name="Leiningen: clojure-complete:0.2.5" level="project" />
@@ -66,7 +63,6 @@
     <orderEntry type="library" name="Leiningen: compojure:1.6.1" level="project" />
     <orderEntry type="library" name="Leiningen: crypto-equality:1.0.0" level="project" />
     <orderEntry type="library" name="Leiningen: crypto-random:1.2.0" level="project" />
-    <orderEntry type="library" name="Leiningen: funcool/cuerdas:2.0.3" level="project" />
     <orderEntry type="library" name="Leiningen: hiccup:1.0.5" level="project" />
     <orderEntry type="library" name="Leiningen: instaparse:1.4.8" level="project" />
     <orderEntry type="library" name="Leiningen: javax.servlet/javax.servlet-api:3.1.0" level="project" />
@@ -79,8 +75,6 @@
     <orderEntry type="library" name="Leiningen: org.apache.commons/commons-collections4:4.3" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.commons/commons-math3:3.6.1" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.poi/poi:4.1.0" level="project" />
-    <orderEntry type="library" name="Leiningen: org.bouncycastle/bcpkix-jdk15on:1.58" level="project" />
-    <orderEntry type="library" name="Leiningen: org.bouncycastle/bcprov-jdk15on:1.58" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/clojure:1.10.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/core.specs.alpha:0.2.44" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/java.jdbc:0.7.9" level="project" />

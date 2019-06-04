@@ -29,7 +29,7 @@
                 </li>
             {% endifequal %}
 
-            {% ifequal page "tournaments/tournaments.html" %}
+            {% ifequal page "tournaments.html" %}
                 <li class="nav-item active">
                     <a class="nav-link" href="/tournaments">Турниры<span class="sr-only">(current)</span></a>
                 </li>
@@ -54,7 +54,8 @@
             </li>
         </ul>
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal1" >Вход</button>
+            <!--<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal1" >Вход</button>-->
+            <a role="button" class="btn btn-outline-info" href="/login" >Вход</a>
             <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">Регистрация</button>
         </div>
     </div>
@@ -94,37 +95,6 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                 <button type="button" class="btn btn-primary">Зарегистрироваться</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal enter -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Вход</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="/login">
-                    {% csrf-field %}
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email</label>
-                        <input type="text" name="login" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Введите Email">
-                        <small id="emailHelp1" class="form-text text-muted">Введите зарегестрированный почтовый адрес</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Пароль</label>
-                        <input name="password" type="password" class="form-control" id="exampleInputPassword2" placeholder="Пароль">
-                    </div>
-
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                        <input type="submit" class="btn btn-primary">
-                </form>
             </div>
         </div>
     </div>
