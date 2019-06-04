@@ -8,7 +8,8 @@
     [ring.util.response :refer [content-type response redirect]]
 
     ; для CSRF защиты
-    [ring.util.anti-forgery :refer [anti-forgery-field]]))
+    [ring.util.anti-forgery :refer [anti-forgery-field]])
+  (:import (autorization User)))
 
 ; подскажем Selmer где искать наши шаблоны
 (parser/set-resource-path! (clojure.java.io/resource "templates"))
@@ -36,7 +37,9 @@
   "Главная страница приложения. Список турниров"
   [tournaments]
   (render "index.html" {:tournaments (if (not-empty tournaments)
-                                       tournaments false)}))
+                                       tournaments false)
+                        :login       (User/isAuthorization)
+                        :user       (User/loginAuthorization)}))
 
 (defn tournament-add-form
   "Форма создания турнира"
@@ -51,7 +54,9 @@
            :indicators (if (not-empty indicators)
                          indicators false)
            :citys (if (not-empty citys)
-                    citys false)}))
+                    citys false)
+           :login       (User/isAuthorization)
+           :user       (User/loginAuthorization)}))
 
 (defn tournaments-info [tournament regions sex titles titles-rus]
   "Страница турнира"
@@ -65,7 +70,9 @@
            :titles (if (not-empty titles)
                      titles false)
            :titles-rus (if (not-empty titles-rus)
-                         titles-rus false)}))
+                         titles-rus false)
+           :login       (User/isAuthorization)
+           :user       (User/loginAuthorization)}))
 
 (defn tournament-prev-list [players tournament regions text  titles titles-rus]
   "Страница предварительного листа"
@@ -81,7 +88,9 @@
            :titles (if (not-empty titles)
                      titles false)
            :titles-rus (if (not-empty titles-rus)
-                         titles-rus false)}))
+                         titles-rus false)
+           :login       (User/isAuthorization)
+           :user       (User/loginAuthorization)}))
 
 (defn tournament-start-list [players tournament text]
   "Страница стартового листа"
@@ -91,7 +100,9 @@
            :tournament (if (not-empty tournament)
                          tournament false)
            :text (if (not-empty text)
-                   text false)}))
+                   text false)
+           :login       (User/isAuthorization)
+           :user       (User/loginAuthorization)}))
 
 (defn tournaments-tours [tournament tours games results id-tour number-tour button]
   (render "tournaments/tours.html"
@@ -105,13 +116,17 @@
                       results false)
            :id-tour id-tour
            :number-tour number-tour
-           :button button}))
+           :button button
+           :login       (User/isAuthorization)
+           :user       (User/loginAuthorization)}))
 
 (defn tournaments
   "Список турниров"
   [tournaments]
   (render "tournaments.html" {:tournaments (if (not-empty tournaments)
-                                       tournaments false)})
+                                       tournaments false)
+                              :login       (User/isAuthorization)
+                              :user       (User/loginAuthorization)})
   )
 
 (defn tournaments-registration [tournament regions sex titles titles-rus]
@@ -126,7 +141,9 @@
            :titles (if (not-empty titles)
                      titles false)
            :titles-rus (if (not-empty titles-rus)
-                         titles-rus false)})
+                         titles-rus false)
+           :login       (User/isAuthorization)
+           :user       (User/loginAuthorization)})
   )
 
 ;(defn login-go [username password]

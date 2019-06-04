@@ -1,21 +1,19 @@
 package autorization;
 
 public class User {
-    private static User ourInstance = new User();
-
-    public static User getInstance() {
-        return ourInstance;
-    }
     private static boolean authorization = false;
-
-    private User() {
-    }
+    private static String login;
 
     public static boolean isAuthorization() {
         return authorization;
     }
+    public static String loginAuthorization() {
+        return login;
+    }
 
-    public static void setAuthorization(boolean autorization) {
+    public static void setAuthorization(boolean autorization, String login) {
+        System.out.println("Переменная изменена");
         User.authorization = autorization;
+        User.login = login;
     }
 }

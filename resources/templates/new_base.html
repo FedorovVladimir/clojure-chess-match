@@ -53,11 +53,16 @@
                 <a class="nav-link" href="#">Контакты</a>
             </li>
         </ul>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <!--<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal1" >Вход</button>-->
-            <a role="button" class="btn btn-outline-info" href="/login" >Вход</a>
-            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">Регистрация</button>
-        </div>
+        <!--<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal1" >Вход</button>-->
+        {% if login %}
+            <h3 class="text-info">{{user}}&nbsp</h3>
+            <a role="button" class="btn btn-outline-info" href="/login" >Выход</a>
+        {% else %}
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a role="button" class="btn btn-outline-info" href="/login" >Вход</a>
+                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">Регистрация</button>
+            </div>
+        {% endif %}
     </div>
 </nav>
 
