@@ -56,7 +56,8 @@
            :citys (if (not-empty citys)
                     citys false)
            :login       (User/isAuthorization)
-           :user       (User/loginAuthorization)}))
+           :user       (User/loginAuthorization)
+           :role        (User/roleAuthorization)}))
 
 (defn tournaments-info [tournament regions sex titles titles-rus]
   "Страница турнира"
@@ -72,7 +73,8 @@
            :titles-rus (if (not-empty titles-rus)
                          titles-rus false)
            :login       (User/isAuthorization)
-           :user       (User/loginAuthorization)}))
+           :user       (User/loginAuthorization)
+           :role        (User/roleAuthorization)}))
 
 (defn tournament-prev-list [players tournament regions text  titles titles-rus]
   "Страница предварительного листа"
@@ -90,7 +92,8 @@
            :titles-rus (if (not-empty titles-rus)
                          titles-rus false)
            :login       (User/isAuthorization)
-           :user       (User/loginAuthorization)}))
+           :user       (User/loginAuthorization)
+           :role        (User/roleAuthorization)}))
 
 (defn tournament-start-list [players tournament text]
   "Страница стартового листа"
@@ -102,7 +105,8 @@
            :text (if (not-empty text)
                    text false)
            :login       (User/isAuthorization)
-           :user       (User/loginAuthorization)}))
+           :user       (User/loginAuthorization)
+           :role        (User/roleAuthorization)}))
 
 (defn tournaments-tours [tournament tours games results id-tour number-tour button]
   (render "tournaments/tours.html"
@@ -118,7 +122,8 @@
            :number-tour number-tour
            :button button
            :login       (User/isAuthorization)
-           :user       (User/loginAuthorization)}))
+           :user       (User/loginAuthorization)
+           :role        (User/roleAuthorization)}))
 
 (defn tournaments
   "Список турниров"
@@ -126,7 +131,8 @@
   (render "tournaments.html" {:tournaments (if (not-empty tournaments)
                                        tournaments false)
                               :login       (User/isAuthorization)
-                              :user       (User/loginAuthorization)})
+                              :user       (User/loginAuthorization)
+                              :role        (User/roleAuthorization)})
   )
 
 (defn tournaments-registration [tournament regions sex titles titles-rus]

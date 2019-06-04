@@ -136,8 +136,8 @@
   ;(println (second user-login)))
   )
 
-(defn f [a path login]
-  (User/setAuthorization a login)
+(defn f [a path login role]
+  (User/setAuthorization a login role)
   (redirect path))
 
 (defn login [request]
@@ -145,12 +145,13 @@
   (let [user {:login    (get-in request [:form-params "login"])
               :password (get-in request [:form-params "password"])}]
     (let [us (db/get-user (second (first user)) (second (second user)))]
-      (println us)
+      (println (second (first (first us))))
+      (println (second (first (rest (rest (rest (rest (rest (rest (first us))))))))))
       (if (== 0 (count us))
-        (f false "/tournaments" (second (first user)))
-        (f true "/" (second (first user)))))))
+        (f false "/tournaments" (second (first user)) (second (first (rest (rest (rest (rest (rest (rest (first us))))))))))
+        (f true "/" (second (first user)) (second (first (rest (rest (rest (rest (rest (rest (first us))))))))))))))
 
 (defn logout []
   "Выход пользователя"
-  (User/setAuthorization false "")
+  (User/setAuthorization false "" "")
   (redirect "/"))

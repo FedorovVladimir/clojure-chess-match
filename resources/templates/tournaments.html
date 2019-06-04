@@ -1,8 +1,12 @@
 {% extends "new_base.html" %}
 {% block content %}
-<div class="alert alert-info" role="alert">
-    <a href="/tournaments/add" type="button" class="btn btn-info">Добавить турнир</a>
-</div>
+{% ifequal role "admin" %}
+    <div class="alert alert-info" role="alert">
+        <a href="/tournaments/add" type="button" class="btn btn-info">Добавить турнир</a>
+    </div>
+{% else %}
+    <br><br>
+{% endifequal %}
 {% if tournaments %}
 <div class="container">
     <div class="row">
