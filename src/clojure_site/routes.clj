@@ -61,6 +61,10 @@
            (GET  "/tournaments/:id/start_list/export" [id]
              (c/tournament-start-list-export id))
 
+           ; выход пользователя
+           (GET  "/logout" []
+             (c/logout))
+
            ; страница предварительного списка
            (GET "/tournaments/:id/prev_list" [id]
              (let [players (db/get-prev-list-players id)

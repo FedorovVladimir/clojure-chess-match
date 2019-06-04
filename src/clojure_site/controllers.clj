@@ -141,18 +141,16 @@
   (redirect path))
 
 (defn login [request]
+  "Вход пользователя"
   (let [user {:login    (get-in request [:form-params "login"])
               :password (get-in request [:form-params "password"])}]
     (let [us (db/get-user (second (first user)) (second (second user)))]
       (println us)
       (if (== 0 (count us))
         (f false "/tournaments" (second (first user)))
-        (f true "/" (second (first user)))
-      )
-    ;(redirect "/")
-    ;(println us)
-    ;(redirect "/")
-    ;(equal-user user)
-    ;(clojure-site.views/login (:login user) (:password user))
-    ;(println user)
-    )))
+        (f true "/" (second (first user)))))))
+
+(defn logout []
+  "Выход пользователя"
+  (User/setAuthorization false "")
+  (redirect "/"))

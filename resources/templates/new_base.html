@@ -55,8 +55,8 @@
         </ul>
         <!--<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal1" >Вход</button>-->
         {% if login %}
-            <h3 class="text-info">{{user}}&nbsp</h3>
-            <a role="button" class="btn btn-outline-info" href="/login" >Выход</a>
+            <h4 class="text-warning">{{user}}&nbsp</h4>
+            <a role="button" class="btn btn-outline-info" href="/logout" type="submit">Выход</a>
         {% else %}
             <div class="btn-group" role="group" aria-label="Basic example">
                 <a role="button" class="btn btn-outline-info" href="/login" >Вход</a>
