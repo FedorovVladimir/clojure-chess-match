@@ -28,6 +28,10 @@
            (GET "/login" []
                (v/login-page))
 
+           ; страница регистрации
+           (GET "/registrationlogin" []
+             (v/registration-page))
+
            ; список турниров
            (GET "/tournaments" []
              (let [tournaments (db/get-tournaments)]

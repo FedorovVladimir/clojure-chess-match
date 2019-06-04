@@ -59,51 +59,13 @@
             <a role="button" class="btn btn-outline-info" href="/logout" type="submit">Выход</a>
         {% else %}
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a role="button" class="btn btn-outline-info" href="/login" >Вход</a>
-                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">Регистрация</button>
+                <a role="button" class="btn btn-outline-info" href="/login">Вход</a>
+                <a role="button" class="btn btn-outline-info" href="/registrationlogin">Регистрация</a>
             </div>
         {% endif %}
     </div>
 </nav>
 
-<!-- Modal registr -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Регистрация</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите Email">
-                        <small id="emailHelp" class="form-text text-muted">Адрес не должен быть зарегистрирован на сайте</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Пароль</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
-                    </div>
-                    <div class="form-group">
-                        <label for="fio">ФИО</label>
-                        <input type="text" class="form-control" id="fio" placeholder="Пароль">
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Согласие на обработку персональных данных</label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary">Зарегистрироваться</button>
-            </div>
-        </div>
-    </div>
-</div>
 {% block content %}
 {% endblock %}
 <!-- Footer -->

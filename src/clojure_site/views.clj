@@ -146,10 +146,10 @@
            :user       (User/loginAuthorization)})
   )
 
-;(defn login-go [username password]
-;  (println "-----")
-;  ;(println (do-login {{username password "/"}} ))
-;  )
-
 (defn login-page []
-  (render "loginpage.html"))
+  "Страница входа"
+  (render "login_page.html"))
+
+(defn registration-page []
+  "Страница регистрации пользователя"
+  (render "registration_page.html"))
