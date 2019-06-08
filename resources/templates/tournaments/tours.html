@@ -9,24 +9,24 @@
     <a href="#" class="nav-item nav-link">Результаты</a>
     </div>
 </nav>
-
-<div class="alert alert-info" role="alert">
-    {% if tours %}
-    <div class="btn-group" role="group" aria-label="First group">
-        {% for tour in tours %}
-        <a href="/tournaments/{{ tournament.id }}/tour/{{ tour.id }}" type="button" class="btn btn-outline-secondary">{{ tour.number }}</a>
-        {% endfor %}
-    </div>
-    {% endif %}
-    {% if tours %}
-        {% if button %}
-            <a type="button" href="/tournaments/{{ tournament.id }}/pairs/{{ number-tour }}/tour" class="btn btn-info text-light">Составить пары</a>
+{% ifequal role "admin" %}
+    <div class="alert alert-info" role="alert">
+        {% if tours %}
+        <div class="btn-group" role="group" aria-label="First group">
+            {% for tour in tours %}
+            <a href="/tournaments/{{ tournament.id }}/tour/{{ tour.id }}" type="button" class="btn btn-outline-secondary">{{ tour.number }}</a>
+            {% endfor %}
+        </div>
         {% endif %}
-    {% else %}
-        <a href="/tournaments/{{ tournament.id }}/pairs" type="button" class="btn btn-info text-light">Провести жеребьевку</a>
-    {% endif %}
-</div>
-
+        {% if tours %}
+            {% if button %}
+                <a type="button" href="/tournaments/{{ tournament.id }}/pairs/{{ number-tour }}/tour" class="btn btn-info text-light">Составить пары</a>
+            {% endif %}
+        {% else %}
+            <a href="/tournaments/{{ tournament.id }}/pairs" type="button" class="btn btn-info text-light">Провести жеребьевку</a>
+        {% endif %}
+    </div>
+{% endifequal %}
 <div class="container-fluid">
     <div class="row">
 
@@ -39,7 +39,9 @@
 
             <h4 class="text-center m-5">
                 Пары{{ tournament.name }}
-                <a href="#" type="button" class="btn btn-outline-success">Экспорт</a>
+                {% ifequal role "admin" %}
+                    <a href="#" type="button" class="btn btn-outline-success">Экспорт</a>
+                {% endifequal %}
             </h4>
 
             <table class="table table-sm text-center">

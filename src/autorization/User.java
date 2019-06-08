@@ -11,12 +11,9 @@ public class User {
     public static String loginAuthorization() {
         return login;
     }
-    public static String roleAuthorization() {
-        return role;
-    }
+    public static String roleAuthorization() { return role; }
 
     public static void setAuthorization(boolean autorization, String login, String role) {
-        System.out.println("Переменная изменена");
         User.authorization = autorization;
         User.login = login;
         User.role = role;

@@ -20,7 +20,7 @@
 
                 <div class="form-group">
                     <label for="name">Название</label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Этап кубка России">
+                    <input type="text" class="form-control" name="name" id="name" aria-describedby="inputGroupPrepend" required>
                 </div>
 
                 <div class="form-group">
@@ -43,32 +43,32 @@
 
                 <div class="form-group">
                     <label for="adress">Адрес</label>
-                    <input type="text" class="form-control" name="adress" id="adress" placeholder="ул. Гоголя 42">
+                    <input type="text" class="form-control" name="adress" id="adress" aria-describedby="inputGroupPrepend" required>
                 </div>
 
                 <div class="form-row">
                     <div class="container col-6">
                         <div class="form-group">
                             <label for="startDate">Введите дату начала:</label>
-                            <input type="date" name="start-date" class="form-control" id="startDate">
+                            <input type="date" name="start-date" class="form-control" id="startDate" aria-describedby="inputGroupPrepend" required>
                         </div>
                     </div>
                     <div class="container col-6">
                         <div class="form-group">
                             <label for="endDate">Введите дату окончания:</label>
-                            <input type="date" name="end-date" class="form-control" id="endDate">
+                            <input type="date" name="end-date" class="form-control" id="endDate" aria-describedby="inputGroupPrepend" required>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="countTour">Количество туров</label>
-                    <input type="text" class="form-control" name="count-tour" id="countTour" placeholder="9">
+                    <input type="text" class="form-control" name="count-tour" id="countTour" aria-describedby="inputGroupPrepend" required>
                 </div>
 
                 <div class="form-group">
                     <label for="timeControl">Контроль времени</label>
-                    <input type="text" class="form-control" name="time-control" id="timeControl" placeholder="3+2">
+                    <input type="text" class="form-control" name="time-control" id="timeControl" aria-describedby="inputGroupPrepend" required>
                 </div>
 
                 <div class="form-group">
@@ -107,5 +107,5 @@
         </div>
     </div>
 </div>
-
+<script src="/script/validation.js"></script>
 {% endblock %}

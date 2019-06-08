@@ -16,6 +16,8 @@
 
 
 ; объявляем маршруты
+
+
 (defroutes mail-routes
 
            ; главная страница приложения
@@ -31,6 +33,10 @@
            ; страница регистрации
            (GET "/registrationlogin" []
              (v/registration-page))
+
+           ; бработчик регистрации
+           ;(POST "/registrationlogin" [request]
+           ;  (c->registration))
 
            ; список турниров
            (GET "/tournaments" []

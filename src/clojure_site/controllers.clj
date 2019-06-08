@@ -145,7 +145,6 @@
   (let [user {:login    (get-in request [:form-params "login"])
               :password (get-in request [:form-params "password"])}]
     (let [us (db/get-user (second (first user)) (second (second user)))]
-      (println (second (first (first us))))
       (println (second (first (rest (rest (rest (rest (rest (rest (first us))))))))))
       (if (== 0 (count us))
         (f false "/tournaments" (second (first user)) (second (first (rest (rest (rest (rest (rest (rest (first us))))))))))
