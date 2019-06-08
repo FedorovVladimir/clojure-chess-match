@@ -43,10 +43,12 @@
                     <th scope="col" style="width: 100px"><p class="align-middle">Рейтинг</p></th>
                     <th scope="col" style="width: 100px"><p class="align-middle">Рейтинг FIDE</p></th>
                     <th scope="col" style="width: 100px"><p class="align-middle">Звание</p></th>
-                    {% if text = 0 %}
-                        <th scope="col" style="width: 110px"><p class="align-middle">Действие</p></th>
-                    {% endif %}
-                    <th scope="col"><p class="align-middle">Действие</p></th>
+                    {% ifequal role "admin" %}
+                        {% if text = 0 %}
+                            <th scope="col" style="width: 110px"><p class="align-middle">Действие</p></th>
+                        {% endif %}
+                        <th scope="col"><p class="align-middle">Действие</p></th>
+                    {% endifequal %}
                 </tr>
                 </thead>
                 <tbody>
@@ -62,7 +64,9 @@
                         <th scope="col" class="p-1">{{ player.rating_rus }}</th>
                         <th scope="col" class="p-1">{{ player.rating_fide }}</th>
                         <th scope="col" class="p-1">{{ player.title_rus }}</th>
-                        <th scope="col" class="p-1"><a type="button" class="btn btn-outline-danger">Исключить</a></th>
+                        {% ifequal role "admin" %}
+                            <th scope="col" class="p-1"><a type="button" class="btn btn-outline-danger">Исключить</a></th>
+                        {% endifequal %}
                     </tr>
                 </div>
                 {% endfor %}
@@ -72,10 +76,4 @@
     </div>
 </div>
 
-
-<script>
-    function saveButton(id) {
-        document.getElementById('th' + id).innerHTML = "<a type='button' style='width: 110px' id='text'" + id + " class='btn btn-warning'>Сохранить</a>";
-    }
-</script>
 {% endblock %}

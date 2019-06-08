@@ -9,7 +9,7 @@
     <a href="#" class="nav-item nav-link">Результаты</a>
     </div>
 </nav>
-{% ifequal role "admin" %}
+
     <div class="alert alert-info" role="alert">
         {% if tours %}
         <div class="btn-group" role="group" aria-label="First group">
@@ -20,13 +20,17 @@
         {% endif %}
         {% if tours %}
             {% if button %}
-                <a type="button" href="/tournaments/{{ tournament.id }}/pairs/{{ number-tour }}/tour" class="btn btn-info text-light">Составить пары</a>
+                {% ifequal role "admin" %}
+                    <a type="button" href="/tournaments/{{ tournament.id }}/pairs/{{ number-tour }}/tour" class="btn btn-info text-light">Составить пары</a>
+                {% endifequal %}
             {% endif %}
         {% else %}
-            <a href="/tournaments/{{ tournament.id }}/pairs" type="button" class="btn btn-info text-light">Провести жеребьевку</a>
+            {% ifequal role "admin" %}
+                <a href="/tournaments/{{ tournament.id }}/pairs" type="button" class="btn btn-info text-light">Провести жеребьевку</a>
+            {% endifequal %}
         {% endif %}
     </div>
-{% endifequal %}
+
 <div class="container-fluid">
     <div class="row">
 

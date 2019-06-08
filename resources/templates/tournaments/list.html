@@ -48,9 +48,11 @@
                     <th scope="col" style="width: 100px"><p class="align-middle">Рейтинг</p></th>
                     <th scope="col" style="width: 100px"><p class="align-middle">Рейтинг FIDE</p></th>
                     <th scope="col" style="width: 100px"><p class="align-middle">Звание</p></th>
-                    {% if text = 0 %}
-                        <th scope="col" style="width: 110px"><p class="align-middle">Действие</p></th>
-                    {% endif %}
+                    {% ifequal role "admin" %}
+                        {% if text = 0 %}
+                            <th scope="col" style="width: 110px"><p class="align-middle">Действие</p></th>
+                        {% endif %}
+                    {% endifequal %}
                 </tr>
                 </thead>
                 <tbody>
@@ -152,12 +154,13 @@
                                     </select>
                                 {% endif %}
                             </th>
-
-                            {% if player.activ %}{% if player.activ = 1 %}
-                            <th scope="col" class="p-1"><a type='button' style="width: 110px" class='btn btn-success' href="list_players/{{ player.id_player_list }}/mark/0">Отменить</a></th>
-                            {% else %}
-                            <th id="th{{ player.id_player_list }}" scope="col" class="p-1"><a type='button' style="width: 110px" class='btn btn-muted' href="list_players/{{ player.id_player_list }}/mark/1">Пришел</a></th>
-                            {% endif %}{% endif %}
+                            {% ifequal role "admin" %}
+                                {% if player.activ %}{% if player.activ = 1 %}
+                                <th scope="col" class="p-1"><a type='button' style="width: 110px" class='btn btn-success' href="list_players/{{ player.id_player_list }}/mark/0">Отменить</a></th>
+                                {% else %}
+                                <th id="th{{ player.id_player_list }}" scope="col" class="p-1"><a type='button' style="width: 110px" class='btn btn-muted' href="list_players/{{ player.id_player_list }}/mark/1">Пришел</a></th>
+                                {% endif %}{% endif %}
+                            {% endifequal %}
                         </tr>
                     </div>
                 {% endfor %}
