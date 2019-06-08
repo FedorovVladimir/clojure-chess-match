@@ -272,3 +272,8 @@
                               :LAST name
                               :FIRST last
                               :EMAIL email}))
+
+(defn get-user-duplicate [login]
+  "Поиск совпадений по логину в БД"
+  (jdbc/query mysql-db ["select * from USERS
+                                  where LOGIN = ? " login]))

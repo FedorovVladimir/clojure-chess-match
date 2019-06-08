@@ -153,11 +153,13 @@
 
 (defn registration-login [request]
   "Регистрация пользователя"
-  (println request)
   (let [new-user{:login    (get-in request [:form-params "login"])
                  :password (get-in request [:form-params "password"])
                  :name (get-in request [:form-params "name"])
                  :last (get-in request [:form-params "last"])
                  :email (get-in request [:form-params "email"])}]
-    (db/registration-login (:login new-user) (:password new-user) (:name new-user) (:last new-user) (:email new-user))
-    (redirect "/login")))
+    (println (second (first new-user)))
+    (let [user-duplicate (db/get-user-duplicate (second (first new-user)))]
+      (if (== 0 (count user-duplicate))
+        (and (db/registration-login (:login new-user) (:password new-user) (:name new-user) (:last new-user) (:email new-user)) (redirect "/login"))
+        (redirect "/")))))
