@@ -244,5 +244,22 @@
     from TOUR
     where TOUR.ID = ? " id-tour]))
 
-(defn update-player [idp]
-  )
+(defn update-player [idp first_name last_name patro date_born region adress rating_rus rating_fide title]
+  "Обновление данных об участнике"
+  (jdbc/update! mysql-db
+                :PLAYER
+                {:RATING_FIDE rating_fide
+                 :RATING_RUS rating_rus
+                 :ID_TITLE_RUS title
+                 :ID_REGION region
+                 }
+                ["id_human = ? " idp])
+  (jdbc/update! mysql-db
+                :HUMAN
+                {:LAST last_name
+                 :FIRST first_name
+                 :PATRO patro
+                 :DATE_BORN date_born
+                 :ADRES adress
+                 }
+                ["id = ? " idp]))

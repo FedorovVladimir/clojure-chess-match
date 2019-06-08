@@ -125,7 +125,7 @@
               :title (get-in  title [])
               :date_born (get-in  date_born [])}]
   (println user)
-  ;(db/update-player idp)
+  (db/update-player idp first_name last_name patro date_born region adress rating_rus rating_fide title)
   (redirect (str "/tournaments/" idt "/prev_list"))))
 
 (defn update-game [request]
