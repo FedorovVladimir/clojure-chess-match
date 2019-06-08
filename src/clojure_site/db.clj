@@ -256,13 +256,19 @@
                 ["id_human = ? " idp])
   (jdbc/update! mysql-db
                 :HUMAN
-                {:LAST last_name
-                 :FIRST first_name
-                 :PATRO patro
-                 :DATE_BORN date_born
-                 :ADRES adress
-                 }
+                  {:LAST last_name
+                   :FIRST first_name
+                   :PATRO patro
+                   :DATE_BORN date_born
+                   :ADRES adress
+                   }
                 ["id = ? " idp]))
 
-(defn registration-login []
-  )
+(defn registration-login [login password name last email]
+  "Регистрация пользователя"
+  (jdbc/insert! mysql-db :USERS
+                            {:LOGIN login
+                              :PASSWORD password
+                              :LAST name
+                              :FIRST last
+                              :EMAIL email}))
