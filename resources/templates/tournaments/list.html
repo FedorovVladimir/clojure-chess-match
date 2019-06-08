@@ -79,7 +79,7 @@
                                 {% if player.activ = 1 %}
                                     {{ player.first }}
                                 {% else %}
-                                    <input type="text" form="form{{ player.id_player_list }}" class="form-control" name="first_name" id="first_name" placeholder="Иван" oninput="saveButton({{ player.id_player_list }})" value="{{ player.first }}">
+                                    <input type="text" form="form{{ player.id_player_list }}" class="form-control" name="first_name" id="first_name"  oninput="saveButton({{ player.id_player_list }})" value="{{ player.first }}">
                                 {% endif %}
                             </th>
 
@@ -87,7 +87,7 @@
                                 {% if player.activ = 1 %}
                                     {{ player.patro }}
                                 {% else %}
-                                    <input type="text" form="form{{ player.id_player_list }}" class="form-control" name="patro" id="patro" placeholder="Иванович" oninput="saveButton({{ player.id_player_list }})" value="{{ player.patro }}">
+                                    <input type="text" form="form{{ player.id_player_list }}" class="form-control" name="patro" id="patro"  oninput="saveButton({{ player.id_player_list }})" value="{{ player.patro }}">
                                 {% endif %}
                             </th>
 
@@ -173,7 +173,7 @@
 
 <script>
     function saveButton(id) {
-        document.getElementById('th' + id).innerHTML = "<input type='submit' form='form" + id + "' style='width: 110px' class='btn btn-warning border border-dark'>Сохранить</input>";
+        document.getElementById('th' + id).innerHTML = "<input type='submit' form='form" + id + "' style='width: 110px' class='btn btn-warning border border-dark' value='Сохранить'>Сохранить</input>";
         document.getElementById('th' + id).childNodes[1].remove();
     }
 </script>

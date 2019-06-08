@@ -34,9 +34,9 @@
            (GET "/registrationlogin" []
              (v/registration-page))
 
-           ; бработчик регистрации
+           ; обработчик регистрации
            ;(POST "/registrationlogin" [request]
-           ;  (c->registration))
+           ;  (-> c/registration))
 
            ; список турниров
            (GET "/tournaments" []
@@ -98,8 +98,8 @@
            (GET "/tournaments/:idt/list_players/:idp/mark/:activ" [idt idp activ]
              (c/mark-player idt idp activ))
 
-           (POST "/tournaments/:idt/list_players/:idp/update" [idt idp]
-             (c/update-player idt idp))
+           (POST "/tournaments/:idt/list_players/:idp/update" [idt idp first_name, last_name, title, patro, date_born, region, adress, rating_rus, rating_fide]
+             (c/update-player idt idp first_name last_name patro date_born region adress rating_rus rating_fide title))
 
            ; страница турнира
            (GET "/tournaments/info/:id" [id]

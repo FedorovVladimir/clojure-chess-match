@@ -112,8 +112,21 @@
   (create-tour-pairs id number-tour)
   (redirect (str "/tournaments/" id "/tours")))
 
-(defn update-player [idt idp]
-  (println "здесь должно быть обновление игрока"))
+(defn update-player [idt idp first_name last_name patro date_born region adress rating_rus rating_fide title]
+  "Редактирование данных участника"
+  (let [user {:idp (get-in idp [])
+              :first_name (get-in  first_name [])
+              :last_name (get-in  last_name [])
+              :patro (get-in  patro [])
+              :region (get-in  region [])
+              :adress (get-in  adress [])
+              :rating_fide (get-in  rating_fide [])
+              :rating_rus (get-in  rating_rus [])
+              :title (get-in  title [])
+              :date_born (get-in  date_born [])}]
+  (println user)
+  ;(db/update-player idp)
+  (redirect (str "/tournaments/" idt "/prev_list"))))
 
 (defn update-game [request]
   (let [result {:result (get-in request [:form-params "result"])}
@@ -128,13 +141,6 @@
 
       "Проверьте правильность введенных данных")))
 
-(defn equal-user [user]
-  (println (second (first user)))
-  (println (second (second user)))
-
-  ;(let [user-login (first user)]
-  ;(println (second user-login)))
-  )
 
 (defn f [a path login role]
   (User/setAuthorization a login role)

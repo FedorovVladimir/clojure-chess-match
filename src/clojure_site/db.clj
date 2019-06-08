@@ -243,3 +243,6 @@
   (jdbc/query mysql-db ["select TOUR.NUMBER
     from TOUR
     where TOUR.ID = ? " id-tour]))
+
+(defn update-player [idp]
+  )
