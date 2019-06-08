@@ -22,7 +22,6 @@
 
            ; главная страница приложения
            (GET "/" []
-             ;if 1 in singltot ...
              (let [tournaments (db/get-tournaments)]
                (v/index tournaments)))
 
@@ -34,9 +33,9 @@
            (GET "/registrationlogin" []
              (v/registration-page))
 
-           ; обработчик регистрации
-           ;(POST "/registrationlogin" [request]
-           ;  (-> c/registration))
+           ; обработчик регистрации на сайте
+           (POST "/registrationlogin" [request]
+             (-> c/registration-login))
 
            ; список турниров
            (GET "/tournaments" []
@@ -98,6 +97,7 @@
            (GET "/tournaments/:idt/list_players/:idp/mark/:activ" [idt idp activ]
              (c/mark-player idt idp activ))
 
+           ; обработчик редактирования данных участника
            (POST "/tournaments/:idt/list_players/:idp/update" [idt idp first_name, last_name, title, patro, date_born, region, adress, rating_rus, rating_fide]
              (c/update-player idt idp first_name last_name patro date_born region adress rating_rus rating_fide title))
 

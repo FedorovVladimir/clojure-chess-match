@@ -263,3 +263,6 @@
                  :ADRES adress
                  }
                 ["id = ? " idp]))
+
+(defn registration-login []
+  )
