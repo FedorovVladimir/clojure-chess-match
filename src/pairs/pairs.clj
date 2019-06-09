@@ -30,7 +30,7 @@
   ;(println (db/get-rusult-tour 29))
   ;(println (:table_tournament (first (db/get-file-tournament 1))))
   ;(println (:table_tournament (first (db/get-file-tournament 1))))
-  (create-tour-pairs 1 3)
+  (create-tour-pairs 1 1)
   ;(println (show-tour 1 3))
   ;(db/update-file (AdapterPairs/setResultTour (db/get-start-list-players 1)
   ;                                            (db/get-rusult-tour 37)

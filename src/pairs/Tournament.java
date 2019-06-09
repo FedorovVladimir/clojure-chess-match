@@ -215,7 +215,7 @@ public class Tournament {
         String pairs;
         System.out.println(tournamentFile);
         pairs = JaVaFoApi.exec(1000, tournamentFile);
-        String[] pair = pairs.split("\n");
+        String[] pair = pairs.split("\\n");
         System.out.println(pairs);
 
         int countPairs = pair.length;
@@ -223,7 +223,7 @@ public class Tournament {
             countPairs -= 1;
         }
         for (int i = 1; i < countPairs; i++) {
-            String[] s = pair[i].split(" ");
+            String[] s = pair[i].split( " |\\r");
             new_t.addGame(new Game(
                     listPlayers.getPlayer(Integer.valueOf(s[0])),
                     listPlayers.getPlayer(Integer.valueOf(s[1])),

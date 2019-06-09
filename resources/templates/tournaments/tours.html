@@ -14,7 +14,7 @@
         {% if tours %}
         <div class="btn-group" role="group" aria-label="First group">
             {% for tour in tours %}
-            <a href="/tournaments/{{ tournament.id }}/tour/{{ tour.id }}" type="button" class="btn btn-outline-secondary">{{ tour.number }}</a>
+                <a href="/tournaments/{{ tournament.id }}/tour/{{ tour.id }}" type="button" class="btn btn-outline-secondary">{{ tour.number }}</a>
             {% endfor %}
         </div>
         {% endif %}
@@ -35,14 +35,14 @@
     <div class="row">
 
         <div class="col-md-2">
-
+            Тур {{number-tour}}
         </div>
 
         {% if tours %}
         <div class="col-md-8">
 
             <h4 class="text-center m-5">
-                Пары{{ tournament.name }}
+                Пары "{{ tournament.name }}"
                 {% ifequal role "admin" %}
                     <a href="#" type="button" class="btn btn-outline-success">Экспорт</a>
                 {% endifequal %}
@@ -76,7 +76,7 @@
                                         {% endifequal %}
                                     {% endfor %}
                                 </select>
-                                <input style="display: inline" form="form{{ game.id }}" type="submit">
+                                <input class="btn btn-success" style="display: inline" form="form{{ game.id }}" type="submit" value="Подтвердить">
                             {% else %}
                                 {{ game.code }}
                             {% endif %}
