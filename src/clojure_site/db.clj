@@ -244,7 +244,7 @@
     from TOUR
     where TOUR.ID = ? " id-tour]))
 
-(defn update-player [idp first_name last_name patro date_born region adress rating_rus rating_fide title]
+(defn update-player [idp region  rating_rus rating_fide title]
   "Обновление данных об участнике"
   (jdbc/update! mysql-db
                 :PLAYER
@@ -253,15 +253,6 @@
                  :ID_TITLE_RUS title
                  :ID_REGION region
                  }
-                ["id_human = ? " idp])
-  (jdbc/update! mysql-db
-                :HUMAN
-                  {:LAST last_name
-                   :FIRST first_name
-                   :PATRO patro
-                   :DATE_BORN date_born
-                   :ADRES adress
-                   }
                 ["id = ? " idp]))
 
 (defn registration-login [login password name last email]
@@ -277,3 +268,22 @@
   "Поиск совпадений по логину в БД"
   (jdbc/query mysql-db ["select * from USERS
                                   where LOGIN = ? " login]))
+
+(defn get-player-id [idp]
+  (jdbc/query mysql-db ["select ID_PLAYER from LIST_PLAYER
+                                        where ID= ? " idp]))
+
+(defn update-human [idp first_name last_name patro date_born adress]
+  (jdbc/update! mysql-db
+                :HUMAN
+                {:LAST last_name
+                 :FIRST first_name
+                 :PATRO patro
+                 :DATE_BORN date_born
+                 :ADRES adress
+                 }
+                ["id = ? " idp]))
+
+(defn get-human-id [id]
+  (jdbc/query mysql-db ["select ID_HUMAN from PLAYER
+                                        where ID= ? " id]))

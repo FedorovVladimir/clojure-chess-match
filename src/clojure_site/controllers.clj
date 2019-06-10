@@ -114,8 +114,11 @@
 
 (defn update-player [idt idp first_name last_name patro date_born region adress rating_rus rating_fide title]
   "Редактирование данных участника"
-  (db/update-player idp first_name last_name patro date_born region adress rating_rus rating_fide title)
-  (redirect (str "/tournaments/" idt "/prev_list")))
+  (let [id (db/get-player-id idp)]
+   (db/update-player (second (first (first id))) region  rating_rus rating_fide title)
+    (let [id-human (db/get-human-id (second (first (first id))))]
+      (db/update-human (second (first (first id-human))) first_name last_name patro date_born adress)
+  (redirect (str "/tournaments/" idt "/prev_list")))))
 
 (defn update-game [request]
   (let [result {:result (get-in request [:form-params "result"])}

@@ -15,7 +15,8 @@
         </div>
         <div class="col-4">
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Название турнира" aria-label="Search">
+                <input type="text" id="searchInput" onkeyup="searchCategory()" placeholder="Название турнира" class="form-control mr-sm-2">
+                <!--<input class="form-control mr-sm-2" type="search" placeholder="Название турнира" aria-label="Search">-->
                 <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i>Искать</button>
             </form>
         </div>
@@ -23,7 +24,7 @@
 </div>
 <br>
 <div class="container">
-    <table class="table table-sm">
+    <table class="table table-sm" id="categoriesTable">
         <thead>
         <tr>
             <th scope="col">Название</th>
@@ -59,4 +60,25 @@
     </div>
 </div>
 {% endif %}
+<script>
+    function searchCategory() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("categoriesTable");
+        tr = table.getElementsByTagName("tr")
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none"
+                }
+            }
+        }
+    }
+</script>
 {% endblock %}
